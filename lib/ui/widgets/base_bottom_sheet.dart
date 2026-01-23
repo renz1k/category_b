@@ -13,9 +13,7 @@ class BaseBottomSheet extends StatelessWidget {
         color: Theme.of(context).canvasColor,
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
-      child: Column(
-        children: [SizedBox(width: double.infinity, child: child)],
-      ),
+      child: child,
     );
   }
 }

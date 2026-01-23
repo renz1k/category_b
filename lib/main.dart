@@ -1,4 +1,5 @@
 import 'package:category_b/router/router.dart';
+import 'package:category_b/ui/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,6 +20,7 @@ class _CategoryBAppState extends State<CategoryBApp> {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'categotyB',
+      theme: themeData,
       routerConfig: _router.config(),
     );
   }

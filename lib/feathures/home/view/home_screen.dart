@@ -8,13 +8,16 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return AutoTabsRouter(
-      routes: [GenerateAnekdotRoute(), FavoriteRoute(), SettingsRoute()],
+      routes: const [GenerateAnekdotRoute(), FavoriteRoute(), SettingsRoute()],
       builder: (context, child) {
         final tabsRouter = AutoTabsRouter.of(context);
         return Scaffold(
           body: child,
           bottomNavigationBar: BottomNavigationBar(
+            selectedItemColor: theme.primaryColor,
+            unselectedItemColor: theme.hintColor,
             currentIndex: tabsRouter.activeIndex,
             onTap: (index) => _onTap(index, tabsRouter),
             items: const [
