@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 final primaryColor = Color(0xFFF82B10);
 final themeData = ThemeData(
+  dividerTheme: DividerThemeData(color: Colors.grey.withValues(alpha: 0.1)),
   colorScheme: ColorScheme.fromSeed(seedColor: primaryColor),
   scaffoldBackgroundColor: Color(0xFFEFF1F3),
   primaryColor: primaryColor,
