@@ -4,9 +4,14 @@ import 'package:category_b/feathures/generate%20anekdot/widgets/generate_anekdot
 import 'package:flutter/material.dart';
 
 @RoutePage()
-class GenerateAnekdotScreen extends StatelessWidget {
+class GenerateAnekdotScreen extends StatefulWidget {
   const GenerateAnekdotScreen({super.key});
 
+  @override
+  State<GenerateAnekdotScreen> createState() => _GenerateAnekdotScreenState();
+}
+
+class _GenerateAnekdotScreenState extends State<GenerateAnekdotScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);

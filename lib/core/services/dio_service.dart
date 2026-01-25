@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:get_it/get_it.dart';
 
 class DioService {
   static DioService? _instance;
@@ -27,10 +26,4 @@ class DioService {
       ),
     );
   }
-}
-
-final getIt = GetIt.instance;
-void setupDio({required String baseUrl}) {
-  getIt.registerLazySingleton<DioService>(() => DioService());
-  getIt<DioService>().init(baseUrl: baseUrl);
 }
