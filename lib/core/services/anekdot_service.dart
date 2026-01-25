@@ -1,3 +1,4 @@
+import 'package:category_b/core/di/setup_dependencies.dart';
 import 'package:category_b/core/services/dio_service.dart';
 import 'package:dio/dio.dart';
 import 'package:html/parser.dart' as html_parser;
