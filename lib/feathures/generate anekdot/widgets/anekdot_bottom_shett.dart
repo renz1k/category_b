@@ -21,6 +21,7 @@ class AnekdotBottomSheet extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            const Divider(height: 1),
             Expanded(
               child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),

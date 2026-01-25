@@ -1,8 +1,19 @@
+import 'package:category_b/core/services/anekdot_service.dart';
+import 'package:category_b/core/services/dio_service.dart';
 import 'package:category_b/router/router.dart';
 import 'package:category_b/ui/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await dotenv.load(fileName: ".env");
+
+  setupDio(baseUrl: dotenv.env['BASE_URL']!);
+
+  final service = AnekdotService();
+
   runApp(const CategoryBApp());
 }
 
