@@ -1,5 +1,5 @@
-import 'package:category_b/core/services/anekdot_service.dart';
-import 'package:category_b/core/services/anekdot_servise_interface.dart';
+import 'package:category_b/core/services/anekdot/anekdot_service.dart';
+import 'package:category_b/core/services/anekdot/anekdot_service_interface.dart';
 import 'package:category_b/core/services/dio_service.dart';
 import 'package:get_it/get_it.dart';
 

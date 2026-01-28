@@ -1,9 +1,9 @@
 import 'dart:developer';
 
 import 'package:category_b/core/di/setup_dependencies.dart';
-import 'package:category_b/core/services/anekdot_servise_interface.dart';
+import 'package:category_b/core/services/anekdot/anekdot_service_interface.dart';
+import 'package:category_b/core/services/anekdot/models/anekdots.dart';
 import 'package:category_b/core/services/dio_service.dart';
-import 'package:category_b/core/services/models/anekdots.dart';
 import 'package:dio/dio.dart';
 import 'package:html/parser.dart' as html_parser;
 
