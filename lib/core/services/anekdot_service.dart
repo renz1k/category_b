@@ -1,14 +1,16 @@
 import 'dart:developer';
 
 import 'package:category_b/core/di/setup_dependencies.dart';
+import 'package:category_b/core/services/anekdot_servise_interface.dart';
 import 'package:category_b/core/services/dio_service.dart';
 import 'package:category_b/core/services/models/anekdots.dart';
 import 'package:dio/dio.dart';
 import 'package:html/parser.dart' as html_parser;
 
-class AnekdotService {
+class AnekdotService implements AnekdotServiceInterface {
   final Dio dio = getIt<DioService>().dio;
 
+  @override
   Future<Anekdot> getRandomAnekdot({int maxRetries = 3}) async {
     for (int attempt = 1; attempt <= maxRetries; attempt++) {
       try {
