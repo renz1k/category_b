@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:category_b/core/di/setup_dependencies.dart';
-import 'package:category_b/core/services/anekdot_servise_interface.dart';
-import 'package:category_b/core/services/models/anekdots.dart';
+import 'package:category_b/core/services/anekdot/anekdot_service_interface.dart';
+import 'package:category_b/core/services/anekdot/models/anekdots.dart';
 import 'package:equatable/equatable.dart';
 
 part 'generate_anekdot_event.dart';
