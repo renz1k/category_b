@@ -33,7 +33,7 @@ class _GenerateAnekdotScreenState extends State<GenerateAnekdotScreen> {
               if (state is GenerateAnekdotLoaded) {
                 showAnekdotBottomSheet(
                   context: context,
-                  anekdotText: state.anekdotText,
+                  anekdotText: state.anekdot.anekdotText,
                 );
               }
             },
