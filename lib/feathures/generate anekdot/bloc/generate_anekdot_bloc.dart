@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:category_b/core/di/setup_dependencies.dart';
 import 'package:category_b/core/services/anekdot_service.dart';
+import 'package:category_b/core/services/models/anekdots.dart';
 import 'package:equatable/equatable.dart';
 
 part 'generate_anekdot_event.dart';
@@ -19,8 +20,8 @@ class GenerateAnekdotBloc
   ) async {
     try {
       emit(GenerateAnekdotLoading());
-      final anekdotText = await _service.getRandomAnekdot();
-      emit(GenerateAnekdotLoaded(anekdotText));
+      final anekdot = await _service.getRandomAnekdot();
+      emit(GenerateAnekdotLoaded(anekdot));
     } catch (e) {
       emit(GenerateAnekdotFailure(e));
     }

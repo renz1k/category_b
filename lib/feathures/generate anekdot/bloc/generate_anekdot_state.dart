@@ -12,12 +12,12 @@ final class GenerateAnekdotInitial extends GenerateAnekdotState {}
 final class GenerateAnekdotLoading extends GenerateAnekdotState {}
 
 final class GenerateAnekdotLoaded extends GenerateAnekdotState {
-  const GenerateAnekdotLoaded(this.anekdotText);
+  const GenerateAnekdotLoaded(this.anekdot);
 
-  final String anekdotText;
+  final Anekdot anekdot;
 
   @override
-  List<Object> get props => super.props..add([anekdotText]);
+  List<Object> get props => super.props..add([anekdot]);
 }
 
 final class GenerateAnekdotFailure extends GenerateAnekdotState {
