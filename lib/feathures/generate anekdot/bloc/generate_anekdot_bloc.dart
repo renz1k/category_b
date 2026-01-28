@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:category_b/core/di/setup_dependencies.dart';
-import 'package:category_b/core/services/anekdot_service.dart';
+import 'package:category_b/core/services/anekdot_servise_interface.dart';
 import 'package:category_b/core/services/models/anekdots.dart';
 import 'package:equatable/equatable.dart';
 
@@ -9,7 +9,7 @@ part 'generate_anekdot_state.dart';
 
 class GenerateAnekdotBloc
     extends Bloc<GenerateAnekdotEvent, GenerateAnekdotState> {
-  final AnekdotService _service = getIt<AnekdotService>();
+  final _service = getIt<AnekdotServiceInterface>();
   GenerateAnekdotBloc() : super(GenerateAnekdotInitial()) {
     on<GenerateRandomAnekdot>(_onSearch);
   }
