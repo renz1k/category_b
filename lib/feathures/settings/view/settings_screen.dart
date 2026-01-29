@@ -20,7 +20,7 @@ class SettingsScreen extends StatelessWidget {
             scrolledUnderElevation: 0,
             backgroundColor: theme.cardColor,
             surfaceTintColor: Colors.transparent,
-            title: Text('Settings'),
+            title: const Text('Settings'),
             centerTitle: true,
             elevation: 0,
           ),
@@ -55,7 +55,7 @@ class SettingsScreen extends StatelessWidget {
 
           SliverToBoxAdapter(
             child: SettingsActionCard(
-              title: 'Clean history',
+              title: 'Clean favorites',
               iconData: Icons.delete_sweep_outlined,
               iconColor: theme.primaryColor,
               onTap: () {},

@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:category_b/core/services/show_anekdot_bottom_sheet.dart';
+import 'package:category_b/core/services/toggle_favorite_func.dart';
 import 'package:category_b/feathures/favorites/bloc/favorite_anekdots_bloc.dart';
 import 'package:category_b/feathures/favorites/widgets/anekdot_list_card.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
             scrolledUnderElevation: 0,
             backgroundColor: theme.cardColor,
             surfaceTintColor: Colors.transparent,
-            title: Text('Favorite'),
+            title: const Text('Favorite'),
             centerTitle: true,
             elevation: 0,
           ),
@@ -50,12 +51,15 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                     return AnekdotListCard(
                       isFovorite: true,
                       anekdotText: favoriteAnekdot.anekdotText,
-                      onTap: () {
+                      onTapCard: () {
                         showAnekdotBottomSheet(
                           context: context,
                           anekdot: favoriteAnekdot.toAnekdot(),
                           isFavorite: true,
                         );
+                      },
+                      onTapFavorite: () {
+                        toggleFavorite(context, favoriteAnekdot.toAnekdot());
                       },
                     );
                   },

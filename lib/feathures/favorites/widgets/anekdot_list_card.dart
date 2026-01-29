@@ -6,19 +6,23 @@ class AnekdotListCard extends StatelessWidget {
     super.key,
     this.isFovorite = false,
     required this.anekdotText,
-    this.onTap,
+    this.onTapCard,
+    this.onTapFavorite,
+    this.onTapCopy,
   });
 
   final String anekdotText;
   final bool isFovorite;
-  final VoidCallback? onTap;
+  final VoidCallback? onTapCard;
+  final VoidCallback? onTapFavorite;
+  final VoidCallback? onTapCopy;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return GestureDetector(
-      onTap: onTap,
+      onTap: onTapCard,
       child: BaseContainer(
         width: double.infinity,
         height: 60,
@@ -44,7 +48,7 @@ class AnekdotListCard extends StatelessWidget {
             IconButton(
               constraints: BoxConstraints(minWidth: 44, minHeight: 44),
               padding: EdgeInsets.zero,
-              onPressed: () {},
+              onPressed: onTapFavorite,
               icon: Icon(
                 Icons.favorite,
                 color: isFovorite

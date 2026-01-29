@@ -2,7 +2,7 @@ import 'package:category_b/core/di/setup_dependencies.dart';
 import 'package:category_b/core/services/anekdot/anekdot_service_interface.dart';
 import 'package:category_b/feathures/favorites/bloc/favorite_anekdots_bloc.dart';
 import 'package:category_b/feathures/generate%20anekdot/bloc/generate_anekdot_bloc.dart';
-import 'package:category_b/repositories/favorites_repository_interface.dart';
+import 'package:category_b/repositories/favorites/favorites_repository_interface.dart';
 import 'package:category_b/router/router.dart';
 import 'package:category_b/ui/theme/theme.dart';
 import 'package:flutter/material.dart';

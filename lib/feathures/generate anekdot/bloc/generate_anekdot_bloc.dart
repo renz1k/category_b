@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:category_b/core/services/anekdot/anekdot_service_interface.dart';
 import 'package:category_b/core/services/anekdot/models/anekdots.dart';
+import 'package:category_b/repositories/favorites/favorites_repository_interface.dart';
 import 'package:category_b/repositories/favorites/model/favorite_anekdots.dart';
-import 'package:category_b/repositories/favorites_repository_interface.dart';
 import 'package:equatable/equatable.dart';
 
 part 'generate_anekdot_event.dart';
