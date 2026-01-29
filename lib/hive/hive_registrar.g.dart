@@ -7,12 +7,12 @@ import 'package:category_b/hive/hive_adapters.dart';
 
 extension HiveRegistrar on HiveInterface {
   void registerAdapters() {
-    registerAdapter(AnekdotAdapter());
+    registerAdapter(FavoriteAnekdotsAdapter());
   }
 }
 
 extension IsolatedHiveRegistrar on IsolatedHiveInterface {
   void registerAdapters() {
-    registerAdapter(AnekdotAdapter());
+    registerAdapter(FavoriteAnekdotsAdapter());
   }
 }

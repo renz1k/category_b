@@ -5,11 +5,11 @@ class AnekdotListCard extends StatelessWidget {
   const AnekdotListCard({
     super.key,
     this.isFovorite = false,
-    required this.anekdot,
+    required this.anekdotText,
     this.onTap,
   });
 
-  final String anekdot;
+  final String anekdotText;
   final bool isFovorite;
   final VoidCallback? onTap;
 
@@ -30,7 +30,7 @@ class AnekdotListCard extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(right: 8),
                 child: Text(
-                  anekdot,
+                  anekdotText,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: theme.textTheme.bodyLarge?.copyWith(

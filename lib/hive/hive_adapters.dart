@@ -1,5 +1,5 @@
-import 'package:category_b/core/services/anekdot/models/anekdots.dart';
+import 'package:category_b/repositories/favorites/model/favorite_anekdots.dart';
 import 'package:hive_ce/hive_ce.dart';
 
-@GenerateAdapters([AdapterSpec<>()])
+@GenerateAdapters([AdapterSpec<FavoriteAnekdots>()])
 part 'hive_adapters.g.dart';
