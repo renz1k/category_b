@@ -6,25 +6,33 @@ part of 'hive_adapters.dart';
 // AdaptersGenerator
 // **************************************************************************
 
-class AnekdotAdapter extends TypeAdapter<Anekdot> {
+class FavoriteAnekdotsAdapter extends TypeAdapter<FavoriteAnekdots> {
   @override
-  final typeId = 0;
+  final typeId = 1;
 
   @override
-  Anekdot read(BinaryReader reader) {
+  FavoriteAnekdots read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Anekdot(anekdotText: fields[0] as String);
+    return FavoriteAnekdots(
+      id: fields[0] as String,
+      createdAt: fields[2] as DateTime,
+      anekdotText: fields[1] as String,
+    );
   }
 
   @override
-  void write(BinaryWriter writer, Anekdot obj) {
+  void write(BinaryWriter writer, FavoriteAnekdots obj) {
     writer
-      ..writeByte(1)
+      ..writeByte(3)
       ..writeByte(0)
-      ..write(obj.anekdotText);
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.anekdotText)
+      ..writeByte(2)
+      ..write(obj.createdAt);
   }
 
   @override
@@ -33,7 +41,7 @@ class AnekdotAdapter extends TypeAdapter<Anekdot> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is AnekdotAdapter &&
+      other is FavoriteAnekdotsAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

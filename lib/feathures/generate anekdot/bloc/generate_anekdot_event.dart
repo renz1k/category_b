@@ -4,7 +4,17 @@ sealed class GenerateAnekdotEvent extends Equatable {
   const GenerateAnekdotEvent();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
-class GenerateRandomAnekdot extends GenerateAnekdotEvent {}
+final class GenerateRandomAnekdot extends GenerateAnekdotEvent {}
+
+final class ToggleFavoriteAnekdot extends GenerateAnekdotEvent {
+  const ToggleFavoriteAnekdot({required this.anekdot, this.completer});
+
+  final Anekdot anekdot;
+  final Completer? completer;
+
+  @override
+  List<Object?> get props => super.props..addAll([anekdot, completer]);
+}
