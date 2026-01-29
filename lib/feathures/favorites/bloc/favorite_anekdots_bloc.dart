@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:category_b/repositories/favorites/favorites_repository_interface.dart';
 import 'package:category_b/repositories/favorites/model/favorite_anekdots.dart';
-import 'package:category_b/repositories/favorites_repository_interface.dart';
 import 'package:equatable/equatable.dart';
 
 part 'favorite_anekdots_event.dart';

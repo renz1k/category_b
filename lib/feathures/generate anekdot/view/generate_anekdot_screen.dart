@@ -24,30 +24,19 @@ class _GenerateAnekdotScreenState extends State<GenerateAnekdotScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: theme.cardColor,
-        title: Text('Category B'),
+        title: const Text('Category B'),
         centerTitle: true,
       ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: BlocConsumer<GenerateAnekdotBloc, GenerateAnekdotState>(
-            listenWhen: (prev, curr) {
-              final tabsRouter = AutoTabsRouter.of(context, watch: false);
-
-              if (tabsRouter.current.name != GenerateAnekdotRoute.name) {
-                return false;
-              }
-
-              if (isBottomSheetOpen) return false;
-
-              if (curr is! GenerateAnekdotLoaded) return false;
-
-              if (prev is GenerateAnekdotLoaded) {
-                return prev.anekdot.anekdotText != curr.anekdot.anekdotText;
-              }
-
-              return true;
-            },
+            listenWhen: (prev, curr) => _listenWhenGenerateAnekdot(
+              context,
+              isBottomSheetOpen,
+              curr,
+              prev,
+            ),
             listener: (context, state) async {
               if (state is GenerateAnekdotLoaded) {
                 isBottomSheetOpen = true;
@@ -76,5 +65,28 @@ class _GenerateAnekdotScreenState extends State<GenerateAnekdotScreen> {
         ),
       ),
     );
+  }
+
+  bool _listenWhenGenerateAnekdot(
+    BuildContext context,
+    bool isBottomSheetOpen,
+    GenerateAnekdotState curr,
+    GenerateAnekdotState prev,
+  ) {
+    final tabsRouter = AutoTabsRouter.of(context, watch: false);
+
+    if (tabsRouter.current.name != GenerateAnekdotRoute.name) {
+      return false;
+    }
+
+    if (isBottomSheetOpen) return false;
+
+    if (curr is! GenerateAnekdotLoaded) return false;
+
+    if (prev is GenerateAnekdotLoaded) {
+      return prev.anekdot.anekdotText != curr.anekdot.anekdotText;
+    }
+
+    return true;
   }
 }

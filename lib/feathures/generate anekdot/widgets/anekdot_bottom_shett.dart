@@ -8,12 +8,14 @@ class AnekdotBottomSheet extends StatefulWidget {
   const AnekdotBottomSheet({
     super.key,
     required this.anekdot,
-    required this.onTapFavorite,
+    this.onTapFavorite,
+    this.onTapCopy,
     this.initialIsFavorite = false,
   });
 
   final Anekdot anekdot;
-  final VoidCallback onTapFavorite;
+  final VoidCallback? onTapFavorite;
+  final VoidCallback? onTapCopy;
   final bool initialIsFavorite;
 
   @override
@@ -24,6 +26,7 @@ class _AnekdotBottomSheetState extends State<AnekdotBottomSheet> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
     return BaseBottomSheet(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
@@ -34,7 +37,7 @@ class _AnekdotBottomSheetState extends State<AnekdotBottomSheet> {
             const Divider(height: 1),
             Expanded(
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 24, right: 8, left: 8),
                   child: Text(
@@ -56,7 +59,7 @@ class _AnekdotBottomSheetState extends State<AnekdotBottomSheet> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: widget.onTapCopy,
                       icon: Icon(
                         Icons.copy,
                         size: 32,

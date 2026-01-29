@@ -2,9 +2,9 @@ import 'package:category_b/core/services/anekdot/anekdot_service.dart';
 import 'package:category_b/core/services/anekdot/anekdot_service_interface.dart';
 import 'package:category_b/core/services/dio_service.dart';
 import 'package:category_b/core/services/hive_service.dart';
+import 'package:category_b/repositories/favorites/favorites_repository.dart';
+import 'package:category_b/repositories/favorites/favorites_repository_interface.dart';
 import 'package:category_b/repositories/favorites/model/favorite_anekdots.dart';
-import 'package:category_b/repositories/favorites_repository.dart';
-import 'package:category_b/repositories/favorites_repository_interface.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 
@@ -24,6 +24,6 @@ Future<void> setupDependencies({required String baseUrl}) async {
   );
 
   getIt.registerLazySingleton<FavoritesRepositoryInterface>(
-    () => FavoritesRepository(),
+    () => FavoritesRepository(favoriteBox: getIt<Box<FavoriteAnekdots>>()),
   );
 }
