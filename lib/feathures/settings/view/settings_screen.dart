@@ -1,7 +1,11 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
+import 'package:category_b/feathures/favorites/bloc/favorite_anekdots_bloc.dart';
 import 'package:category_b/feathures/settings/widgets/settings_action__card.dart';
 import 'package:category_b/feathures/settings/widgets/settings_toggle_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
 class SettingsScreen extends StatelessWidget {
@@ -58,7 +62,7 @@ class SettingsScreen extends StatelessWidget {
               title: 'Clean favorites',
               iconData: Icons.delete_sweep_outlined,
               iconColor: theme.primaryColor,
-              onTap: () {},
+              onTap: () => _clearFavorites(context),
             ),
           ),
 
@@ -72,5 +76,35 @@ class SettingsScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+Future<void> _clearFavorites(BuildContext context) async {
+  final bloc = BlocProvider.of<FavoriteAnekdotsBloc>(context);
+  final completer = Completer();
+
+  bloc.add(ClearFavoriteAnekdots(completer: completer));
+
+  try {
+    await completer.future;
+
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Избранное успешно очищено!'),
+          duration: Duration(seconds: 2),
+          backgroundColor: Colors.green,
+        ),
+      );
+    }
+  } catch (e) {
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Ошибка очистки: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 }

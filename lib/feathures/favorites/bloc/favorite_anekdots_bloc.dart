@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:category_b/repositories/favorites/favorites_repository_interface.dart';
 import 'package:category_b/repositories/favorites/model/favorite_anekdots.dart';
@@ -13,6 +15,7 @@ class FavoriteAnekdotsBloc
   }) : _favoritesRepository = favoritesRepository,
        super(FavoriteAnekdotsInitial()) {
     on<LoadFavoriteAnekdots>(_load);
+    on<ClearFavoriteAnekdots>(_onClear);
   }
   final FavoritesRepositoryInterface _favoritesRepository;
 
@@ -26,6 +29,23 @@ class FavoriteAnekdotsBloc
       emit(FavoriteAnekdotsLoaded(anekdots: anekdots));
     } catch (e) {
       emit(FavoriteAnekdotsFailure(error: e));
+    }
+  }
+
+  Future<void> _onClear(
+    ClearFavoriteAnekdots event,
+    Emitter<FavoriteAnekdotsState> emit,
+  ) async {
+    try {
+      await _favoritesRepository.clear();
+
+      final anekdots = await _favoritesRepository.getAnekdotsList();
+      emit(FavoriteAnekdotsLoaded(anekdots: anekdots));
+
+      event.completer?.complete();
+    } catch (e) {
+      emit(FavoriteAnekdotsFailure(error: e));
+      event.completer?.completeError(e);
     }
   }
 }
