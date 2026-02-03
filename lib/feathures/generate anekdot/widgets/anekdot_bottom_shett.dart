@@ -61,11 +61,11 @@ class _AnekdotBottomSheetState extends State<AnekdotBottomSheet> {
                     IconButton(
                       onPressed: widget.onTapCopy,
                       icon: Icon(
-                        Icons.copy,
+                        Icons.ios_share,
                         size: 32,
                         color: theme.hintColor.withValues(alpha: 0.4),
                       ),
-                      tooltip: 'Копировать',
+                      tooltip: 'Поделиться',
                     ),
                     IconButton(
                       onPressed: widget.onTapFavorite,

@@ -1,4 +1,5 @@
 import 'package:category_b/core/services/anekdot/models/anekdots.dart';
+import 'package:category_b/core/services/share_service.dart';
 import 'package:category_b/core/services/toggle_favorite_func.dart';
 import 'package:category_b/feathures/generate%20anekdot/widgets/anekdot_bottom_shett.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ Future<void> showAnekdotBottomSheet({
         anekdot: anekdot,
         initialIsFavorite: isFavorite,
         onTapFavorite: () => toggleFavorite(context, anekdot),
+        onTapCopy: () => ShareService.shareAnekdot(anekdot.anekdotText),
       ),
     ),
   );
