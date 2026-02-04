@@ -2,8 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:category_b/core/services/show_anekdot_bottom_sheet.dart';
 import 'package:category_b/core/services/toggle_favorite_func.dart';
 import 'package:category_b/feathures/favorites/bloc/favorite_anekdots_bloc.dart';
-import 'package:category_b/feathures/favorites/widgets/add_anekdot_dialog.dart';
 import 'package:category_b/feathures/favorites/widgets/anekdot_list_card.dart';
+import 'package:category_b/feathures/generate%20anekdot/bloc/generate_anekdot_bloc.dart';
+import 'package:category_b/ui/widgets/add_anekdot_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -63,6 +64,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                           context: context,
                           anekdot: favoriteAnekdot.toAnekdot(),
                           isFavorite: true,
+                          dbId: favoriteAnekdot.id,
                         );
                       },
                       onTapFavorite: () {
@@ -103,6 +105,8 @@ void _onPressedAddAnekdot(
     BlocProvider.of<FavoriteAnekdotsBloc>(
       context,
     ).add(AddCustomAnekdot(text: text));
+
+    BlocProvider.of<GenerateAnekdotBloc>(context).add(FavoritesListDirty());
 
     Navigator.of(dialogContext).pop();
 

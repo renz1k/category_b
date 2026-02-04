@@ -10,12 +10,14 @@ class AnekdotBottomSheet extends StatefulWidget {
     required this.anekdot,
     this.onTapFavorite,
     this.onTapCopy,
+    this.onTapEdit,
     this.initialIsFavorite = false,
   });
 
   final Anekdot anekdot;
   final VoidCallback? onTapFavorite;
   final VoidCallback? onTapCopy;
+  final VoidCallback? onTapEdit;
   final bool initialIsFavorite;
 
   @override
@@ -67,6 +69,16 @@ class _AnekdotBottomSheetState extends State<AnekdotBottomSheet> {
                       ),
                       tooltip: 'Поделиться',
                     ),
+                    if (widget.onTapEdit != null)
+                      IconButton(
+                        onPressed: widget.onTapEdit,
+                        icon: Icon(
+                          Icons.edit,
+                          size: 32,
+                          color: theme.hintColor.withValues(alpha: 0.4),
+                        ),
+                        tooltip: 'Редактировать',
+                      ),
                     IconButton(
                       onPressed: widget.onTapFavorite,
                       icon: Icon(

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class AddAnekdotDialog extends StatefulWidget {
-  const AddAnekdotDialog({super.key, required this.onAdd});
+  const AddAnekdotDialog({super.key, required this.onAdd, this.initialText});
 
   final ValueChanged<String> onAdd;
+  final String? initialText;
 
   @override
   State<AddAnekdotDialog> createState() => _AddAnekdotDialogState();
@@ -15,7 +16,7 @@ class _AddAnekdotDialogState extends State<AddAnekdotDialog> {
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController();
+    _controller = TextEditingController(text: widget.initialText);
   }
 
   @override
@@ -30,7 +31,9 @@ class _AddAnekdotDialogState extends State<AddAnekdotDialog> {
     return AlertDialog(
       backgroundColor: theme.cardColor,
       actionsPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-      title: const Text('Добавить анекдот'),
+      title: Text(
+        widget.initialText == null ? 'Добавить анекдот' : 'Редактировать',
+      ),
       content: TextField(
         controller: _controller,
         maxLines: 5,
@@ -67,7 +70,9 @@ class _AddAnekdotDialogState extends State<AddAnekdotDialog> {
                 backgroundColor: theme.primaryColor,
                 foregroundColor: theme.cardColor,
               ),
-              child: const Text('Добавить'),
+              child: Text(
+                widget.initialText == null ? 'Добавить' : 'Сохранить',
+              ),
             ),
           ],
         ),

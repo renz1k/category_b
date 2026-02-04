@@ -18,3 +18,5 @@ final class ToggleFavoriteAnekdot extends GenerateAnekdotEvent {
   @override
   List<Object?> get props => super.props..addAll([anekdot, completer]);
 }
+
+final class FavoritesListDirty extends GenerateAnekdotEvent {}

@@ -26,3 +26,13 @@ final class AddCustomAnekdot extends FavoriteAnekdotsEvent {
   @override
   List<Object?> get props => super.props..add(text);
 }
+
+final class UpdateAnekdot extends FavoriteAnekdotsEvent {
+  const UpdateAnekdot({required this.id, required this.newText});
+
+  final String id;
+  final String newText;
+
+  @override
+  List<Object?> get props => super.props..addAll([id, newText]);
+}
