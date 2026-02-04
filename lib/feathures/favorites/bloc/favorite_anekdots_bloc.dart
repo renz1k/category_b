@@ -17,6 +17,7 @@ class FavoriteAnekdotsBloc
        super(FavoriteAnekdotsInitial()) {
     on<LoadFavoriteAnekdots>(_load);
     on<AddCustomAnekdot>(_onAddCustom);
+    on<UpdateAnekdot>(_onUpdate);
     on<ClearFavoriteAnekdots>(_onClear);
   }
   final FavoritesRepositoryInterface _favoritesRepository;
@@ -27,6 +28,44 @@ class FavoriteAnekdotsBloc
   ) async {
     try {
       emit(FavoriteAnekdotsLoading());
+      final anekdots = await _favoritesRepository.getAnekdotsList();
+      emit(FavoriteAnekdotsLoaded(anekdots: anekdots));
+    } catch (e) {
+      emit(FavoriteAnekdotsFailure(error: e));
+    }
+  }
+
+  Future<void> _onAddCustom(
+    AddCustomAnekdot event,
+    Emitter<FavoriteAnekdotsState> emit,
+  ) async {
+    try {
+      final newAnekdot = FavoriteAnekdots(
+        id: const Uuid().v4(),
+        anekdotText: event.text,
+        createdAt: DateTime.now(),
+      );
+      await _favoritesRepository.addOrUpdateAnekdot(newAnekdot);
+      final anekdots = await _favoritesRepository.getAnekdotsList();
+      emit(FavoriteAnekdotsLoaded(anekdots: anekdots));
+    } catch (e) {
+      emit(FavoriteAnekdotsFailure(error: e));
+    }
+  }
+
+  Future<void> _onUpdate(
+    UpdateAnekdot event,
+    Emitter<FavoriteAnekdotsState> emit,
+  ) async {
+    try {
+      final updatedAnekdot = FavoriteAnekdots(
+        id: event.id,
+        anekdotText: event.newText,
+        createdAt: DateTime.now(),
+      );
+
+      await _favoritesRepository.addOrUpdateAnekdot(updatedAnekdot);
+
       final anekdots = await _favoritesRepository.getAnekdotsList();
       emit(FavoriteAnekdotsLoaded(anekdots: anekdots));
     } catch (e) {
@@ -48,24 +87,6 @@ class FavoriteAnekdotsBloc
     } catch (e) {
       emit(FavoriteAnekdotsFailure(error: e));
       event.completer?.completeError(e);
-    }
-  }
-
-  Future<void> _onAddCustom(
-    AddCustomAnekdot event,
-    Emitter<FavoriteAnekdotsState> emit,
-  ) async {
-    try {
-      final newAnekdot = FavoriteAnekdots(
-        id: const Uuid().v4(),
-        anekdotText: event.text,
-        createdAt: DateTime.now(),
-      );
-      await _favoritesRepository.addAnekdot(newAnekdot);
-      final anekdots = await _favoritesRepository.getAnekdotsList();
-      emit(FavoriteAnekdotsLoaded(anekdots: anekdots));
-    } catch (e) {
-      emit(FavoriteAnekdotsFailure(error: e));
     }
   }
 }

@@ -20,6 +20,7 @@ class GenerateAnekdotBloc
        super(GenerateAnekdotInitial()) {
     on<GenerateRandomAnekdot>(_onSearch);
     on<ToggleFavoriteAnekdot>(_onToggle);
+    on<FavoritesListDirty>(_favoriteListReload);
   }
 
   final AnekdotServiceInterface _service;
@@ -70,6 +71,17 @@ class GenerateAnekdotBloc
       emit(GenerateAnekdotFailure(e));
     } finally {
       event.completer?.complete();
+    }
+  }
+
+  Future<void> _favoriteListReload(
+    FavoritesListDirty event,
+    Emitter<GenerateAnekdotState> emit,
+  ) async {
+    if (state is GenerateAnekdotLoaded) {
+      final current = state as GenerateAnekdotLoaded;
+      final newFavorites = await _favoritesRepository.getAnekdotsList();
+      emit(current.copyWith(favoriteAnekdot: newFavorites));
     }
   }
 }
