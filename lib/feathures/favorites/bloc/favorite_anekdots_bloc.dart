@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:category_b/repositories/favorites/favorites_repository_interface.dart';
 import 'package:category_b/repositories/favorites/model/favorite_anekdots.dart';
 import 'package:equatable/equatable.dart';
+import 'package:uuid/uuid.dart';
 
 part 'favorite_anekdots_event.dart';
 part 'favorite_anekdots_state.dart';
@@ -15,6 +16,7 @@ class FavoriteAnekdotsBloc
   }) : _favoritesRepository = favoritesRepository,
        super(FavoriteAnekdotsInitial()) {
     on<LoadFavoriteAnekdots>(_load);
+    on<AddCustomAnekdot>(_onAddCustom);
     on<ClearFavoriteAnekdots>(_onClear);
   }
   final FavoritesRepositoryInterface _favoritesRepository;
@@ -46,6 +48,24 @@ class FavoriteAnekdotsBloc
     } catch (e) {
       emit(FavoriteAnekdotsFailure(error: e));
       event.completer?.completeError(e);
+    }
+  }
+
+  Future<void> _onAddCustom(
+    AddCustomAnekdot event,
+    Emitter<FavoriteAnekdotsState> emit,
+  ) async {
+    try {
+      final newAnekdot = FavoriteAnekdots(
+        id: const Uuid().v4(),
+        anekdotText: event.text,
+        createdAt: DateTime.now(),
+      );
+      await _favoritesRepository.addAnekdot(newAnekdot);
+      final anekdots = await _favoritesRepository.getAnekdotsList();
+      emit(FavoriteAnekdotsLoaded(anekdots: anekdots));
+    } catch (e) {
+      emit(FavoriteAnekdotsFailure(error: e));
     }
   }
 }

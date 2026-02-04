@@ -30,6 +30,11 @@ class FavoritesRepository implements FavoritesRepositoryInterface {
   }
 
   @override
+  Future<void> addAnekdot(FavoriteAnekdots anekdot) async {
+    await _favoriteBox.put(anekdot.id, anekdot);
+  }
+
+  @override
   Future<void> clear() async {
     await _favoriteBox.clear();
   }

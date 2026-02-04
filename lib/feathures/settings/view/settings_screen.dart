@@ -24,7 +24,7 @@ class SettingsScreen extends StatelessWidget {
             scrolledUnderElevation: 0,
             backgroundColor: theme.cardColor,
             surfaceTintColor: Colors.transparent,
-            title: const Text('Settings'),
+            title: const Text('Настройки'),
             centerTitle: true,
             elevation: 0,
           ),
@@ -33,7 +33,7 @@ class SettingsScreen extends StatelessWidget {
 
           SliverToBoxAdapter(
             child: SettingsToggleCard(
-              title: 'Dark theme',
+              title: 'Тёмная тема',
               value: false,
               onChanged: (value) {},
             ),
@@ -41,7 +41,7 @@ class SettingsScreen extends StatelessWidget {
 
           SliverToBoxAdapter(
             child: SettingsToggleCard(
-              title: 'Notifications',
+              title: 'Уведомления',
               value: false,
               onChanged: (value) {},
             ),
@@ -49,7 +49,7 @@ class SettingsScreen extends StatelessWidget {
 
           SliverToBoxAdapter(
             child: SettingsToggleCard(
-              title: 'Allow analytics',
+              title: 'Разрешить аналитику',
               value: true,
               onChanged: (value) {},
             ),
@@ -59,7 +59,7 @@ class SettingsScreen extends StatelessWidget {
 
           SliverToBoxAdapter(
             child: SettingsActionCard(
-              title: 'Clean favorites',
+              title: 'Очистить избранное',
               iconData: Icons.delete_sweep_outlined,
               iconColor: theme.primaryColor,
               onTap: () => _clearFavorites(context),
@@ -68,7 +68,7 @@ class SettingsScreen extends StatelessWidget {
 
           SliverToBoxAdapter(
             child: SettingsActionCard(
-              title: 'Write to support',
+              title: 'Связать с поддержкой',
               iconData: Icons.message_outlined,
               onTap: () {},
             ),

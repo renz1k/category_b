@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:category_b/core/services/show_anekdot_bottom_sheet.dart';
 import 'package:category_b/core/services/toggle_favorite_func.dart';
 import 'package:category_b/feathures/favorites/bloc/favorite_anekdots_bloc.dart';
+import 'package:category_b/feathures/favorites/widgets/add_anekdot_dialog.dart';
 import 'package:category_b/feathures/favorites/widgets/anekdot_list_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,6 +27,12 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     final theme = Theme.of(context);
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _showAddDialog(context),
+        tooltip: 'Добавить свой анекдот',
+        backgroundColor: theme.primaryColor,
+        child: const Icon(Icons.add),
+      ),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -34,7 +41,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
             scrolledUnderElevation: 0,
             backgroundColor: theme.cardColor,
             surfaceTintColor: Colors.transparent,
-            title: const Text('Favorite'),
+            title: const Text('Избранное'),
             centerTitle: true,
             elevation: 0,
           ),
@@ -73,5 +80,34 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
         ],
       ),
     );
+  }
+}
+
+void _showAddDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (dialogContext) => AddAnekdotDialog(
+      onAdd: (text) => _onPressedAddAnekdot(context, dialogContext, text),
+    ),
+  );
+}
+
+void _onPressedAddAnekdot(
+  BuildContext context,
+  BuildContext dialogContext,
+  String rawText,
+) {
+  final text = rawText.trim();
+
+  if (text.isNotEmpty) {
+    BlocProvider.of<FavoriteAnekdotsBloc>(
+      context,
+    ).add(AddCustomAnekdot(text: text));
+
+    Navigator.of(dialogContext).pop();
+
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('Анекдот добавлен!')));
   }
 }
