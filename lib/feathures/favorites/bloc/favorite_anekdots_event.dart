@@ -17,3 +17,12 @@ final class ClearFavoriteAnekdots extends FavoriteAnekdotsEvent {
   @override
   List<Object?> get props => super.props..add(completer);
 }
+
+final class AddCustomAnekdot extends FavoriteAnekdotsEvent {
+  const AddCustomAnekdot({required this.text});
+
+  final String text;
+
+  @override
+  List<Object?> get props => super.props..add(text);
+}
