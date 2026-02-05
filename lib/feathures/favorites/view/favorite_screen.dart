@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:category_b/core/services/show_anekdot_bottom_sheet.dart';
 import 'package:category_b/core/services/toggle_favorite_func.dart';
 import 'package:category_b/feathures/favorites/bloc/favorite_anekdots_bloc.dart';
 import 'package:category_b/feathures/favorites/widgets/anekdot_list_card.dart';
+import 'package:category_b/feathures/favorites/widgets/custom_search_bar.dart';
 import 'package:category_b/feathures/generate%20anekdot/bloc/generate_anekdot_bloc.dart';
 import 'package:category_b/ui/widgets/add_anekdot_dialog.dart';
 import 'package:flutter/material.dart';
@@ -17,10 +20,35 @@ class FavoriteScreen extends StatefulWidget {
 }
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
+  final _searchController = TextEditingController();
+  Timer? _debounce;
+
   @override
   void initState() {
     BlocProvider.of<FavoriteAnekdotsBloc>(context).add(LoadFavoriteAnekdots());
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _debounce?.cancel();
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void _onSearchChanged(String query) {
+    if (_debounce?.isActive ?? false) _debounce!.cancel();
+    _debounce = Timer(const Duration(milliseconds: 150), () {
+      BlocProvider.of<FavoriteAnekdotsBloc>(
+        context,
+      ).add(SearchQueryChanged(query));
+    });
+  }
+
+  void _clearSearch() {
+    _searchController.clear();
+    _onSearchChanged('');
+    FocusScope.of(context).unfocus();
   }
 
   @override
@@ -34,52 +62,86 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
         backgroundColor: theme.primaryColor,
         child: const Icon(Icons.add),
       ),
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            snap: true,
-            floating: true,
-            scrolledUnderElevation: 0,
-            backgroundColor: theme.cardColor,
-            surfaceTintColor: Colors.transparent,
-            title: const Text('Избранное'),
-            centerTitle: true,
-            elevation: 0,
-          ),
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: CustomScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          slivers: [
+            SliverAppBar(
+              snap: true,
+              floating: true,
+              pinned: true,
+              scrolledUnderElevation: 0,
+              backgroundColor: theme.cardColor,
+              surfaceTintColor: Colors.transparent,
+              title: const Text('Избранное'),
+              centerTitle: true,
+            ),
 
-          const SliverToBoxAdapter(child: SizedBox(height: 16)),
+            SliverToBoxAdapter(
+              child: CustomSearchBar(
+                controller: _searchController,
+                onChanged: _onSearchChanged,
+                onClear: _clearSearch,
+              ),
+            ),
 
-          BlocBuilder<FavoriteAnekdotsBloc, FavoriteAnekdotsState>(
-            builder: (context, state) {
-              if (state is FavoriteAnekdotsLoaded) {
-                return SliverList.builder(
-                  itemCount: state.anekdots.length,
-                  itemBuilder: (context, index) {
-                    final favoriteAnekdot = state.anekdots[index];
-                    return AnekdotListCard(
-                      isFovorite: true,
-                      anekdotText: favoriteAnekdot.anekdotText,
-                      onTapCard: () {
-                        showAnekdotBottomSheet(
-                          context: context,
-                          anekdot: favoriteAnekdot.toAnekdot(),
-                          isFavorite: true,
-                          dbId: favoriteAnekdot.id,
-                        );
-                      },
-                      onTapFavorite: () {
-                        toggleFavorite(context, favoriteAnekdot.toAnekdot());
-                      },
+            const SliverToBoxAdapter(child: SizedBox(height: 8)),
+
+            BlocBuilder<FavoriteAnekdotsBloc, FavoriteAnekdotsState>(
+              builder: (context, state) {
+                if (state is FavoriteAnekdotsLoaded) {
+                  final list = state.filteredAnekdots;
+
+                  if (list.isEmpty) {
+                    final message = state.searchQuery.isNotEmpty
+                        ? 'Ничего не найдено'
+                        : 'Избранных анекдотов нет';
+
+                    return SliverFillRemaining(
+                      hasScrollBody: false,
+                      child: Center(
+                        child: Text(
+                          message,
+                          style: theme.textTheme.bodyLarge?.copyWith(
+                            color: theme.hintColor,
+                          ),
+                        ),
+                      ),
                     );
-                  },
+                  }
+
+                  return SliverList.builder(
+                    itemCount: list.length,
+                    itemBuilder: (context, index) {
+                      final favoriteAnekdot = list[index];
+                      return AnekdotListCard(
+                        isFovorite: true,
+                        anekdotText: favoriteAnekdot.anekdotText,
+                        onTapCard: () {
+                          FocusScope.of(context).unfocus();
+                          showAnekdotBottomSheet(
+                            context: context,
+                            anekdot: favoriteAnekdot.toAnekdot(),
+                            isFavorite: true,
+                            dbId: favoriteAnekdot.id,
+                          );
+                        },
+                        onTapFavorite: () {
+                          toggleFavorite(context, favoriteAnekdot.toAnekdot());
+                        },
+                      );
+                    },
+                  );
+                }
+                return const SliverFillRemaining(
+                  child: Center(child: CircularProgressIndicator()),
                 );
-              }
-              return const SliverFillRemaining(
-                child: CircularProgressIndicator(),
-              );
-            },
-          ),
-        ],
+              },
+            ),
+            const SliverToBoxAdapter(child: SizedBox(height: 80)),
+          ],
+        ),
       ),
     );
   }
