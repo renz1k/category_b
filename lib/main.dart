@@ -4,6 +4,7 @@ import 'package:category_b/core/services/anekdot/anekdot_service_interface.dart'
 import 'package:category_b/feathures/favorites/bloc/favorite_anekdots_bloc.dart';
 import 'package:category_b/feathures/generate%20anekdot/bloc/generate_anekdot_bloc.dart';
 import 'package:category_b/repositories/favorites/favorites_repository_interface.dart';
+import 'package:category_b/repositories/settings/settings_repository_interface.dart';
 import 'package:category_b/router/router.dart';
 import 'package:category_b/ui/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +45,11 @@ class _CategoryBAppState extends State<CategoryBApp> {
             favoritesRepository: getIt<FavoritesRepositoryInterface>(),
           ),
         ),
-        BlocProvider(create: (context) => ThemeCubit()),
+        BlocProvider(
+          create: (context) => ThemeCubit(
+            settingsRepository: getIt<SettingsRepositoryInterface>(),
+          ),
+        ),
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, state) {
