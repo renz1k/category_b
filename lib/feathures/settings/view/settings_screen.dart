@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:category_b/bloc/theme/theme_cubit.dart';
 import 'package:category_b/feathures/favorites/bloc/favorite_anekdots_bloc.dart';
 import 'package:category_b/feathures/settings/widgets/settings_action__card.dart';
 import 'package:category_b/feathures/settings/widgets/settings_toggle_card.dart';
@@ -14,6 +15,7 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDarkTheme = context.watch<ThemeCubit>().state.isDark;
 
     return Scaffold(
       body: CustomScrollView(
@@ -34,8 +36,8 @@ class SettingsScreen extends StatelessWidget {
           SliverToBoxAdapter(
             child: SettingsToggleCard(
               title: 'Тёмная тема',
-              value: false,
-              onChanged: (value) {},
+              value: isDarkTheme,
+              onChanged: (value) => _setThemeBrightness(context, value),
             ),
           ),
 
@@ -75,6 +77,12 @@ class SettingsScreen extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  void _setThemeBrightness(BuildContext context, bool value) {
+    context.read<ThemeCubit>().setThemeBrightness(
+      value ? Brightness.dark : Brightness.light,
     );
   }
 }

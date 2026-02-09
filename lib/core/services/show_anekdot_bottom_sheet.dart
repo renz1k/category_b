@@ -2,7 +2,7 @@ import 'package:category_b/core/services/anekdot/models/anekdots.dart';
 import 'package:category_b/core/services/share_service.dart';
 import 'package:category_b/core/services/toggle_favorite_func.dart';
 import 'package:category_b/feathures/favorites/bloc/favorite_anekdots_bloc.dart';
-import 'package:category_b/ui/widgets/add_anekdot_dialog.dart';
+import 'package:category_b/ui/widgets/add_or_update_anekdot_dialog.dart';
 import 'package:category_b/ui/widgets/anekdot_bottom_shett.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,9 +35,9 @@ Future<void> showAnekdotBottomSheet({
 void _showEditDialog(BuildContext context, String id, String currentText) {
   showDialog(
     context: context,
-    builder: (dialogContext) => AddAnekdotDialog(
+    builder: (dialogContext) => AddOrUpdateAnekdotDialog(
       initialText: currentText,
-      onAdd: (newText) {
+      onAddOrUpdate: (newText) {
         BlocProvider.of<FavoriteAnekdotsBloc>(
           context,
         ).add(UpdateAnekdot(id: id, newText: newText));
