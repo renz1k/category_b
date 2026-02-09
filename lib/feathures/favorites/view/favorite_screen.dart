@@ -7,7 +7,7 @@ import 'package:category_b/feathures/favorites/bloc/favorite_anekdots_bloc.dart'
 import 'package:category_b/feathures/favorites/widgets/anekdot_list_card.dart';
 import 'package:category_b/feathures/favorites/widgets/custom_search_bar.dart';
 import 'package:category_b/feathures/generate%20anekdot/bloc/generate_anekdot_bloc.dart';
-import 'package:category_b/ui/widgets/add_anekdot_dialog.dart';
+import 'package:category_b/ui/widgets/add_or_update_anekdot_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -150,8 +150,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
 void _showAddDialog(BuildContext context) {
   showDialog(
     context: context,
-    builder: (dialogContext) => AddAnekdotDialog(
-      onAdd: (text) => _onPressedAddAnekdot(context, dialogContext, text),
+    builder: (dialogContext) => AddOrUpdateAnekdotDialog(
+      onAddOrUpdate: (text) =>
+          _onPressedAddAnekdot(context, dialogContext, text),
     ),
   );
 }

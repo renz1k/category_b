@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 
-class AddAnekdotDialog extends StatefulWidget {
-  const AddAnekdotDialog({super.key, required this.onAdd, this.initialText});
+class AddOrUpdateAnekdotDialog extends StatefulWidget {
+  const AddOrUpdateAnekdotDialog({
+    super.key,
+    required this.onAddOrUpdate,
+    this.initialText,
+  });
 
-  final ValueChanged<String> onAdd;
+  final ValueChanged<String> onAddOrUpdate;
   final String? initialText;
 
   @override
-  State<AddAnekdotDialog> createState() => _AddAnekdotDialogState();
+  State<AddOrUpdateAnekdotDialog> createState() =>
+      _AddOrUpdateAnekdotDialogState();
 }
 
-class _AddAnekdotDialogState extends State<AddAnekdotDialog> {
+class _AddOrUpdateAnekdotDialogState extends State<AddOrUpdateAnekdotDialog> {
   late final TextEditingController _controller;
 
   @override
@@ -31,8 +36,10 @@ class _AddAnekdotDialogState extends State<AddAnekdotDialog> {
     return AlertDialog(
       backgroundColor: theme.cardColor,
       actionsPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-      title: Text(
-        widget.initialText == null ? 'Добавить анекдот' : 'Редактировать',
+      title: Center(
+        child: Text(
+          widget.initialText == null ? 'Добавить анекдот' : 'Редактировать',
+        ),
       ),
       content: TextField(
         controller: _controller,
@@ -65,7 +72,7 @@ class _AddAnekdotDialogState extends State<AddAnekdotDialog> {
               ),
             ),
             FilledButton(
-              onPressed: () => widget.onAdd(_controller.text),
+              onPressed: () => widget.onAddOrUpdate(_controller.text),
               style: FilledButton.styleFrom(
                 backgroundColor: theme.primaryColor,
                 foregroundColor: theme.cardColor,

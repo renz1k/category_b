@@ -1,3 +1,4 @@
+import 'package:category_b/bloc/theme/theme_cubit.dart';
 import 'package:category_b/core/di/setup_dependencies.dart';
 import 'package:category_b/core/services/anekdot/anekdot_service_interface.dart';
 import 'package:category_b/feathures/favorites/bloc/favorite_anekdots_bloc.dart';
@@ -43,11 +44,16 @@ class _CategoryBAppState extends State<CategoryBApp> {
             favoritesRepository: getIt<FavoritesRepositoryInterface>(),
           ),
         ),
+        BlocProvider(create: (context) => ThemeCubit()),
       ],
-      child: MaterialApp.router(
-        title: 'categotyB',
-        theme: themeData,
-        routerConfig: _router.config(),
+      child: BlocBuilder<ThemeCubit, ThemeState>(
+        builder: (context, state) {
+          return MaterialApp.router(
+            title: 'categotyB',
+            theme: state.isDark ? darkTheme : lightTheme,
+            routerConfig: _router.config(),
+          );
+        },
       ),
     );
   }
