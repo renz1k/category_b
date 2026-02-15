@@ -5,18 +5,19 @@ class SettingsActionCard extends StatelessWidget {
   const SettingsActionCard({
     super.key,
     required this.title,
-    this.onTap,
     required this.iconData,
+    this.onTap,
     this.iconColor,
   });
   final String title;
-  final VoidCallback? onTap;
   final IconData iconData;
+  final VoidCallback? onTap;
   final Color? iconColor;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
     return GestureDetector(
       onTap: onTap,
       child: Padding(
@@ -29,7 +30,12 @@ class SettingsActionCard extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: theme.textTheme.titleMedium?.copyWith(fontSize: 18),
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontSize: 18,
+                  color: theme.brightness == Brightness.dark
+                      ? Colors.white
+                      : Colors.black,
+                ),
               ),
 
               Padding(

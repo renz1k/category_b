@@ -1,10 +1,7 @@
 import 'package:dio/dio.dart';
 
 class DioService {
-  static DioService? _instance;
-  factory DioService() => _instance ??= DioService._internal();
-
-  DioService._internal();
+  DioService();
 
   late final Dio dio;
 
@@ -12,9 +9,9 @@ class DioService {
     dio = Dio(
       BaseOptions(
         baseUrl: baseUrl,
-        connectTimeout: Duration(seconds: 15),
-        receiveTimeout: Duration(seconds: 15),
-        sendTimeout: Duration(seconds: 15),
+        connectTimeout: const Duration(seconds: 15),
+        receiveTimeout: const Duration(seconds: 15),
+        sendTimeout: const Duration(seconds: 15),
         followRedirects: true,
         validateStatus: (status) => status != null && status < 500,
         headers: {

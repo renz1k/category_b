@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:category_b/core/services/show_anekdot_bottom_sheet.dart';
 import 'package:category_b/feathures/generate%20anekdot/bloc/generate_anekdot_bloc.dart';
 import 'package:category_b/feathures/generate%20anekdot/widgets/generate_anekdot_button.dart';
 import 'package:category_b/router/router.dart';
+import 'package:category_b/ui/widgets/bottom%20sheet/show_anekdot_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -53,10 +53,10 @@ class _GenerateAnekdotScreenState extends State<GenerateAnekdotScreen> {
             },
             builder: (context, state) {
               if (state is GenerateAnekdotLoading) {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
               return GenerateAnekdotButton(
-                text: 'Рандомный анек',
+                text: 'Рандомный анекдот',
                 onPressed: () => bloc.add(GenerateRandomAnekdot()),
                 icon: Icons.auto_stories,
               );

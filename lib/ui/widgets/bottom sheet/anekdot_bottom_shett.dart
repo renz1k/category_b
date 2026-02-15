@@ -1,6 +1,10 @@
 import 'package:category_b/core/services/anekdot/models/anekdots.dart';
 import 'package:category_b/feathures/generate%20anekdot/bloc/generate_anekdot_bloc.dart';
-import 'package:category_b/ui/widgets/base_bottom_sheet.dart';
+import 'package:category_b/ui/theme/theme.dart';
+import 'package:category_b/ui/widgets/bottom%20sheet/base_bottom_sheet.dart';
+import 'package:category_b/ui/widgets/bottom%20sheet/bottom_sheet_android_buttons.dart';
+import 'package:category_b/ui/widgets/bottom%20sheet/bottom_sheet_cupertino_buttons.dart';
+import 'package:category_b/ui/widgets/bottom%20sheet/cupertino_handle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,14 +13,14 @@ class AnekdotBottomSheet extends StatefulWidget {
     super.key,
     required this.anekdot,
     this.onTapFavorite,
-    this.onTapCopy,
+    this.onTapShare,
     this.onTapEdit,
     this.initialIsFavorite = false,
   });
 
   final Anekdot anekdot;
   final VoidCallback? onTapFavorite;
-  final VoidCallback? onTapCopy;
+  final VoidCallback? onTapShare;
   final VoidCallback? onTapEdit;
   final bool initialIsFavorite;
 
@@ -31,12 +35,23 @@ class _AnekdotBottomSheetState extends State<AnekdotBottomSheet> {
 
     return BaseBottomSheet(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+        padding: theme.isAndroid
+            ? EdgeInsets.symmetric(horizontal: 12, vertical: 16)
+            : EdgeInsets.symmetric(horizontal: 12).copyWith(bottom: 16),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Divider(height: 1),
+            Center(
+              child: theme.isAndroid
+                  ? const SizedBox(
+                      height: 1,
+                      width: double.infinity,
+                      child: Divider(),
+                    )
+                  : const CupertinoHandle(),
+            ),
+            SizedBox(height: 8),
             Expanded(
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
@@ -45,6 +60,9 @@ class _AnekdotBottomSheetState extends State<AnekdotBottomSheet> {
                   child: Text(
                     widget.anekdot.anekdotText,
                     style: theme.textTheme.bodyLarge?.copyWith(
+                      color: theme.brightness == Brightness.dark
+                          ? Colors.white
+                          : Colors.black,
                       height: 1.6,
                       fontSize: 16,
                     ),
@@ -57,40 +75,15 @@ class _AnekdotBottomSheetState extends State<AnekdotBottomSheet> {
                 final isFavorite = state is GenerateAnekdotLoaded
                     ? state.isFavorite(widget.anekdot.anekdotText)
                     : widget.initialIsFavorite;
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    IconButton(
-                      onPressed: widget.onTapCopy,
-                      icon: Icon(
-                        Icons.ios_share,
-                        size: 32,
-                        color: theme.hintColor.withValues(alpha: 0.4),
-                      ),
-                      tooltip: 'Поделиться',
-                    ),
-                    if (widget.onTapEdit != null)
-                      IconButton(
-                        onPressed: widget.onTapEdit,
-                        icon: Icon(
-                          Icons.edit,
-                          size: 32,
-                          color: theme.hintColor.withValues(alpha: 0.4),
-                        ),
-                        tooltip: 'Редактировать',
-                      ),
-                    IconButton(
-                      onPressed: widget.onTapFavorite,
-                      icon: Icon(
-                        Icons.favorite,
-                        size: 32,
-                        color: isFavorite
-                            ? theme.primaryColor
-                            : theme.hintColor.withValues(alpha: 0.4),
-                      ),
-                      tooltip: 'В избранное',
-                    ),
-                  ],
+                if (theme.isAndroid) {
+                  return BottomSheetAndroidButtons(
+                    widget: widget,
+                    isFavorite: isFavorite,
+                  );
+                }
+                return BottomSheetCupertinoButtons(
+                  widget: widget,
+                  isFavorite: isFavorite,
                 );
               },
             ),

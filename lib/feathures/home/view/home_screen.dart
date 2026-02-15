@@ -9,6 +9,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
     return AutoTabsRouter(
       routes: const [GenerateAnekdotRoute(), FavoriteRoute(), SettingsRoute()],
       builder: (context, child) {

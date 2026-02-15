@@ -3,10 +3,7 @@ import 'package:category_b/repositories/favorites/model/favorite_anekdots.dart';
 import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 
 class HiveService {
-  static HiveService? _instance;
-  factory HiveService() => _instance ??= HiveService._();
-
-  HiveService._();
+  HiveService();
 
   Future<void> init() async {
     await Hive.initFlutter();

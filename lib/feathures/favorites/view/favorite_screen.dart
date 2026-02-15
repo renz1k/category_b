@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:category_b/core/services/show_anekdot_bottom_sheet.dart';
-import 'package:category_b/core/services/toggle_favorite_func.dart';
 import 'package:category_b/feathures/favorites/bloc/favorite_anekdots_bloc.dart';
-import 'package:category_b/feathures/favorites/widgets/anekdot_list_card.dart';
+import 'package:category_b/feathures/favorites/widgets/add%20anekdot%20buttons/add_anekdot_android_button.dart';
+import 'package:category_b/feathures/favorites/widgets/add%20anekdot%20buttons/add_anekdot_cupertino_button.dart';
 import 'package:category_b/feathures/favorites/widgets/custom_search_bar.dart';
-import 'package:category_b/feathures/generate%20anekdot/bloc/generate_anekdot_bloc.dart';
-import 'package:category_b/ui/widgets/add_or_update_anekdot_dialog.dart';
+import 'package:category_b/feathures/favorites/widgets/favorite%20screen%20content/empty_favorites_widget.dart';
+import 'package:category_b/feathures/favorites/widgets/favorite%20screen%20content/favorite_content_widget.dart';
+import 'package:category_b/ui/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -36,6 +36,10 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     super.dispose();
   }
 
+  void _unfocus(BuildContext context) {
+    FocusScope.of(context).unfocus();
+  }
+
   void _onSearchChanged(String query) {
     if (_debounce?.isActive ?? false) _debounce!.cancel();
     _debounce = Timer(const Duration(milliseconds: 150), () {
@@ -48,7 +52,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   void _clearSearch() {
     _searchController.clear();
     _onSearchChanged('');
-    FocusScope.of(context).unfocus();
+    _unfocus(context);
   }
 
   @override
@@ -56,14 +60,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     final theme = Theme.of(context);
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _showAddDialog(context),
-        tooltip: 'Добавить свой анекдот',
-        backgroundColor: theme.primaryColor,
-        child: const Icon(Icons.add),
-      ),
+      floatingActionButton: theme.isAndroid ? AddAnekdotAndroidButton() : null,
       body: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
+        onTap: () => _unfocus(context),
         child: CustomScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           slivers: [
@@ -76,6 +75,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
               surfaceTintColor: Colors.transparent,
               title: const Text('Избранное'),
               centerTitle: true,
+              actions: [
+                if (!theme.isAndroid) const AddAnekdotCupertinoButton(),
+              ],
             ),
 
             SliverToBoxAdapter(
@@ -97,42 +99,10 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                     final message = state.searchQuery.isNotEmpty
                         ? 'Ничего не найдено'
                         : 'Избранных анекдотов нет';
-
-                    return SliverFillRemaining(
-                      hasScrollBody: false,
-                      child: Center(
-                        child: Text(
-                          message,
-                          style: theme.textTheme.bodyLarge?.copyWith(
-                            color: theme.hintColor,
-                          ),
-                        ),
-                      ),
-                    );
+                    return EmptyFavoritesWidget(message: message);
                   }
 
-                  return SliverList.builder(
-                    itemCount: list.length,
-                    itemBuilder: (context, index) {
-                      final favoriteAnekdot = list[index];
-                      return AnekdotListCard(
-                        isFovorite: true,
-                        anekdotText: favoriteAnekdot.anekdotText,
-                        onTapCard: () {
-                          FocusScope.of(context).unfocus();
-                          showAnekdotBottomSheet(
-                            context: context,
-                            anekdot: favoriteAnekdot.toAnekdot(),
-                            isFavorite: true,
-                            dbId: favoriteAnekdot.id,
-                          );
-                        },
-                        onTapFavorite: () {
-                          toggleFavorite(context, favoriteAnekdot.toAnekdot());
-                        },
-                      );
-                    },
-                  );
+                  return FavoriteContentWidget(list: list);
                 }
                 return const SliverFillRemaining(
                   child: Center(child: CircularProgressIndicator()),
@@ -144,37 +114,5 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
         ),
       ),
     );
-  }
-}
-
-void _showAddDialog(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (dialogContext) => AddOrUpdateAnekdotDialog(
-      onAddOrUpdate: (text) =>
-          _onPressedAddAnekdot(context, dialogContext, text),
-    ),
-  );
-}
-
-void _onPressedAddAnekdot(
-  BuildContext context,
-  BuildContext dialogContext,
-  String rawText,
-) {
-  final text = rawText.trim();
-
-  if (text.isNotEmpty) {
-    BlocProvider.of<FavoriteAnekdotsBloc>(
-      context,
-    ).add(AddCustomAnekdot(text: text));
-
-    BlocProvider.of<GenerateAnekdotBloc>(context).add(FavoritesListDirty());
-
-    Navigator.of(dialogContext).pop();
-
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(const SnackBar(content: Text('Анекдот добавлен!')));
   }
 }

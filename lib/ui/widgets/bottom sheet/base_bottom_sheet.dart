@@ -9,8 +9,10 @@ class BaseBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isCupertino = !theme.isAndroid;
+
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20).copyWith(top: isCupertino ? 12 : 20),
       decoration: BoxDecoration(
         color: theme.brightness == Brightness.light
             ? kSurfaceLight
