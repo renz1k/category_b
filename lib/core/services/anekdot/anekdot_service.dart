@@ -19,7 +19,8 @@ class AnekdotService implements AnekdotServiceInterface {
           options: Options(
             responseType: ResponseType.plain,
             followRedirects: true,
-            receiveTimeout: Duration(seconds: 20),
+            receiveTimeout: Duration(seconds: 5),
+            sendTimeout: Duration(seconds: 3),
           ),
         );
 
@@ -34,19 +35,24 @@ class AnekdotService implements AnekdotServiceInterface {
           }
         }
 
-        if (attempt == maxRetries) {
-          return Anekdot(
-            anekdotText:
-                'Не удалось получить анекдот после $maxRetries попыток',
-          );
+        if (attempt < maxRetries) {
+          await Future.delayed(Duration(milliseconds: 500));
+          continue;
         }
 
-        await Future.delayed(Duration(seconds: attempt * 2));
+        return Anekdot(anekdotText: 'Сервер занят, попробуйте через минуту');
       } catch (e) {
-        log('Попытка $attempt/3: $e');
-        if (attempt == maxRetries) rethrow;
+        log('Попытка $attempt/$maxRetries: $e');
+
+        if (attempt < maxRetries) {
+          await Future.delayed(Duration(milliseconds: 500));
+          continue;
+        }
+
+        return Anekdot(anekdotText: 'Проверьте интернет-соединение');
       }
     }
-    throw Exception('Неизвестная ошибка');
+
+    return Anekdot(anekdotText: 'Неожиданная ошибка');
   }
 }

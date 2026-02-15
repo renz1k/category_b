@@ -18,13 +18,19 @@ class CustomSearchBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
+    final textColor = theme.brightness == Brightness.dark
+        ? Colors.white
+        : Colors.black;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: TextField(
         controller: controller,
         onChanged: onChanged,
+        style: TextStyle(color: textColor),
         decoration: InputDecoration(
           hintText: hintText,
+          hintStyle: TextStyle(color: textColor),
           filled: true,
           fillColor: theme.cardColor,
           contentPadding: const EdgeInsets.all(12),

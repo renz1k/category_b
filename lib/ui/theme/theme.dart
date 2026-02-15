@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 const Color kPrimaryColor = Color(0xFFF82B10);
 const Color kScaffoldLight = Color(0xFFEFF1F3);
-const Color kCardLight = Color(0xFFFFFFFF);
 const Color kScaffoldDark = Color(0xFF0F1117);
+const Color kCardLight = Color(0xFFFFFFFF);
 const Color kCardDark = Color(0xFF1A1D24);
 const Color kSurfaceLight = Color(0xFFF8FAFC);
 const Color kSurfaceDark = Color(0xFF1A1D24);
@@ -40,6 +40,14 @@ FilledButtonThemeData _filledButtonThemeData() => FilledButtonThemeData(
 final ThemeData lightTheme = ThemeData(
   useMaterial3: true,
   brightness: Brightness.light,
+
+  switchTheme: SwitchThemeData(
+    trackOutlineColor: WidgetStateProperty.all(
+      ColorScheme.fromSeed(
+        seedColor: kPrimaryColor,
+      ).onSurfaceVariant.withValues(alpha: 0.5),
+    ),
+  ),
 
   colorScheme: ColorScheme.fromSeed(
     seedColor: kPrimaryColor,
@@ -98,6 +106,15 @@ final ThemeData lightTheme = ThemeData(
 final ThemeData darkTheme = ThemeData(
   useMaterial3: true,
   brightness: Brightness.dark,
+
+  switchTheme: SwitchThemeData(
+    trackOutlineColor: WidgetStateProperty.all(
+      ColorScheme.fromSeed(
+        seedColor: kPrimaryColor,
+        brightness: Brightness.dark,
+      ).onSurfaceVariant.withValues(alpha: 0.5),
+    ),
+  ),
 
   colorScheme:
       ColorScheme.fromSeed(
@@ -159,3 +176,8 @@ final ThemeData darkTheme = ThemeData(
     shape: const CircleBorder(),
   ),
 );
+
+extension ThemePlatformExtension on ThemeData {
+  bool get isAndroid => false;
+  // defaultTargetPlatform == TargetPlatform.android;
+}
