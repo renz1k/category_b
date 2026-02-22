@@ -32,6 +32,10 @@ migrate_working_dir/
 .pub/
 /build/
 /coverage/
+# Firebase
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+.env
 
 # Symbolication related
 app.*.symbols
