@@ -50,7 +50,7 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCU9_YVmcmB8nH1-6tnCRf2hLJcVzvIQ74',
+    apiKey: 'AIzaSyCUee7LZvIBkVlpexhJHQz_Vp2imo6-Jys',
     appId: '1:248705870217:android:c548dad6bcaa3c1464d958',
     messagingSenderId: '248705870217',
     projectId: 'category-b',
@@ -58,11 +58,12 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDVPULuGLYfSv-ZF8V82dm1V1mBJ1UMTew',
+    apiKey: 'AIzaSyAOwyJllnOhI3kGw80zD9Km7jU9qXbW52g',
     appId: '1:248705870217:ios:0c280c1e046f2ce264d958',
     messagingSenderId: '248705870217',
     projectId: 'category-b',
     storageBucket: 'category-b.firebasestorage.app',
     iosBundleId: 'com.example.categoryb',
   );
+
 }
