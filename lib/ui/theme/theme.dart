@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 const Color kPrimaryColor = Color(0xFFF82B10);
@@ -178,6 +179,5 @@ final ThemeData darkTheme = ThemeData(
 );
 
 extension ThemePlatformExtension on ThemeData {
-  bool get isAndroid => false;
-  // defaultTargetPlatform == TargetPlatform.android;
+  bool get isAndroid => defaultTargetPlatform == TargetPlatform.android;
 }
