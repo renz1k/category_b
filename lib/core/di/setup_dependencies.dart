@@ -1,3 +1,4 @@
+import 'package:category_b/core/di/app_initializer.dart';
 import 'package:category_b/core/services/anekdot/anekdot_service.dart';
 import 'package:category_b/core/services/anekdot/anekdot_service_interface.dart';
 import 'package:category_b/core/services/dio_service.dart';
@@ -24,7 +25,10 @@ Future<void> setupDependencies({required String baseUrl}) async {
   await getIt<HiveService>().init();
 
   getIt.registerLazySingleton<NotificationService>(() => NotificationService());
-  await getIt<NotificationService>().initialize();
+
+  getIt.registerLazySingleton<AppInitializer>(
+    () => AppInitializer(notificationService: getIt<NotificationService>()),
+  );
 
   getIt.registerSingleton<Box<FavoriteAnekdots>>(
     await getIt<HiveService>().getFavoritesBox(),

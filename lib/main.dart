@@ -1,9 +1,9 @@
 import 'dart:developer';
 
 import 'package:category_b/bloc/theme/theme_cubit.dart';
+import 'package:category_b/core/di/app_initializer.dart';
 import 'package:category_b/core/di/setup_dependencies.dart';
 import 'package:category_b/core/services/anekdot/anekdot_service_interface.dart';
-import 'package:category_b/core/services/notifications/notification_service.dart';
 import 'package:category_b/feathures/favorites/bloc/favorite_anekdots_bloc.dart';
 import 'package:category_b/feathures/generate%20anekdot/bloc/generate_anekdot_bloc.dart';
 import 'package:category_b/repositories/favorites/favorites_repository_interface.dart';
@@ -25,7 +25,7 @@ Future<void> main() async {
 
   await setupDependencies(baseUrl: dotenv.env['BASE_URL']!);
 
-  await getIt<NotificationService>().scheduleWeeklyReminder();
+  await getIt<AppInitializer>().init();
 
   log('App fully initialized');
 
