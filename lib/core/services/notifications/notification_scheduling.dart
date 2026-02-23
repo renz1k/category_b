@@ -8,6 +8,8 @@ class NotificationScheduler {
 
   NotificationScheduler(this.localNotifications);
 
+  static const int weeklyId = 777;
+
   Future<void> showNotification({
     required int id,
     required String title,
@@ -46,62 +48,15 @@ class NotificationScheduler {
 
   Future<void> scheduleWeeklyReminder() async {
     try {
-      await localNotifications.cancel(id: 777);
-      log('Cancelled previous notification with id 777 (reset timer)');
+      await cancelWeeklyReminder();
+      log('Cancelled previous notification with id $weeklyId (reset timer)');
 
       final now = tz.TZDateTime.now(tz.local);
-
       final scheduledDate = now.add(const Duration(days: 7));
-
       log('Current time: $now, Scheduled time: $scheduledDate');
 
-      final AndroidFlutterLocalNotificationsPlugin? androidImplementation =
-          localNotifications
-              .resolvePlatformSpecificImplementation<
-                AndroidFlutterLocalNotificationsPlugin
-              >();
-
-      bool hasPermission = true;
-
-      if (androidImplementation != null) {
-        hasPermission =
-            await androidImplementation.areNotificationsEnabled() ?? false;
-        log('Android notifications enabled: $hasPermission');
-
-        if (!hasPermission) {
-          log('WARNING: Notifications are disabled! Requesting permission...');
-          final bool? granted = await androidImplementation
-              .requestNotificationsPermission();
-          hasPermission = granted ?? false;
-          log('Permission request result: $hasPermission');
-        } else {
-          log('Notifications are enabled, proceeding with scheduling...');
-        }
-      }
-
-      if (androidImplementation == null) {
-        final IOSFlutterLocalNotificationsPlugin? iosImplementation =
-            localNotifications
-                .resolvePlatformSpecificImplementation<
-                  IOSFlutterLocalNotificationsPlugin
-                >();
-        if (iosImplementation != null) {
-          final bool? iosPermission = await iosImplementation
-              .requestPermissions(alert: true, badge: true, sound: true);
-          hasPermission = iosPermission ?? false;
-          log('iOS notification permission: $hasPermission');
-        }
-      }
-
-      if (!hasPermission) {
-        log('ERROR: Notification permission not granted! Cannot schedule.');
-        return;
-      }
-
-      final Duration timeUntilNotification = scheduledDate.difference(now);
-
       await localNotifications.zonedSchedule(
-        id: 777,
+        id: weeklyId,
         title: 'Скучно без анекдотов? 🥺',
         body: 'Зайди — у нас свежие анекдоты!',
         scheduledDate: scheduledDate,
@@ -123,30 +78,14 @@ class NotificationScheduler {
         ),
         androidScheduleMode: AndroidScheduleMode.inexact,
       );
-
-      log('Weekly reminder scheduled for: $scheduledDate');
-
-      final List<PendingNotificationRequest> pendingNotifications =
-          await localNotifications.pendingNotificationRequests();
-      log('Total pending notifications: ${pendingNotifications.length}');
-      bool foundScheduled = false;
-      for (var notification in pendingNotifications) {
-        log(
-          'Pending notification: id=${notification.id}, title="${notification.title}", body="${notification.body}"',
-        );
-        if (notification.id == 777) {
-          foundScheduled = true;
-          log('Found our scheduled notification (id=777)');
-        }
-      }
-      if (!foundScheduled && timeUntilNotification.inMinutes >= 1) {
-        log(
-          'ERROR: Scheduled notification (id=777) not found in pending list!',
-        );
-      }
     } catch (e, stackTrace) {
       log('ERROR scheduling notification: $e');
       log('Stack trace: $stackTrace');
     }
+  }
+
+  Future<void> cancelWeeklyReminder() async {
+    await localNotifications.cancel(id: weeklyId);
+    log('Weekly reminder cancelled');
   }
 }

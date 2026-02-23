@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:category_b/bloc/notifications/cubit/notifications_cubit.dart';
 import 'package:category_b/bloc/theme/theme_cubit.dart';
 import 'package:category_b/feathures/favorites/bloc/favorite_anekdots_bloc.dart';
 import 'package:category_b/feathures/settings/widgets/confirmation_dialog.dart';
@@ -21,6 +22,7 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDarkTheme = context.watch<ThemeCubit>().state.isDark;
+    final isEnabled = context.watch<NotificationsCubit>().state.enabled;
 
     return Scaffold(
       body: CustomScrollView(
@@ -49,8 +51,8 @@ class SettingsScreen extends StatelessWidget {
           SliverToBoxAdapter(
             child: SettingsToggleCard(
               title: 'Уведомления',
-              value: false,
-              onChanged: (value) {},
+              value: isEnabled,
+              onChanged: (value) => _toggleNotifications(context, value),
             ),
           ),
 
@@ -83,6 +85,10 @@ class SettingsScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _toggleNotifications(BuildContext context, bool value) {
+    context.read<NotificationsCubit>().toggle(value);
   }
 }
 

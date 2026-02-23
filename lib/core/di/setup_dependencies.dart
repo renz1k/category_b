@@ -24,10 +24,20 @@ Future<void> setupDependencies({required String baseUrl}) async {
   getIt.registerLazySingleton<HiveService>(() => HiveService());
   await getIt<HiveService>().init();
 
+  final sharedPrefs = await SharedPreferences.getInstance();
+  getIt.registerSingleton<SharedPreferences>(sharedPrefs);
+
+  getIt.registerLazySingleton<SettingsRepositoryInterface>(
+    () => SettingsRepository(preferences: getIt<SharedPreferences>()),
+  );
+
   getIt.registerLazySingleton<NotificationService>(() => NotificationService());
 
   getIt.registerLazySingleton<AppInitializer>(
-    () => AppInitializer(notificationService: getIt<NotificationService>()),
+    () => AppInitializer(
+      notificationService: getIt<NotificationService>(),
+      settingsRepository: getIt<SettingsRepositoryInterface>(),
+    ),
   );
 
   getIt.registerSingleton<Box<FavoriteAnekdots>>(
@@ -36,12 +46,5 @@ Future<void> setupDependencies({required String baseUrl}) async {
 
   getIt.registerLazySingleton<FavoritesRepositoryInterface>(
     () => FavoritesRepository(favoriteBox: getIt<Box<FavoriteAnekdots>>()),
-  );
-
-  final sharedPrefs = await SharedPreferences.getInstance();
-  getIt.registerSingleton<SharedPreferences>(sharedPrefs);
-
-  getIt.registerLazySingleton<SettingsRepositoryInterface>(
-    () => SettingsRepository(preferences: getIt<SharedPreferences>()),
   );
 }
