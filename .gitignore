@@ -37,6 +37,12 @@ android/app/google-services.json
 ios/Runner/GoogleService-Info.plist
 .env
 
+/lib/firebase_options.dart
+android/app/google-services.json  
+ios/Runner/GoogleService-Info.plist
+ios/firebase_app_id_file.json
+.env
+
 # Symbolication related
 app.*.symbols
 

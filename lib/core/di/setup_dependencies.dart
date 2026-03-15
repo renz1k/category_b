@@ -1,3 +1,4 @@
+import 'package:category_b/core/di/app_initializer.dart';
 import 'package:category_b/core/services/anekdot/anekdot_service.dart';
 import 'package:category_b/core/services/anekdot/anekdot_service_interface.dart';
 import 'package:category_b/core/services/dio_service.dart';
@@ -23,8 +24,21 @@ Future<void> setupDependencies({required String baseUrl}) async {
   getIt.registerLazySingleton<HiveService>(() => HiveService());
   await getIt<HiveService>().init();
 
+  final sharedPrefs = await SharedPreferences.getInstance();
+  getIt.registerSingleton<SharedPreferences>(sharedPrefs);
+
+  getIt.registerLazySingleton<SettingsRepositoryInterface>(
+    () => SettingsRepository(preferences: getIt<SharedPreferences>()),
+  );
+
   getIt.registerLazySingleton<NotificationService>(() => NotificationService());
-  await getIt<NotificationService>().initialize();
+
+  getIt.registerLazySingleton<AppInitializer>(
+    () => AppInitializer(
+      notificationService: getIt<NotificationService>(),
+      settingsRepository: getIt<SettingsRepositoryInterface>(),
+    ),
+  );
 
   getIt.registerSingleton<Box<FavoriteAnekdots>>(
     await getIt<HiveService>().getFavoritesBox(),
@@ -32,12 +46,5 @@ Future<void> setupDependencies({required String baseUrl}) async {
 
   getIt.registerLazySingleton<FavoritesRepositoryInterface>(
     () => FavoritesRepository(favoriteBox: getIt<Box<FavoriteAnekdots>>()),
-  );
-
-  final sharedPrefs = await SharedPreferences.getInstance();
-  getIt.registerSingleton<SharedPreferences>(sharedPrefs);
-
-  getIt.registerLazySingleton<SettingsRepositoryInterface>(
-    () => SettingsRepository(preferences: getIt<SharedPreferences>()),
   );
 }

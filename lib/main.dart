@@ -1,6 +1,8 @@
 import 'dart:developer';
 
+import 'package:category_b/bloc/notifications/cubit/notifications_cubit.dart';
 import 'package:category_b/bloc/theme/theme_cubit.dart';
+import 'package:category_b/core/di/app_initializer.dart';
 import 'package:category_b/core/di/setup_dependencies.dart';
 import 'package:category_b/core/services/anekdot/anekdot_service_interface.dart';
 import 'package:category_b/core/services/notifications/notification_service.dart';
@@ -25,7 +27,7 @@ Future<void> main() async {
 
   await setupDependencies(baseUrl: dotenv.env['BASE_URL']!);
 
-  await getIt<NotificationService>().scheduleWeeklyReminder();
+  await getIt<AppInitializer>().init();
 
   log('App fully initialized');
 
@@ -59,6 +61,12 @@ class _CategoryBAppState extends State<CategoryBApp> {
         ),
         BlocProvider(
           create: (context) => ThemeCubit(
+            settingsRepository: getIt<SettingsRepositoryInterface>(),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => NotificationsCubit(
+            notificationService: getIt<NotificationService>(),
             settingsRepository: getIt<SettingsRepositoryInterface>(),
           ),
         ),
