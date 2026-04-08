@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class CustomSearchBar extends StatelessWidget {
   const CustomSearchBar({
-    super.key,
     required this.controller,
     required this.onChanged,
     required this.onClear,
+    super.key,
     this.hintText = 'Поиск...',
   });
 

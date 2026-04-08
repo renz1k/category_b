@@ -11,5 +11,5 @@ class HiveService {
   }
 
   Future<Box<FavoriteAnekdots>> getFavoritesBox() async =>
-      await Hive.openBox<FavoriteAnekdots>('favorite_anekdots');
+      Hive.openBox<FavoriteAnekdots>('favorite_anekdots');
 }

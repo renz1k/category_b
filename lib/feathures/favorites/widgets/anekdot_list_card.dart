@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 class AnekdotListCard extends StatelessWidget {
   const AnekdotListCard({
-    super.key,
     required this.anekdotText,
+    super.key,
     this.onTapCard,
     this.onTapFavorite,
     this.onTapCopy,

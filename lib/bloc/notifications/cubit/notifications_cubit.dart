@@ -28,11 +28,11 @@ class NotificationsCubit extends Cubit<NotificationsState> {
       }
 
       await settingsRepository.setNotificationsEnabled(true);
-      emit(NotificationsState(enabled: true));
+      emit(const NotificationsState(enabled: true));
     } else {
       await notificationService.disableNotifications();
       await settingsRepository.setNotificationsEnabled(false);
-      emit(NotificationsState(enabled: false));
+      emit(const NotificationsState(enabled: false));
     }
   }
 }

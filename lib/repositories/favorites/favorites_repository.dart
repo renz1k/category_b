@@ -20,7 +20,7 @@ class FavoritesRepository implements FavoritesRepositoryInterface {
         .toList();
 
     if (matches.isNotEmpty) {
-      for (var match in matches) {
+      for (final match in matches) {
         await _favoriteBox.delete(match.id);
       }
       return;

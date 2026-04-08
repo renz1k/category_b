@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 class BottomSheetAndroidButtons extends StatelessWidget {
   const BottomSheetAndroidButtons({
-    super.key,
     required this.widget,
     required this.isFavorite,
+    super.key,
   });
 
   final AnekdotBottomSheet widget;

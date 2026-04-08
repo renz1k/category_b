@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 class SettingsActionCard extends StatelessWidget {
   const SettingsActionCard({
-    super.key,
     required this.title,
     required this.iconData,
+    super.key,
     this.onTap,
     this.iconColor,
   });
@@ -23,7 +23,7 @@ class SettingsActionCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 8),
         child: BaseContainer(
-          padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
           width: double.infinity,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -39,7 +39,7 @@ class SettingsActionCard extends StatelessWidget {
               ),
 
               Padding(
-                padding: const EdgeInsets.all(4.0),
+                padding: const EdgeInsets.all(4),
                 child: Icon(
                   iconData,
                   color: iconColor ?? theme.hintColor.withValues(alpha: 0.3),

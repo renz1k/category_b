@@ -55,6 +55,7 @@ class _CategoryBAppState extends State<CategoryBApp> {
             title: 'categoryB',
             theme: state.isDark ? darkTheme : lightTheme,
             routerConfig: _router.config(),
+            debugShowCheckedModeBanner: false,
           );
         },
       ),

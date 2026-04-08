@@ -46,7 +46,7 @@ void _onPressedAddAnekdot(
 
       Navigator.of(dialogContext).pop();
 
-      showMessage(context, 'Анекдот добавлен!', isError: false);
+      showMessage(context, 'Анекдот добавлен!');
     } catch (e) {
       showMessage(context, 'Ошибка добавления: $e', isError: true);
     }

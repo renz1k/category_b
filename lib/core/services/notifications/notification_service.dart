@@ -1,11 +1,10 @@
 import 'dart:developer';
 
+import 'package:category_b/core/services/notifications/firebase_background_handler.dart';
+import 'package:category_b/core/services/notifications/notification_initialization.dart';
+import 'package:category_b/core/services/notifications/notification_scheduling.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:permission_handler/permission_handler.dart';
-
-import 'firebase_background_handler.dart';
-import 'notification_initialization.dart';
-import 'notification_scheduling.dart';
 
 class NotificationService {
   final initializer = NotificationInitializer();
@@ -38,12 +37,12 @@ class NotificationService {
         log('Notification opened app: ${message.messageId}');
       });
 
-      RemoteMessage? initialMessage = await initializer.fcm.getInitialMessage();
+      final initialMessage = await initializer.fcm.getInitialMessage();
       if (initialMessage != null) {
         log('App opened from notification: ${initialMessage.messageId}');
       }
 
-      String? token = await initializer.fcm.getToken();
+      final token = await initializer.fcm.getToken();
       log('FCM Token: $token');
 
       initializer.fcm.onTokenRefresh.listen((String newToken) {

@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ConfirmationDialog extends StatelessWidget {
-  const ConfirmationDialog({super.key, required this.onConfirm});
+  const ConfirmationDialog({required this.onConfirm, super.key});
 
   final VoidCallback onConfirm;
 
@@ -14,7 +14,9 @@ class ConfirmationDialog extends StatelessWidget {
     if (theme.isAndroid) {
       return AlertDialog(
         backgroundColor: theme.cardColor,
-        content: _DialogContent(crossAxisAlignment: CrossAxisAlignment.start),
+        content: const _DialogContent(
+          crossAxisAlignment: CrossAxisAlignment.start,
+        ),
         actions: [
           TextButton(
             onPressed: () => _confirm(context),
@@ -33,7 +35,9 @@ class ConfirmationDialog extends StatelessWidget {
       );
     }
     return CupertinoAlertDialog(
-      content: _DialogContent(crossAxisAlignment: CrossAxisAlignment.center),
+      content: const _DialogContent(
+        crossAxisAlignment: CrossAxisAlignment.center,
+      ),
       actions: [
         CupertinoDialogAction(
           onPressed: () => _confirm(context),

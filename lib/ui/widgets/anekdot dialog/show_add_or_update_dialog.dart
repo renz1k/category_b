@@ -49,7 +49,7 @@ void _handleUpdate(
     Navigator.pop(dialogContext);
     Navigator.pop(context);
 
-    showMessage(context, 'Анекдот обновлён!', isError: false);
+    showMessage(context, 'Анекдот обновлён!');
   } catch (e) {
     showMessage(context, 'Ошибка: $e', isError: true);
   }
@@ -92,7 +92,7 @@ void showMessage(BuildContext context, String message, {bool isError = false}) {
               timer?.cancel();
               Navigator.of(dialogContext).pop();
             },
-            child: Text(
+            child: const Text(
               'OK',
               style: TextStyle(color: CupertinoColors.activeBlue),
             ),

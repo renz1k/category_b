@@ -10,8 +10,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AnekdotBottomSheet extends StatefulWidget {
   const AnekdotBottomSheet({
-    super.key,
     required this.anekdot,
+    super.key,
     this.onTapFavorite,
     this.onTapShare,
     this.onTapEdit,
@@ -36,8 +36,8 @@ class _AnekdotBottomSheetState extends State<AnekdotBottomSheet> {
     return BaseBottomSheet(
       child: Padding(
         padding: theme.isAndroid
-            ? EdgeInsets.symmetric(horizontal: 12, vertical: 16)
-            : EdgeInsets.symmetric(horizontal: 12).copyWith(bottom: 16),
+            ? const EdgeInsets.symmetric(horizontal: 12, vertical: 16)
+            : const EdgeInsets.symmetric(horizontal: 12).copyWith(bottom: 16),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -51,7 +51,7 @@ class _AnekdotBottomSheetState extends State<AnekdotBottomSheet> {
                     )
                   : const CupertinoHandle(),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Expanded(
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),

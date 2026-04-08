@@ -4,9 +4,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 class NotificationScheduler {
-  final FlutterLocalNotificationsPlugin localNotifications;
-
   NotificationScheduler(this.localNotifications);
+  final FlutterLocalNotificationsPlugin localNotifications;
 
   static const int weeklyId = 777;
 
@@ -67,8 +66,6 @@ class NotificationScheduler {
             channelDescription: 'Напоминает зайти в приложение',
             importance: Importance.high,
             priority: Priority.high,
-            enableVibration: true,
-            playSound: true,
           ),
           iOS: DarwinNotificationDetails(
             presentAlert: true,

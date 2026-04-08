@@ -13,15 +13,15 @@ import 'package:get_it/get_it.dart';
 import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final getIt = GetIt.instance;
+final GetIt getIt = GetIt.instance;
 
 Future<void> setupDependencies({required String baseUrl}) async {
-  getIt.registerLazySingleton<DioService>(() => DioService());
+  getIt.registerLazySingleton<DioService>(DioService.new);
   getIt<DioService>().init(baseUrl: baseUrl);
 
-  getIt.registerLazySingleton<AnekdotServiceInterface>(() => AnekdotService());
+  getIt.registerLazySingleton<AnekdotServiceInterface>(AnekdotService.new);
 
-  getIt.registerLazySingleton<HiveService>(() => HiveService());
+  getIt.registerLazySingleton<HiveService>(HiveService.new);
   await getIt<HiveService>().init();
 
   final sharedPrefs = await SharedPreferences.getInstance();
@@ -31,7 +31,7 @@ Future<void> setupDependencies({required String baseUrl}) async {
     () => SettingsRepository(preferences: getIt<SharedPreferences>()),
   );
 
-  getIt.registerLazySingleton<NotificationService>(() => NotificationService());
+  getIt.registerLazySingleton<NotificationService>(NotificationService.new);
 
   getIt.registerLazySingleton<AppInitializer>(
     () => AppInitializer(

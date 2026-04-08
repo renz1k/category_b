@@ -60,7 +60,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     final theme = Theme.of(context);
 
     return Scaffold(
-      floatingActionButton: theme.isAndroid ? AddAnekdotAndroidButton() : null,
+      floatingActionButton: theme.isAndroid
+          ? const AddAnekdotAndroidButton()
+          : null,
       body: GestureDetector(
         onTap: () => _unfocus(context),
         child: CustomScrollView(

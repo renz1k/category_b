@@ -19,7 +19,7 @@ class _GenerateAnekdotScreenState extends State<GenerateAnekdotScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final bloc = BlocProvider.of<GenerateAnekdotBloc>(context);
-    bool isBottomSheetOpen = false;
+    var isBottomSheetOpen = false;
 
     return Scaffold(
       appBar: AppBar(
@@ -73,7 +73,7 @@ class _GenerateAnekdotScreenState extends State<GenerateAnekdotScreen> {
     GenerateAnekdotState curr,
     GenerateAnekdotState prev,
   ) {
-    final tabsRouter = AutoTabsRouter.of(context, watch: false);
+    final tabsRouter = AutoTabsRouter.of(context);
 
     if (tabsRouter.current.name != GenerateAnekdotRoute.name) {
       return false;

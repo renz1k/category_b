@@ -5,7 +5,7 @@ import 'package:category_b/ui/widgets/bottom%20sheet/show_anekdot_bottom_sheet.d
 import 'package:flutter/cupertino.dart';
 
 class FavoriteContentWidget extends StatelessWidget {
-  const FavoriteContentWidget({super.key, required this.list});
+  const FavoriteContentWidget({required this.list, super.key});
 
   final List<FavoriteAnekdots> list;
 

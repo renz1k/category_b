@@ -17,18 +17,14 @@ class NotificationInitializer {
 
       const androidInit = AndroidInitializationSettings('notification_icon');
 
-      const iOSInit = DarwinInitializationSettings(
-        requestSoundPermission: true,
-        requestBadgePermission: true,
-        requestAlertPermission: true,
-      );
+      const iOSInit = DarwinInitializationSettings();
 
       const settings = InitializationSettings(
         android: androidInit,
         iOS: iOSInit,
       );
 
-      final bool? initialized = await localNotifications.initialize(
+      final initialized = await localNotifications.initialize(
         settings: settings,
         onDidReceiveNotificationResponse: (NotificationResponse response) {
           log(
@@ -81,12 +77,7 @@ class NotificationInitializer {
   }
 
   Future<void> _requestAndroidPermissions() async {
-    final fcmSettings = await fcm.requestPermission(
-      alert: true,
-      badge: true,
-      sound: true,
-      provisional: false,
-    );
+    final fcmSettings = await fcm.requestPermission();
     log('FCM permission: ${fcmSettings.authorizationStatus}');
 
     final androidImpl = localNotifications
@@ -95,20 +86,19 @@ class NotificationInitializer {
         >();
 
     if (androidImpl != null) {
-      final bool? granted = await androidImpl.requestNotificationsPermission();
+      final granted = await androidImpl.requestNotificationsPermission();
       log('Android local notification permission: $granted');
     }
   }
 
   Future<void> _requestIosPermissions() async {
-    final IOSFlutterLocalNotificationsPlugin? iosImplementation =
-        localNotifications
-            .resolvePlatformSpecificImplementation<
-              IOSFlutterLocalNotificationsPlugin
-            >();
+    final iosImplementation = localNotifications
+        .resolvePlatformSpecificImplementation<
+          IOSFlutterLocalNotificationsPlugin
+        >();
 
     if (iosImplementation != null) {
-      final bool? iosPermission = await iosImplementation.requestPermissions(
+      final iosPermission = await iosImplementation.requestPermissions(
         alert: true,
         badge: true,
         sound: true,

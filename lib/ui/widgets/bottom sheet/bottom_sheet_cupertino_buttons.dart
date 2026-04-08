@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 class BottomSheetCupertinoButtons extends StatelessWidget {
   const BottomSheetCupertinoButtons({
-    super.key,
     required this.widget,
     required this.isFavorite,
+    super.key,
   });
 
   final AnekdotBottomSheet widget;

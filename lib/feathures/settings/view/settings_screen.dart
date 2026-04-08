@@ -144,7 +144,7 @@ Future<void> clearFavorites(BuildContext context) async {
     await completer.future;
 
     if (context.mounted) {
-      showMessage(context, 'Избранное успешно очищено!', isError: false);
+      showMessage(context, 'Избранное успешно очищено!');
     }
   } catch (e) {
     if (context.mounted) {

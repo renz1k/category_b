@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 class AddOrUpdateAnekdotDialog extends StatefulWidget {
   const AddOrUpdateAnekdotDialog({
-    super.key,
     required this.onAddOrUpdate,
+    super.key,
     this.initialText,
   });
 
@@ -69,12 +69,12 @@ class _AddOrUpdateAnekdotDialogState extends State<AddOrUpdateAnekdotDialog> {
             ),
             border: const OutlineInputBorder(),
             enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey, width: 1.0),
+              borderSide: BorderSide(color: Colors.grey),
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(
                 color: theme.hintColor.withValues(alpha: 0.3),
-                width: 2.0,
+                width: 2,
               ),
             ),
           ),
@@ -141,7 +141,7 @@ class _AddOrUpdateAnekdotDialogState extends State<AddOrUpdateAnekdotDialog> {
           isDefaultAction: true,
           child: Text(
             widget.initialText == null ? 'Добавить' : 'Сохранить',
-            style: TextStyle(color: CupertinoColors.activeBlue),
+            style: const TextStyle(color: CupertinoColors.activeBlue),
           ),
         ),
       ],

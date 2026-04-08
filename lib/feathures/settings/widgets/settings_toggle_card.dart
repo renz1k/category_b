@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 
 class SettingsToggleCard extends StatelessWidget {
   const SettingsToggleCard({
-    super.key,
     required this.title,
     required this.value,
+    super.key,
     this.onChanged,
   });
 

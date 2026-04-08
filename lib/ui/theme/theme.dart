@@ -52,7 +52,6 @@ final ThemeData lightTheme = ThemeData(
 
   colorScheme: ColorScheme.fromSeed(
     seedColor: kPrimaryColor,
-    brightness: Brightness.light,
     primaryContainer: kPrimaryColor.withValues(alpha: 0.1),
   ).copyWith(surface: kSurfaceLight, surfaceContainerHighest: kSurfaceLight),
 
@@ -87,20 +86,20 @@ final ThemeData lightTheme = ThemeData(
     selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600),
   ),
 
-  appBarTheme: AppBarTheme(
+  appBarTheme: const AppBarTheme(
     backgroundColor: kScaffoldLight,
     foregroundColor: Colors.black87,
     elevation: 0,
     shadowColor: Colors.transparent,
-    shape: const RoundedRectangleBorder(
+    shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
     ),
   ),
-  floatingActionButtonTheme: FloatingActionButtonThemeData(
+  floatingActionButtonTheme: const FloatingActionButtonThemeData(
     backgroundColor: kPrimaryColor,
     foregroundColor: Colors.white,
     elevation: 6,
-    shape: const CircleBorder(),
+    shape: CircleBorder(),
   ),
 );
 
@@ -161,20 +160,20 @@ final ThemeData darkTheme = ThemeData(
     ),
   ),
 
-  appBarTheme: AppBarTheme(
+  appBarTheme: const AppBarTheme(
     backgroundColor: kScaffoldDark,
     foregroundColor: Colors.white,
     elevation: 0,
     shadowColor: Colors.transparent,
-    shape: const RoundedRectangleBorder(
+    shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
     ),
   ),
-  floatingActionButtonTheme: FloatingActionButtonThemeData(
+  floatingActionButtonTheme: const FloatingActionButtonThemeData(
     backgroundColor: kPrimaryColor,
     foregroundColor: Colors.white,
     elevation: 6,
-    shape: const CircleBorder(),
+    shape: CircleBorder(),
   ),
 );
 

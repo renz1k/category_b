@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class BaseContainer extends StatelessWidget {
   const BaseContainer({
-    super.key,
     required this.child,
+    super.key,
     this.width,
     this.height,
     this.margin,

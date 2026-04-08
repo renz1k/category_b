@@ -12,15 +12,15 @@ class AnekdotService implements AnekdotServiceInterface {
 
   @override
   Future<Anekdot> getRandomAnekdot({int maxRetries = 3}) async {
-    for (int attempt = 1; attempt <= maxRetries; attempt++) {
+    for (var attempt = 1; attempt <= maxRetries; attempt++) {
       try {
         final response = await dio.get<String>(
           '/random',
           options: Options(
             responseType: ResponseType.plain,
             followRedirects: true,
-            receiveTimeout: Duration(seconds: 5),
-            sendTimeout: Duration(seconds: 3),
+            receiveTimeout: const Duration(seconds: 5),
+            sendTimeout: const Duration(seconds: 3),
           ),
         );
 
@@ -36,23 +36,25 @@ class AnekdotService implements AnekdotServiceInterface {
         }
 
         if (attempt < maxRetries) {
-          await Future.delayed(Duration(milliseconds: 500));
+          await Future.delayed(const Duration(milliseconds: 500));
           continue;
         }
 
-        return Anekdot(anekdotText: 'Сервер занят, попробуйте через минуту');
+        return const Anekdot(
+          anekdotText: 'Сервер занят, попробуйте через минуту',
+        );
       } catch (e) {
         log('Попытка $attempt/$maxRetries: $e');
 
         if (attempt < maxRetries) {
-          await Future.delayed(Duration(milliseconds: 500));
+          await Future.delayed(const Duration(milliseconds: 500));
           continue;
         }
 
-        return Anekdot(anekdotText: 'Проверьте интернет-соединение');
+        return const Anekdot(anekdotText: 'Проверьте интернет-соединение');
       }
     }
 
-    return Anekdot(anekdotText: 'Неожиданная ошибка');
+    return const Anekdot(anekdotText: 'Неожиданная ошибка');
   }
 }

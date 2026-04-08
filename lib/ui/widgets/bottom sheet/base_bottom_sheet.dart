@@ -2,7 +2,7 @@ import 'package:category_b/ui/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class BaseBottomSheet extends StatelessWidget {
-  const BaseBottomSheet({super.key, required this.child});
+  const BaseBottomSheet({required this.child, super.key});
 
   final Widget child;
 

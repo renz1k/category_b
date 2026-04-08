@@ -17,7 +17,7 @@ Future<void> showAnekdotBottomSheet({
     context: context,
     builder: (context) => GestureDetector(
       onTap: () => _close(context),
-      child: Container(
+      child: ColoredBox(
         color: Colors.transparent,
         child: Padding(
           padding: const EdgeInsets.only(top: 100),

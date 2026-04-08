@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class EmptyFavoritesWidget extends StatelessWidget {
-  const EmptyFavoritesWidget({super.key, required this.message});
+  const EmptyFavoritesWidget({required this.message, super.key});
 
   final String message;
 
