@@ -1,5 +1,5 @@
 name: category_b
-description: "Project for anekdots"
+description: "Project for random anekdots"
 publish_to: 'none'
 version: 0.1.0
 
@@ -32,6 +32,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
+  very_good_analysis: ^9.0.0
   auto_route_generator: ^10.4.0
   hive_ce_generator: ^1.11.0
   build_runner: ^2.10.5
