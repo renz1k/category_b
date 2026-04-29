@@ -12,7 +12,7 @@ final class LoadFavoriteAnekdots extends FavoriteAnekdotsEvent {}
 final class ClearFavoriteAnekdots extends FavoriteAnekdotsEvent {
   const ClearFavoriteAnekdots({this.completer});
 
-  final Completer? completer;
+  final Completer<void>? completer;
 
   @override
   List<Object?> get props => super.props..add(completer);

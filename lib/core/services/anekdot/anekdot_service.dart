@@ -36,18 +36,18 @@ class AnekdotService implements AnekdotServiceInterface {
         }
 
         if (attempt < maxRetries) {
-          await Future.delayed(const Duration(milliseconds: 500));
+          await Future<void>.delayed(const Duration(milliseconds: 500));
           continue;
         }
 
         return const Anekdot(
           anekdotText: 'Сервер занят, попробуйте через минуту',
         );
-      } catch (e) {
+      } on Object catch (e) {
         log('Попытка $attempt/$maxRetries: $e');
 
         if (attempt < maxRetries) {
-          await Future.delayed(const Duration(milliseconds: 500));
+          await Future<void>.delayed(const Duration(milliseconds: 500));
           continue;
         }
 

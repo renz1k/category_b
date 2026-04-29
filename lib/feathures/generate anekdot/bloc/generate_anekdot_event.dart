@@ -13,7 +13,7 @@ final class ToggleFavoriteAnekdot extends GenerateAnekdotEvent {
   const ToggleFavoriteAnekdot({required this.anekdot, this.completer});
 
   final Anekdot anekdot;
-  final Completer? completer;
+  final Completer<void>? completer;
 
   @override
   List<Object?> get props => super.props..addAll([anekdot, completer]);

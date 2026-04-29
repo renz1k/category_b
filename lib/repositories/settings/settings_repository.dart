@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:category_b/repositories/settings/settings_repository_interface.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,7 +17,7 @@ class SettingsRepository implements SettingsRepositoryInterface {
   }
 
   @override
-  Future<void> setDarkThemeSelected(bool selected) async {
+  Future<void> setDarkThemeSelected({required bool selected}) async {
     await _preferences.setBool(_isDarkThemeSelectedKey, selected);
   }
 
@@ -29,7 +28,7 @@ class SettingsRepository implements SettingsRepositoryInterface {
   }
 
   @override
-  Future<void> setNotificationsEnabled(bool enabled) async {
+  Future<void> setNotificationsEnabled({required bool enabled}) async {
     await _preferences.setBool(_notificationsEnabledKey, enabled);
   }
 }

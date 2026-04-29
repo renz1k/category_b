@@ -34,7 +34,7 @@ class FavoriteAnekdotsBloc
 
       final anekdots = await _favoritesRepository.getAnekdotsList();
       _emitLoaded(anekdots, emit);
-    } catch (e) {
+    } on Object catch (e) {
       emit(FavoriteAnekdotsFailure(error: e));
     }
   }
@@ -52,7 +52,7 @@ class FavoriteAnekdotsBloc
       await _favoritesRepository.addOrUpdateAnekdot(newAnekdot);
       final anekdots = await _favoritesRepository.getAnekdotsList();
       _emitLoaded(anekdots, emit);
-    } catch (e) {
+    } on Object catch (e) {
       emit(FavoriteAnekdotsFailure(error: e));
     }
   }
@@ -72,7 +72,7 @@ class FavoriteAnekdotsBloc
 
       final anekdots = await _favoritesRepository.getAnekdotsList();
       _emitLoaded(anekdots, emit);
-    } catch (e) {
+    } on Object catch (e) {
       emit(FavoriteAnekdotsFailure(error: e));
     }
   }
@@ -98,7 +98,7 @@ class FavoriteAnekdotsBloc
       final anekdots = await _favoritesRepository.getAnekdotsList();
       _emitLoaded(anekdots, emit);
       event.completer?.complete();
-    } catch (e) {
+    } on Object catch (e) {
       emit(FavoriteAnekdotsFailure(error: e));
       event.completer?.completeError(e);
     }

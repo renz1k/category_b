@@ -40,7 +40,7 @@ class GenerateAnekdotBloc
           favoriteAnekdots: favoriteAnekdots,
         ),
       );
-    } catch (e) {
+    } on Object catch (e) {
       emit(GenerateAnekdotFailure(e));
     }
   }
@@ -67,7 +67,7 @@ class GenerateAnekdotBloc
           ),
         );
       }
-    } catch (e) {
+    } on Object catch (e) {
       emit(GenerateAnekdotFailure(e));
     } finally {
       event.completer?.complete();

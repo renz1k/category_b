@@ -39,7 +39,7 @@ class NotificationScheduler {
       );
 
       log('Notification shown successfully: id=$id');
-    } catch (e, stackTrace) {
+    } on Object catch (e, stackTrace) {
       log('ERROR showing notification: $e');
       log('Stack trace: $stackTrace');
     }
@@ -75,7 +75,7 @@ class NotificationScheduler {
         ),
         androidScheduleMode: AndroidScheduleMode.inexact,
       );
-    } catch (e, stackTrace) {
+    } on Object catch (e, stackTrace) {
       log('ERROR scheduling notification: $e');
       log('Stack trace: $stackTrace');
     }

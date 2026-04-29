@@ -1,7 +1,7 @@
 abstract interface class SettingsRepositoryInterface {
   bool isDarkThemeSelected();
-  Future<void> setDarkThemeSelected(bool selected);
+  Future<void> setDarkThemeSelected({required bool selected});
 
   bool areNotificationsEnabled();
-  Future<void> setNotificationsEnabled(bool enabled);
+  Future<void> setNotificationsEnabled({required bool enabled});
 }

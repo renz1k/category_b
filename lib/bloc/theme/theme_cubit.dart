@@ -20,9 +20,9 @@ class ThemeCubit extends Cubit<ThemeState> {
     try {
       emit(ThemeState(brightness));
       await _settingsRepository.setDarkThemeSelected(
-        brightness == Brightness.dark,
+        selected: brightness == Brightness.dark,
       );
-    } catch (e) {
+    } on Object catch (e) {
       log(e.toString());
     }
   }
@@ -33,7 +33,7 @@ class ThemeCubit extends Cubit<ThemeState> {
           ? Brightness.dark
           : Brightness.light;
       emit(ThemeState(brightness));
-    } catch (e) {
+    } on Object catch (e) {
       log(e.toString());
     }
   }

@@ -51,7 +51,7 @@ class NotificationService {
 
       _initialized = true;
       log('NotificationService initialized successfully');
-    } catch (e, stackTrace) {
+    } on Object catch (e, stackTrace) {
       log('NotificationService init error: $e');
       log('Stack trace: $stackTrace');
     }

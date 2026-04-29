@@ -18,7 +18,7 @@ class NotificationsCubit extends Cubit<NotificationsState> {
   final NotificationService notificationService;
   final SettingsRepositoryInterface settingsRepository;
 
-  Future<void> toggle(bool value) async {
+  Future<void> toggle({required bool value}) async {
     if (value) {
       final success = await notificationService.enableNotifications();
 
@@ -27,11 +27,11 @@ class NotificationsCubit extends Cubit<NotificationsState> {
         return;
       }
 
-      await settingsRepository.setNotificationsEnabled(true);
+      await settingsRepository.setNotificationsEnabled(enabled: true);
       emit(const NotificationsState(enabled: true));
     } else {
       await notificationService.disableNotifications();
-      await settingsRepository.setNotificationsEnabled(false);
+      await settingsRepository.setNotificationsEnabled(enabled: false);
       emit(const NotificationsState(enabled: false));
     }
   }

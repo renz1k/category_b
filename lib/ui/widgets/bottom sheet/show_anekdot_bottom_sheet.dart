@@ -11,7 +11,7 @@ Future<void> showAnekdotBottomSheet({
   String? dbId,
   bool isFavorite = false,
 }) async {
-  await showModalBottomSheet(
+  await showModalBottomSheet<void>(
     isScrollControlled: true,
     backgroundColor: Colors.transparent,
     context: context,

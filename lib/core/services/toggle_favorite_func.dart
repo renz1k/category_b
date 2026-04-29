@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 Future<void> toggleFavorite(BuildContext context, Anekdot anekdot) async {
   final generateAnekdotBloc = BlocProvider.of<GenerateAnekdotBloc>(context);
   final favoriteAnekdotsBloc = BlocProvider.of<FavoriteAnekdotsBloc>(context);
-  final completer = Completer();
+  final completer = Completer<void>();
 
   generateAnekdotBloc.add(
     ToggleFavoriteAnekdot(anekdot: anekdot, completer: completer),

@@ -88,7 +88,7 @@ class SettingsScreen extends StatelessWidget {
   }
 
   void _toggleNotifications(BuildContext context, bool value) {
-    context.read<NotificationsCubit>().toggle(value);
+    context.read<NotificationsCubit>().toggle(value: value);
   }
 }
 
@@ -102,14 +102,14 @@ void _showSupportSheet(BuildContext context) {
   final theme = Theme.of(context);
 
   if (theme.isAndroid) {
-    showModalBottomSheet(
+    showModalBottomSheet<void>(
       context: context,
       backgroundColor: theme.cardColor,
       builder: (context) => const SupportBottomSheet(),
     );
     return;
   }
-  showCupertinoModalPopup(
+  showCupertinoModalPopup<void>(
     context: context,
     builder: (context) => const SupportBottomSheet(),
   );
@@ -119,14 +119,14 @@ void _confirmClearFavorites(BuildContext context) {
   final theme = Theme.of(context);
 
   if (theme.isAndroid) {
-    showDialog(
+    showDialog<void>(
       context: context,
       builder: (context) =>
           ConfirmationDialog(onConfirm: () => clearFavorites(context)),
     );
     return;
   }
-  showCupertinoDialog(
+  showCupertinoDialog<void>(
     context: context,
     barrierDismissible: true,
     builder: (context) =>
@@ -136,7 +136,7 @@ void _confirmClearFavorites(BuildContext context) {
 
 Future<void> clearFavorites(BuildContext context) async {
   final bloc = BlocProvider.of<FavoriteAnekdotsBloc>(context);
-  final completer = Completer();
+  final completer = Completer<void>();
 
   bloc.add(ClearFavoriteAnekdots(completer: completer));
 
@@ -146,7 +146,7 @@ Future<void> clearFavorites(BuildContext context) async {
     if (context.mounted) {
       showMessage(context, 'Избранное успешно очищено!');
     }
-  } catch (e) {
+  } on Object catch (e) {
     if (context.mounted) {
       showMessage(context, 'Ошибка очистки: $e', isError: true);
     }

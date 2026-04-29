@@ -15,7 +15,7 @@ void showAddOrUpdateDialog(
   final theme = Theme.of(context);
 
   if (theme.isAndroid) {
-    showDialog(
+    showDialog<void>(
       context: context,
       builder: (dialogContext) => AddOrUpdateAnekdotDialog(
         initialText: currentText,
@@ -24,7 +24,7 @@ void showAddOrUpdateDialog(
       ),
     );
   } else {
-    showCupertinoDialog(
+    showCupertinoDialog<void>(
       context: context,
       builder: (dialogContext) => AddOrUpdateAnekdotDialog(
         initialText: currentText,
@@ -50,7 +50,7 @@ void _handleUpdate(
     Navigator.pop(context);
 
     showMessage(context, 'Анекдот обновлён!');
-  } catch (e) {
+  } on Object catch (e) {
     showMessage(context, 'Ошибка: $e', isError: true);
   }
 }
@@ -78,7 +78,7 @@ void showMessage(BuildContext context, String message, {bool isError = false}) {
       timer?.cancel();
     });
 
-    showCupertinoDialog(
+    showCupertinoDialog<void>(
       context: context,
       barrierDismissible: true,
       builder: (dialogContext) => CupertinoAlertDialog(

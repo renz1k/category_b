@@ -33,3 +33,4 @@ linter:
     lines_longer_than_80_chars: false
     require_trailing_commas: true
     public_member_api_docs: false
+    one_member_abstracts: false

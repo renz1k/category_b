@@ -11,7 +11,7 @@ void showAddAnekdotDialog(BuildContext context) {
   final theme = Theme.of(context);
 
   if (theme.isAndroid) {
-    showDialog(
+    showDialog<void>(
       context: context,
       builder: (dialogContext) => AddOrUpdateAnekdotDialog(
         onAddOrUpdate: (text) =>
@@ -19,7 +19,7 @@ void showAddAnekdotDialog(BuildContext context) {
       ),
     );
   } else {
-    showCupertinoDialog(
+    showCupertinoDialog<void>(
       context: context,
       builder: (dialogContext) => AddOrUpdateAnekdotDialog(
         onAddOrUpdate: (text) =>
@@ -47,7 +47,7 @@ void _onPressedAddAnekdot(
       Navigator.of(dialogContext).pop();
 
       showMessage(context, 'Анекдот добавлен!');
-    } catch (e) {
+    } on Object catch (e) {
       showMessage(context, 'Ошибка добавления: $e', isError: true);
     }
   }

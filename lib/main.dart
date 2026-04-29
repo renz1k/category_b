@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:category_b/category_b_app.dart';
+import 'package:category_b/app/category_b_app.dart';
 import 'package:category_b/core/di/app_initializer.dart';
 import 'package:category_b/core/di/setup_dependencies.dart';
 import 'package:category_b/firebase_options.dart';

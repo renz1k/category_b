@@ -19,32 +19,28 @@ Future<void> setupDependencies({required String baseUrl}) async {
   getIt.registerLazySingleton<DioService>(DioService.new);
   getIt<DioService>().init(baseUrl: baseUrl);
 
-  getIt.registerLazySingleton<AnekdotServiceInterface>(AnekdotService.new);
-
-  getIt.registerLazySingleton<HiveService>(HiveService.new);
+  getIt
+    ..registerLazySingleton<AnekdotServiceInterface>(AnekdotService.new)
+    ..registerLazySingleton<HiveService>(HiveService.new);
   await getIt<HiveService>().init();
 
   final sharedPrefs = await SharedPreferences.getInstance();
-  getIt.registerSingleton<SharedPreferences>(sharedPrefs);
-
-  getIt.registerLazySingleton<SettingsRepositoryInterface>(
-    () => SettingsRepository(preferences: getIt<SharedPreferences>()),
-  );
-
-  getIt.registerLazySingleton<NotificationService>(NotificationService.new);
-
-  getIt.registerLazySingleton<AppInitializer>(
-    () => AppInitializer(
-      notificationService: getIt<NotificationService>(),
-      settingsRepository: getIt<SettingsRepositoryInterface>(),
-    ),
-  );
-
-  getIt.registerSingleton<Box<FavoriteAnekdots>>(
-    await getIt<HiveService>().getFavoritesBox(),
-  );
-
-  getIt.registerLazySingleton<FavoritesRepositoryInterface>(
-    () => FavoritesRepository(favoriteBox: getIt<Box<FavoriteAnekdots>>()),
-  );
+  getIt
+    ..registerSingleton<SharedPreferences>(sharedPrefs)
+    ..registerLazySingleton<SettingsRepositoryInterface>(
+      () => SettingsRepository(preferences: getIt<SharedPreferences>()),
+    )
+    ..registerLazySingleton<NotificationService>(NotificationService.new)
+    ..registerLazySingleton<AppInitializer>(
+      () => AppInitializer(
+        notificationService: getIt<NotificationService>(),
+        settingsRepository: getIt<SettingsRepositoryInterface>(),
+      ),
+    )
+    ..registerSingleton<Box<FavoriteAnekdots>>(
+      await getIt<HiveService>().getFavoritesBox(),
+    )
+    ..registerLazySingleton<FavoritesRepositoryInterface>(
+      () => FavoritesRepository(favoriteBox: getIt<Box<FavoriteAnekdots>>()),
+    );
 }
