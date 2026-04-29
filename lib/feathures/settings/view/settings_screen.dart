@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:category_b/bloc/notifications/cubit/notifications_cubit.dart';
-import 'package:category_b/bloc/theme/theme_cubit.dart';
+import 'package:category_b/app/cubit/notifications/notifications_cubit.dart';
+import 'package:category_b/app/cubit/theme/theme_cubit.dart';
 import 'package:category_b/feathures/favorites/bloc/favorite_anekdots_bloc.dart';
 import 'package:category_b/feathures/settings/widgets/confirmation_dialog.dart';
 import 'package:category_b/feathures/settings/widgets/settings_action__card.dart';

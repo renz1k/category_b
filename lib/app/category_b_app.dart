@@ -1,5 +1,5 @@
-import 'package:category_b/bloc/notifications/cubit/notifications_cubit.dart';
-import 'package:category_b/bloc/theme/theme_cubit.dart';
+import 'package:category_b/app/cubit/notifications/notifications_cubit.dart';
+import 'package:category_b/app/cubit/theme/theme_cubit.dart';
 import 'package:category_b/core/di/setup_dependencies.dart';
 import 'package:category_b/core/services/anekdot/anekdot_service_interface.dart';
 import 'package:category_b/core/services/notifications/notification_service.dart';
