@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:category_b/core/constants/app_constants.dart';
+import 'package:category_b/core/texts/app_texts.dart';
 import 'package:category_b/feathures/favorites/bloc/favorite_anekdots_bloc.dart';
 import 'package:category_b/feathures/favorites/widgets/add%20anekdot%20buttons/add_anekdot_android_button.dart';
 import 'package:category_b/feathures/favorites/widgets/add%20anekdot%20buttons/add_anekdot_cupertino_button.dart';
@@ -76,7 +77,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
               scrolledUnderElevation: 0,
               backgroundColor: theme.cardColor,
               surfaceTintColor: Colors.transparent,
-              title: const Text('Избранное'),
+              title: const Text(AppTexts.favoritesTitle),
               centerTitle: true,
               actions: [
                 if (!theme.isAndroid) const AddAnekdotCupertinoButton(),
@@ -100,8 +101,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
 
                   if (list.isEmpty) {
                     final message = state.searchQuery.isNotEmpty
-                        ? 'Ничего не найдено'
-                        : 'Избранных анекдотов нет';
+                      ? AppTexts.favoritesEmptySearch
+                      : AppTexts.favoritesEmptyList;
                     return EmptyFavoritesWidget(message: message);
                   }
 

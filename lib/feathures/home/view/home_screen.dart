@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:category_b/core/texts/app_texts.dart';
 import 'package:category_b/router/router.dart';
 import 'package:flutter/material.dart';
 
@@ -25,15 +26,15 @@ class HomeScreen extends StatelessWidget {
             items: const [
               BottomNavigationBarItem(
                 icon: Icon(Icons.home),
-                label: 'main.html',
+                label: AppTexts.homeTabTitle,
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.favorite_rounded),
-                label: 'ОЧ нраица',
+                label: AppTexts.favoritesTabTitle,
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.settings),
-                label: 'Настроики',
+                label: AppTexts.settingsTabTitle,
               ),
             ],
           ),

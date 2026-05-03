@@ -1,3 +1,5 @@
+import 'package:category_b/core/texts/app_texts.dart';
+import 'package:category_b/ui/theme/app_theme_tokens.dart';
 import 'package:flutter/material.dart';
 
 class CustomSearchBar extends StatelessWidget {
@@ -6,7 +8,7 @@ class CustomSearchBar extends StatelessWidget {
     required this.onChanged,
     required this.onClear,
     super.key,
-    this.hintText = 'Поиск...',
+    this.hintText = AppTexts.searchHint,
   });
 
   final TextEditingController controller;
@@ -23,7 +25,7 @@ class CustomSearchBar extends StatelessWidget {
         : Colors.black;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: AppThemeTokens.paddingSymmetricSearchBar,
       child: TextField(
         controller: controller,
         onChanged: onChanged,
@@ -33,10 +35,12 @@ class CustomSearchBar extends StatelessWidget {
           hintStyle: TextStyle(color: textColor),
           filled: true,
           fillColor: theme.cardColor,
-          contentPadding: const EdgeInsets.all(12),
+          contentPadding: AppThemeTokens.paddingMedium,
           prefixIcon: Icon(Icons.search, color: theme.hintColor),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(
+              AppThemeTokens.searchBarBorderRadius,
+            ),
             borderSide: BorderSide.none,
           ),
           suffixIcon: ValueListenableBuilder<TextEditingValue>(

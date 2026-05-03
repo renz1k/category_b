@@ -1,3 +1,5 @@
+import 'package:category_b/core/texts/app_texts.dart';
+import 'package:category_b/ui/theme/app_theme_tokens.dart';
 import 'package:category_b/ui/theme/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +13,9 @@ class SupportBottomSheet extends StatelessWidget {
 
     if (theme.isAndroid) {
       return Padding(
-        padding: const EdgeInsets.all(24).copyWith(top: 12),
+        padding: AppThemeTokens.paddingSupportSheet.copyWith(
+          top: AppThemeTokens.paddingTopSupportSheet.top,
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -34,7 +38,7 @@ class SupportBottomSheet extends StatelessWidget {
                   backgroundColor: theme.primaryColor,
                   foregroundColor: Colors.white,
                 ),
-                label: const Text('Написать в Telegram'),
+                label: const Text(AppTexts.settingsTelegramText),
                 icon: const Icon(Icons.telegram, color: Colors.white),
               ),
             ),
@@ -50,7 +54,7 @@ class SupportBottomSheet extends StatelessWidget {
                       : Colors.black,
                   side: BorderSide(color: theme.hintColor),
                 ),
-                label: const Text('Отправить Email'),
+                label: const Text(AppTexts.settingsEmailText),
                 icon: const Icon(Icons.email_outlined),
               ),
             ),
@@ -59,13 +63,13 @@ class SupportBottomSheet extends StatelessWidget {
       );
     }
     return CupertinoActionSheet(
-      title: const Text('Поддержка'),
-      message: const Text('Ответим вам быстро!'),
+      title: const Text(AppTexts.settingsSupportTitle),
+      message: const Text(AppTexts.settingsSupportText),
       actions: <CupertinoActionSheetAction>[
         CupertinoActionSheetAction(
           isDefaultAction: true,
           child: const Text(
-            'Написать в Telegram',
+            AppTexts.settingsTelegramText,
             style: TextStyle(color: CupertinoColors.activeBlue),
           ),
           onPressed: () => _close(context),
@@ -73,7 +77,7 @@ class SupportBottomSheet extends StatelessWidget {
         CupertinoActionSheetAction(
           isDestructiveAction: true,
           child: const Text(
-            'Отправить Email',
+            AppTexts.settingsEmailText,
             style: TextStyle(color: CupertinoColors.activeBlue),
           ),
           onPressed: () => _close(context),

@@ -1,3 +1,4 @@
+import 'package:category_b/ui/theme/app_theme_tokens.dart';
 import 'package:category_b/ui/widgets/base_container.dart';
 import 'package:flutter/material.dart';
 
@@ -21,9 +22,11 @@ class SettingsActionCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 8),
+        padding: AppThemeTokens.paddingSymmetricSettingsCard.copyWith(
+          bottom: AppThemeTokens.marginBottomSettingsCard.bottom,
+        ),
         child: BaseContainer(
-          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+          padding: AppThemeTokens.paddingSymmetricSettingsCardContent,
           width: double.infinity,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -31,7 +34,7 @@ class SettingsActionCard extends StatelessWidget {
               Text(
                 title,
                 style: theme.textTheme.titleMedium?.copyWith(
-                  fontSize: 18,
+                  fontSize: AppThemeTokens.settingsActionTitleFontSize,
                   color: theme.brightness == Brightness.dark
                       ? Colors.white
                       : Colors.black,
@@ -39,11 +42,11 @@ class SettingsActionCard extends StatelessWidget {
               ),
 
               Padding(
-                padding: const EdgeInsets.all(4),
+                padding: AppThemeTokens.paddingXSmall,
                 child: Icon(
                   iconData,
                   color: iconColor ?? theme.hintColor.withValues(alpha: 0.3),
-                  size: 32,
+                  size: AppThemeTokens.settingsActionIconSize,
                 ),
               ),
             ],

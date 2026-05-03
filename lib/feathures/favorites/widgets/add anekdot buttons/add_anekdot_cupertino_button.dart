@@ -1,4 +1,5 @@
 import 'package:category_b/feathures/favorites/widgets/add%20anekdot%20buttons/show_add_anekdot_dialog.dart';
+import 'package:category_b/ui/theme/app_theme_tokens.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -10,11 +11,13 @@ class AddAnekdotCupertinoButton extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Padding(
-      padding: const EdgeInsets.only(right: 16),
+      padding: EdgeInsets.only(right: AppThemeTokens.paddingLarge.right),
       child: Container(
         decoration: BoxDecoration(
           color: theme.cardColor.withValues(alpha: 0.9),
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(
+            AppThemeTokens.iconButtonBorderRadius,
+          ),
           border: Border.all(
             color: theme.brightness == Brightness.dark
                 ? Colors.white.withValues(alpha: 0.4)
@@ -30,8 +33,8 @@ class AddAnekdotCupertinoButton extends StatelessWidget {
           ],
         ),
         child: CupertinoButton(
-          padding: const EdgeInsets.all(8),
-          minimumSize: const Size(44, 44),
+          padding: const EdgeInsets.all(AppThemeTokens.iconButtonPadding),
+          minimumSize: const Size.square(AppThemeTokens.buttonMinimumSize),
           onPressed: () => showAddAnekdotDialog(context),
           child: Icon(
             Icons.add,

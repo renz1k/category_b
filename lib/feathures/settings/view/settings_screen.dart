@@ -4,6 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:category_b/app/cubit/notifications/notifications_cubit.dart';
 import 'package:category_b/app/cubit/theme/theme_cubit.dart';
 import 'package:category_b/core/services/show_message_service.dart';
+import 'package:category_b/core/texts/app_texts.dart';
 import 'package:category_b/feathures/favorites/bloc/favorite_anekdots_bloc.dart';
 import 'package:category_b/feathures/settings/widgets/confirmation_dialog.dart';
 import 'package:category_b/feathures/settings/widgets/settings_action__card.dart';
@@ -33,7 +34,7 @@ class SettingsScreen extends StatelessWidget {
             scrolledUnderElevation: 0,
             backgroundColor: theme.cardColor,
             surfaceTintColor: Colors.transparent,
-            title: const Text('Настройки'),
+            title: const Text(AppTexts.settingsScreenTitle),
             centerTitle: true,
             elevation: 0,
           ),
@@ -42,7 +43,7 @@ class SettingsScreen extends StatelessWidget {
 
           SliverToBoxAdapter(
             child: SettingsToggleCard(
-              title: 'Тёмная тема',
+              title: AppTexts.settingsThemeToggleTitle,
               value: isDarkTheme,
               onChanged: (value) => _setThemeBrightness(context, value),
             ),
@@ -50,17 +51,9 @@ class SettingsScreen extends StatelessWidget {
 
           SliverToBoxAdapter(
             child: SettingsToggleCard(
-              title: 'Уведомления',
+              title: AppTexts.settingsNotificationsToggleTitle,
               value: isEnabled,
               onChanged: (value) => _toggleNotifications(context, value),
-            ),
-          ),
-
-          SliverToBoxAdapter(
-            child: SettingsToggleCard(
-              title: 'Разрешить аналитику',
-              value: true,
-              onChanged: (value) {},
             ),
           ),
 
@@ -68,7 +61,7 @@ class SettingsScreen extends StatelessWidget {
 
           SliverToBoxAdapter(
             child: SettingsActionCard(
-              title: 'Очистить избранное',
+              title: AppTexts.settingsClearFavoritesTitle,
               iconData: Icons.delete_outline,
               iconColor: theme.primaryColor.withValues(alpha: 0.9),
               onTap: () => _confirmClearFavorites(context),
@@ -77,7 +70,7 @@ class SettingsScreen extends StatelessWidget {
 
           SliverToBoxAdapter(
             child: SettingsActionCard(
-              title: 'Поддержка',
+              title: AppTexts.settingsSupportTitle,
               iconData: Icons.message_outlined,
               onTap: () => _showSupportSheet(context),
             ),
@@ -144,11 +137,15 @@ Future<void> clearFavorites(BuildContext context) async {
     await completer.future;
 
     if (context.mounted) {
-      showMessage(context, 'Избранное успешно очищено!');
+      showMessage(context, AppTexts.settingsClearFavoritesSuccess);
     }
   } on Object catch (e) {
     if (context.mounted) {
-      showMessage(context, 'Ошибка очистки: $e', isError: true);
+      showMessage(
+        context,
+        '${AppTexts.settingsClearFavoritesErrorPrefix}$e',
+        isError: true,
+      );
     }
   }
 }

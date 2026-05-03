@@ -1,3 +1,5 @@
+import 'package:category_b/core/texts/app_texts.dart';
+import 'package:category_b/ui/theme/app_theme_tokens.dart';
 import 'package:category_b/ui/theme/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,12 +22,15 @@ class ConfirmationDialog extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () => _confirm(context),
-            child: Text('Да', style: TextStyle(color: theme.hintColor)),
+            child: Text(
+              AppTexts.settingsConfirmYes,
+              style: TextStyle(color: theme.hintColor),
+            ),
           ),
           TextButton(
             onPressed: () => _close(context),
             child: Text(
-              'Нет',
+              AppTexts.settingsConfirmNo,
               style: TextStyle(
                 color: theme.primaryColor.withValues(alpha: 0.9),
               ),
@@ -43,7 +48,7 @@ class ConfirmationDialog extends StatelessWidget {
           onPressed: () => _confirm(context),
           isDestructiveAction: true,
           child: const Text(
-            'Да',
+            AppTexts.settingsConfirmYes,
             style: TextStyle(color: CupertinoColors.destructiveRed),
           ),
         ),
@@ -51,7 +56,7 @@ class ConfirmationDialog extends StatelessWidget {
           onPressed: () => _close(context),
           isDefaultAction: true,
           child: const Text(
-            'Нет',
+            AppTexts.settingsConfirmNo,
             style: TextStyle(color: CupertinoColors.activeBlue),
           ),
         ),
@@ -80,7 +85,7 @@ class _DialogContent extends StatelessWidget {
       crossAxisAlignment: crossAxisAlignment,
       children: [
         Text(
-          'Вы уверены?',
+          AppTexts.settingsConfirmTitle,
           style: theme.textTheme.headlineSmall?.copyWith(
             color: theme.brightness == Brightness.dark
                 ? Colors.white
@@ -88,9 +93,9 @@ class _DialogContent extends StatelessWidget {
           ),
         ),
         Text(
-          'Это действие не может быть отменено',
+          AppTexts.settingsConfirmBody,
           style: theme.textTheme.bodyMedium?.copyWith(
-            fontSize: 16,
+            fontSize: AppThemeTokens.settingsDialogBodyFontSize,
             color: theme.brightness == Brightness.dark
                 ? Colors.white
                 : Colors.black,

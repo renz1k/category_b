@@ -23,6 +23,18 @@ class AppThemeTokens {
   // Container Sizes
   static const double cupertinoHandleWidth = 40;
   static const double cupertinoHandleHeight = 3;
+  static const double anekdotListCardHeight = 60;
+  static const double anekdotListCardFontSize = 14;
+  static const double buttonMinimumSize = 44;
+  static const double iconButtonPadding = 8;
+  static const double iconButtonBorderRadius = 12;
+  static const double searchBarBorderRadius = 16;
+  static const double generateButtonIconSize = 24;
+  static const double generateButtonIconSpacing = 8;
+  static const double settingsActionIconSize = 32;
+  static const double settingsActionTitleFontSize = 18;
+  static const double settingsDialogTitleFontSize = 16;
+  static const double settingsDialogBodyFontSize = 16;
 
   // Paddings and Margins
   static const EdgeInsets paddingXSmall = EdgeInsets.all(4);
@@ -33,13 +45,28 @@ class AppThemeTokens {
 
   static const EdgeInsets paddingSymmetricHorizontalSmall =
       EdgeInsets.symmetric(horizontal: 12);
+    static const EdgeInsets paddingSymmetricHorizontalMedium =
+      EdgeInsets.symmetric(horizontal: 20);
+    static const EdgeInsets paddingSymmetricSettingsCard =
+        EdgeInsets.symmetric(horizontal: 16);
   static const EdgeInsets paddingSymmetricButtonHorizontal =
       EdgeInsets.symmetric(horizontal: 32, vertical: 16);
+    static const EdgeInsets paddingSymmetricSettingsCardContent =
+        EdgeInsets.symmetric(horizontal: 12, vertical: 12);
+    static const EdgeInsets paddingSymmetricListCardHorizontal =
+      EdgeInsets.symmetric(horizontal: 16);
+    static const EdgeInsets paddingSymmetricSearchBar =
+      EdgeInsets.symmetric(horizontal: 16, vertical: 8);
 
   static const EdgeInsets marginBottomSmall = EdgeInsets.only(bottom: 8);
   static const EdgeInsets marginBottomMedium = EdgeInsets.only(bottom: 12);
   static const EdgeInsets marginBottomLarge = EdgeInsets.only(bottom: 24);
+    static const EdgeInsets marginBottomListCard = EdgeInsets.only(bottom: 10);
   static const EdgeInsets marginTopLarge = EdgeInsets.only(top: 100);
+    static const EdgeInsets marginBottomSettingsCard = EdgeInsets.only(bottom: 8);
+    static const EdgeInsets paddingTopSupportSheet = EdgeInsets.only(top: 12);
+    static const EdgeInsets paddingSupportSheet = EdgeInsets.all(24);
+    static const EdgeInsets marginTopSupportSheetContent = EdgeInsets.only(top: 8);
 
   // Transparency
   static const double alphaLight = 0.1;

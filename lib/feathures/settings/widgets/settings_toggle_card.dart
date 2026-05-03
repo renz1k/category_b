@@ -1,3 +1,4 @@
+import 'package:category_b/ui/theme/app_theme_tokens.dart';
 import 'package:category_b/ui/theme/theme.dart';
 import 'package:category_b/ui/widgets/base_container.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,9 +21,11 @@ class SettingsToggleCard extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 8),
+      padding: AppThemeTokens.paddingSymmetricSettingsCard.copyWith(
+        bottom: AppThemeTokens.marginBottomSettingsCard.bottom,
+      ),
       child: BaseContainer(
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+        padding: AppThemeTokens.paddingSymmetricSettingsCardContent,
         width: double.infinity,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -30,7 +33,7 @@ class SettingsToggleCard extends StatelessWidget {
             Text(
               title,
               style: theme.textTheme.titleMedium?.copyWith(
-                fontSize: 18,
+                fontSize: AppThemeTokens.settingsActionTitleFontSize,
                 color: theme.brightness == Brightness.dark
                     ? Colors.white
                     : Colors.black,

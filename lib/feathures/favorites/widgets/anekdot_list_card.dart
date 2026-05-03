@@ -1,3 +1,4 @@
+import 'package:category_b/ui/theme/app_theme_tokens.dart';
 import 'package:category_b/ui/widgets/base_container.dart';
 import 'package:flutter/material.dart';
 
@@ -25,21 +26,23 @@ class AnekdotListCard extends StatelessWidget {
       onTap: onTapCard,
       child: BaseContainer(
         width: double.infinity,
-        height: 60,
-        margin: const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 10),
+        height: AppThemeTokens.anekdotListCardHeight,
+        margin: AppThemeTokens.paddingSymmetricListCardHorizontal.copyWith(
+          bottom: AppThemeTokens.marginBottomListCard.bottom,
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.only(right: 8),
+                padding: EdgeInsets.only(right: AppThemeTokens.paddingSmall.right),
                 child: Text(
                   anekdotText,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: theme.textTheme.bodyLarge?.copyWith(
                     fontWeight: FontWeight.w600,
-                    fontSize: 14,
+                    fontSize: AppThemeTokens.anekdotListCardFontSize,
                     color: theme.brightness == Brightness.dark
                         ? Colors.white
                         : Colors.black,
@@ -49,7 +52,10 @@ class AnekdotListCard extends StatelessWidget {
             ),
 
             IconButton(
-              constraints: const BoxConstraints(minWidth: 44, minHeight: 44),
+              constraints: const BoxConstraints(
+                minWidth: AppThemeTokens.buttonMinimumSize,
+                minHeight: AppThemeTokens.buttonMinimumSize,
+              ),
               padding: EdgeInsets.zero,
               onPressed: onTapFavorite,
               icon: Icon(

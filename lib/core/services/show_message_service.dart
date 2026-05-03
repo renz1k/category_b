@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:category_b/core/constants/app_constants.dart';
+import 'package:category_b/core/texts/app_texts.dart';
 import 'package:category_b/ui/theme/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,7 @@ void showMessage(
               Navigator.of(dialogContext).pop();
             },
             child: const Text(
-              'OK',
+              AppTexts.buttonOk,
               style: TextStyle(color: CupertinoColors.activeBlue),
             ),
           ),

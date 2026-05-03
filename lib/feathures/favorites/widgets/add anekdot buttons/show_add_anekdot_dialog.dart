@@ -1,4 +1,5 @@
 import 'package:category_b/core/services/show_message_service.dart';
+import 'package:category_b/core/texts/app_texts.dart';
 import 'package:category_b/feathures/favorites/bloc/favorite_anekdots_bloc.dart';
 import 'package:category_b/feathures/generate%20anekdot/bloc/generate_anekdot_bloc.dart';
 import 'package:category_b/ui/theme/theme.dart';
@@ -46,9 +47,13 @@ void _onPressedAddAnekdot(
 
       Navigator.of(dialogContext).pop();
 
-      showMessage(context, 'Анекдот добавлен!');
+      showMessage(context, AppTexts.addAnekdotSuccess);
     } on Object catch (e) {
-      showMessage(context, 'Ошибка добавления: $e', isError: true);
+      showMessage(
+        context,
+        '${AppTexts.addAnekdotErrorPrefix}$e',
+        isError: true,
+      );
     }
   }
 }

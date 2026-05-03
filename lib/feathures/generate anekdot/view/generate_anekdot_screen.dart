@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:category_b/core/services/show_anekdot_bottom_sheet.dart';
+import 'package:category_b/core/texts/app_texts.dart';
 import 'package:category_b/feathures/generate%20anekdot/bloc/generate_anekdot_bloc.dart';
 import 'package:category_b/feathures/generate%20anekdot/widgets/generate_anekdot_button.dart';
 import 'package:category_b/router/router.dart';
+import 'package:category_b/ui/theme/app_theme_tokens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,12 +26,12 @@ class _GenerateAnekdotScreenState extends State<GenerateAnekdotScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: theme.cardColor,
-        title: const Text('Category B'),
+        title: const Text(AppTexts.generateScreenTitle),
         centerTitle: true,
       ),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: AppThemeTokens.paddingSymmetricHorizontalMedium,
           child: BlocConsumer<GenerateAnekdotBloc, GenerateAnekdotState>(
             listenWhen: (prev, curr) => _listenWhenGenerateAnekdot(
               context,
@@ -56,7 +58,7 @@ class _GenerateAnekdotScreenState extends State<GenerateAnekdotScreen> {
                 return const Center(child: CircularProgressIndicator());
               }
               return GenerateAnekdotButton(
-                text: 'Рандомный анекдот',
+                text: AppTexts.generateButtonText,
                 onPressed: () => bloc.add(GenerateRandomAnekdot()),
                 icon: Icons.auto_stories,
               );
