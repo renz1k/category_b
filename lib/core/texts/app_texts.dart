@@ -24,6 +24,11 @@ class AppTexts {
   static const settingsConfirmBody = 'Это действие не может быть отменено';
   static const settingsConfirmYes = 'Да';
   static const settingsConfirmNo = 'Нет';
+  static const settingsNotificationDialogTitle =
+      'Включить уведомления в настройках?';
+  static const settingsNotificationDialogBody =
+      'Разрешение на уведомления отключено. Откройте настройки приложения, чтобы включить уведомления.';
+  static const settingsNotificationDialogLater = 'В следующий раз';
 
   static const generateScreenTitle = 'Anekdots B';
   static const generateButtonText = 'Рандомный анекдот';

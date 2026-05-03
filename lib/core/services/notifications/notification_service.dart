@@ -1,12 +1,13 @@
 import 'dart:developer';
 
+import 'package:app_settings/app_settings.dart';
 import 'package:category_b/core/services/notifications/firebase_background_handler.dart';
 import 'package:category_b/core/services/notifications/notification_initialization.dart';
 import 'package:category_b/core/services/notifications/notification_scheduling.dart';
 import 'package:category_b/core/services/notifications/notification_service_interface.dart';
 import 'package:category_b/core/texts/app_texts.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:permission_handler/permission_handler.dart' as ph;
 
 class NotificationService implements NotificationServiceInterface {
   final initializer = NotificationInitializer();
@@ -66,13 +67,13 @@ class NotificationService implements NotificationServiceInterface {
 
   @override
   Future<bool> hasPermission() async {
-    final status = await Permission.notification.status;
+    final status = await ph.Permission.notification.status;
     return status.isGranted;
   }
 
   @override
   Future<bool> requestPermission() async {
-    final status = await Permission.notification.request();
+    final status = await ph.Permission.notification.request();
     return status.isGranted;
   }
 
@@ -98,6 +99,10 @@ class NotificationService implements NotificationServiceInterface {
 
   @override
   Future<void> openSystemSettings() async {
-    await openAppSettings();
+    try {
+      await AppSettings.openAppSettings(type: AppSettingsType.notification);
+    } on Object {
+      await ph.openAppSettings();
+    }
   }
 }

@@ -1,8 +1,17 @@
+import 'dart:async';
+import 'dart:developer' as developer;
+
 import 'package:category_b/core/texts/app_texts.dart';
 import 'package:category_b/ui/theme/app_theme_tokens.dart';
 import 'package:category_b/ui/theme/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+const _supportEmail = 'mrdima_aysdehtyarenko@mail.ru';
+const _supportTelegram = 'https://t.me/pbth34';
+const _supportTelegramDeepLink = 'tg://resolve?domain=pbth34';
+const _supportEmailSubject = 'по поводу приложения Anekdots B';
 
 class SupportBottomSheet extends StatelessWidget {
   const SupportBottomSheet({super.key});
@@ -33,7 +42,7 @@ class SupportBottomSheet extends StatelessWidget {
               width: double.infinity,
               height: 56,
               child: ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: () => unawaited(_openTelegram(context)),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: theme.primaryColor,
                   foregroundColor: Colors.white,
@@ -47,7 +56,7 @@ class SupportBottomSheet extends StatelessWidget {
               width: double.infinity,
               height: 56,
               child: OutlinedButton.icon(
-                onPressed: () {},
+                onPressed: () => unawaited(_openEmail(context)),
                 style: OutlinedButton.styleFrom(
                   foregroundColor: theme.brightness == Brightness.dark
                       ? Colors.white
@@ -72,7 +81,7 @@ class SupportBottomSheet extends StatelessWidget {
             AppTexts.settingsTelegramText,
             style: TextStyle(color: CupertinoColors.activeBlue),
           ),
-          onPressed: () => _close(context),
+          onPressed: () => unawaited(_openTelegram(context)),
         ),
         CupertinoActionSheetAction(
           isDestructiveAction: true,
@@ -80,10 +89,63 @@ class SupportBottomSheet extends StatelessWidget {
             AppTexts.settingsEmailText,
             style: TextStyle(color: CupertinoColors.activeBlue),
           ),
-          onPressed: () => _close(context),
+          onPressed: () => unawaited(_openEmail(context)),
         ),
       ],
     );
+  }
+
+  Future<void> _openEmail(BuildContext context) async {
+    _close(context);
+
+    final uri = Uri(
+      scheme: 'mailto',
+      path: _supportEmail,
+      queryParameters: {
+        'subject': _supportEmailSubject,
+      },
+    );
+
+    developer.log('Opening email: $uri', name: 'SupportBottomSheet');
+    try {
+      final opened = await launchUrl(uri, mode: LaunchMode.externalApplication);
+      developer.log('Email opened: $opened', name: 'SupportBottomSheet');
+
+      if (!opened) {
+        developer.log(
+          'Mail app not available, trying Gmail web',
+          name: 'SupportBottomSheet',
+        );
+        final gmailUri = Uri.https('mail.google.com', '/mail/u/0/', {
+          'to': _supportEmail,
+          'subject': _supportEmailSubject,
+        });
+        await launchUrl(gmailUri, mode: LaunchMode.externalApplication);
+      }
+    } catch (e) {
+      developer.log(
+        'Error opening email',
+        name: 'SupportBottomSheet',
+        error: e,
+      );
+    }
+  }
+
+  Future<void> _openTelegram(BuildContext context) async {
+    _close(context);
+
+    final deepLinkUri = Uri.parse(_supportTelegramDeepLink);
+    final opened = await launchUrl(
+      deepLinkUri,
+      mode: LaunchMode.externalApplication,
+    );
+
+    if (opened) {
+      return;
+    }
+
+    final webUri = Uri.parse(_supportTelegram);
+    await launchUrl(webUri, mode: LaunchMode.externalApplication);
   }
 
   void _close(BuildContext context) {

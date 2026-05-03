@@ -7,6 +7,7 @@ import 'package:category_b/core/services/show_message_service.dart';
 import 'package:category_b/core/texts/app_texts.dart';
 import 'package:category_b/feathures/favorites/bloc/favorite_anekdots_bloc.dart';
 import 'package:category_b/feathures/settings/widgets/confirmation_dialog.dart';
+import 'package:category_b/feathures/settings/widgets/notification_settings_dialog.dart';
 import 'package:category_b/feathures/settings/widgets/settings_action__card.dart';
 import 'package:category_b/feathures/settings/widgets/settings_toggle_card.dart';
 import 'package:category_b/feathures/settings/widgets/support_bottom_sheet.dart';
@@ -81,8 +82,57 @@ class SettingsScreen extends StatelessWidget {
   }
 
   void _toggleNotifications(BuildContext context, bool value) {
-    context.read<NotificationsCubit>().toggle(value: value);
+    unawaited(_handleToggleNotifications(context, value));
   }
+}
+
+Future<void> _handleToggleNotifications(
+  BuildContext context,
+  bool value,
+) async {
+  final notificationsCubit = context.read<NotificationsCubit>();
+  final enabled = await notificationsCubit.toggle(value: value);
+
+  if (!value || enabled || !context.mounted) {
+    return;
+  }
+
+  final shouldOpenSettings = await _showNotificationSettingsDialog(context);
+
+  if (shouldOpenSettings && context.mounted) {
+    await notificationsCubit.openSystemSettings();
+  }
+}
+
+Future<bool> _showNotificationSettingsDialog(BuildContext context) async {
+  final theme = Theme.of(context);
+  var shouldOpenSettings = false;
+
+  void closeWith({required bool openSettings}) {
+    shouldOpenSettings = openSettings;
+    Navigator.of(context, rootNavigator: true).pop();
+  }
+
+  if (theme.isAndroid) {
+    await showDialog<void>(
+      context: context,
+      builder: (_) => NotificationSettingsDialog(
+        onConfirm: () => closeWith(openSettings: true),
+        onLater: () => closeWith(openSettings: false),
+      ),
+    );
+  } else {
+    await showCupertinoDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      builder: (_) => NotificationSettingsDialog(
+        onConfirm: () => closeWith(openSettings: true),
+        onLater: () => closeWith(openSettings: false),
+      ),
+    );
+  }
+
+  return shouldOpenSettings;
 }
 
 void _setThemeBrightness(BuildContext context, bool value) {
