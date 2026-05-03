@@ -1,16 +1,19 @@
 import 'package:category_b/ui/theme/app_theme_tokens.dart';
-import 'package:category_b/ui/widgets/bottom%20sheet/anekdot_bottom_shett.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class BottomSheetCupertinoButtons extends StatelessWidget {
   const BottomSheetCupertinoButtons({
-    required this.widget,
+    required this.onTapFavorite,
+    required this.onTapShare,
     required this.isFavorite,
     super.key,
+    this.onTapEdit,
   });
 
-  final AnekdotBottomSheet widget;
+  final VoidCallback? onTapFavorite;
+  final VoidCallback? onTapShare;
+  final VoidCallback? onTapEdit;
   final bool isFavorite;
 
   @override
@@ -20,7 +23,7 @@ class BottomSheetCupertinoButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         CupertinoButton(
-          onPressed: widget.onTapShare,
+          onPressed: onTapShare,
           borderRadius: BorderRadius.circular(AppThemeTokens.radiusLarge),
           child: Icon(
             Icons.ios_share,
@@ -29,9 +32,9 @@ class BottomSheetCupertinoButtons extends StatelessWidget {
           ),
         ),
 
-        if (widget.onTapEdit != null)
+        if (onTapEdit != null)
           CupertinoButton(
-            onPressed: widget.onTapEdit,
+            onPressed: onTapEdit,
             color: theme.colorScheme.surface.withValues(
               alpha: AppThemeTokens.alphaLight,
             ),
@@ -45,7 +48,7 @@ class BottomSheetCupertinoButtons extends StatelessWidget {
           ),
 
         CupertinoButton(
-          onPressed: widget.onTapFavorite,
+          onPressed: onTapFavorite,
           color: theme.colorScheme.surface.withValues(
             alpha: AppThemeTokens.alphaLight,
           ),

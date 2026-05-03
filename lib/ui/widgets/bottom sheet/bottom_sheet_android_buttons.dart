@@ -1,15 +1,18 @@
 import 'package:category_b/ui/theme/app_theme_tokens.dart';
-import 'package:category_b/ui/widgets/bottom%20sheet/anekdot_bottom_shett.dart';
 import 'package:flutter/material.dart';
 
 class BottomSheetAndroidButtons extends StatelessWidget {
   const BottomSheetAndroidButtons({
-    required this.widget,
+    required this.onTapFavorite,
+    required this.onTapShare,
     required this.isFavorite,
     super.key,
+    this.onTapEdit,
   });
 
-  final AnekdotBottomSheet widget;
+  final VoidCallback? onTapFavorite;
+  final VoidCallback? onTapShare;
+  final VoidCallback? onTapEdit;
   final bool isFavorite;
 
   @override
@@ -19,7 +22,7 @@ class BottomSheetAndroidButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         IconButton(
-          onPressed: widget.onTapShare,
+          onPressed: onTapShare,
           icon: Icon(
             Icons.share,
             size: AppThemeTokens.iconSizeMedium,
@@ -27,9 +30,9 @@ class BottomSheetAndroidButtons extends StatelessWidget {
           ),
           tooltip: 'Поделиться',
         ),
-        if (widget.onTapEdit != null)
+        if (onTapEdit != null)
           IconButton(
-            onPressed: widget.onTapEdit,
+            onPressed: onTapEdit,
             icon: Icon(
               Icons.edit,
               size: AppThemeTokens.iconSizeMedium,
@@ -40,7 +43,7 @@ class BottomSheetAndroidButtons extends StatelessWidget {
             tooltip: 'Редактировать',
           ),
         IconButton(
-          onPressed: widget.onTapFavorite,
+          onPressed: onTapFavorite,
           icon: Icon(
             Icons.favorite,
             size: AppThemeTokens.iconSizeMedium,

@@ -45,6 +45,7 @@ class AnekdotService implements AnekdotServiceInterface {
 
         return const Anekdot(
           anekdotText: 'Сервер занят, попробуйте через минуту',
+          isError: true,
         );
       } on Object catch (e) {
         log('Попытка $attempt/$maxRetries: $e');
@@ -54,10 +55,13 @@ class AnekdotService implements AnekdotServiceInterface {
           continue;
         }
 
-        return const Anekdot(anekdotText: 'Проверьте интернет-соединение');
+        return const Anekdot(
+          anekdotText: 'Проверьте интернет-соединение',
+          isError: true,
+        );
       }
     }
 
-    return const Anekdot(anekdotText: 'Неожиданная ошибка');
+    return const Anekdot(anekdotText: 'Неожиданная ошибка', isError: true);
   }
 }

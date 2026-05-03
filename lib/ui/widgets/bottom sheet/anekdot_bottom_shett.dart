@@ -30,6 +30,16 @@ class AnekdotBottomSheet extends StatefulWidget {
 }
 
 class _AnekdotBottomSheetState extends State<AnekdotBottomSheet> {
+  bool? _favoriteOverride;
+
+  void _onTapFavorite(bool currentIsFavorite) {
+    setState(() {
+      _favoriteOverride = !currentIsFavorite;
+    });
+
+    widget.onTapFavorite?.call();
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -80,19 +90,32 @@ class _AnekdotBottomSheetState extends State<AnekdotBottomSheet> {
                 ),
               ),
             ),
+            if (widget.anekdot.isError) const SizedBox.shrink() else
             BlocBuilder<GenerateAnekdotBloc, GenerateAnekdotState>(
               builder: (context, state) {
-                final isFavorite = state is GenerateAnekdotLoaded
-                    ? state.isFavorite(widget.anekdot.anekdotText)
-                    : widget.initialIsFavorite;
+                final isFavoriteFromGenerateState =
+                    state is GenerateAnekdotLoaded &&
+                    state.isFavorite(widget.anekdot.anekdotText);
+                final baseIsFavorite =
+                    widget.initialIsFavorite || isFavoriteFromGenerateState;
+                final isFavorite = _favoriteOverride ?? baseIsFavorite;
+                final shouldShowActions = !widget.anekdot.isError;
                 if (theme.isAndroid) {
                   return BottomSheetAndroidButtons(
-                    widget: widget,
+                    onTapFavorite: shouldShowActions
+                        ? () => _onTapFavorite(isFavorite)
+                        : null,
+                    onTapShare: shouldShowActions ? widget.onTapShare : null,
+                    onTapEdit: widget.onTapEdit,
                     isFavorite: isFavorite,
                   );
                 }
                 return BottomSheetCupertinoButtons(
-                  widget: widget,
+                  onTapFavorite: shouldShowActions
+                      ? () => _onTapFavorite(isFavorite)
+                      : null,
+                  onTapShare: shouldShowActions ? widget.onTapShare : null,
+                  onTapEdit: widget.onTapEdit,
                   isFavorite: isFavorite,
                 );
               },
