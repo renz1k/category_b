@@ -1,8 +1,8 @@
-import 'dart:developer';
-
+import 'package:category_b/core/di/setup_dependencies.dart';
 import 'package:category_b/core/texts/app_texts.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:talker/talker.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
@@ -14,7 +14,7 @@ class NotificationInitializer {
   Future<void> initialize() async {
     try {
       tz.initializeTimeZones();
-      log('Timezone initialized: ${tz.local}');
+      getIt<Talker>().info('Timezone initialized: ${tz.local}');
 
       const androidInit = AndroidInitializationSettings('notification_icon');
 
@@ -28,17 +28,17 @@ class NotificationInitializer {
       final initialized = await localNotifications.initialize(
         settings: settings,
         onDidReceiveNotificationResponse: (NotificationResponse response) {
-          log(
+          getIt<Talker>().info(
             'Notification clicked: id=${response.id}, payload=${response.payload}',
           );
         },
       );
 
       if (initialized != true) {
-        log('ERROR: Local notifications failed to initialize!');
+        getIt<Talker>().error('ERROR: Local notifications failed to initialize!');
         return;
       }
-      log('Local notifications initialized: $initialized');
+      getIt<Talker>().info('Local notifications initialized: $initialized');
 
       await _createChannels();
 
@@ -46,8 +46,8 @@ class NotificationInitializer {
 
       await _requestIosPermissions();
     } catch (e, stackTrace) {
-      log('ERROR: NotificationInitializer init failed: $e');
-      log('Stack trace: $stackTrace');
+      getIt<Talker>().error('ERROR: NotificationInitializer init failed: $e');
+      getIt<Talker>().error('Stack trace: $stackTrace');
       rethrow;
     }
   }
@@ -74,12 +74,12 @@ class NotificationInitializer {
     await android?.createNotificationChannel(highImportance);
     await android?.createNotificationChannel(weeklyReminder);
 
-    log('Notification channels created');
+    getIt<Talker>().info('Notification channels created');
   }
 
   Future<void> _requestAndroidPermissions() async {
     final fcmSettings = await fcm.requestPermission();
-    log('FCM permission: ${fcmSettings.authorizationStatus}');
+    getIt<Talker>().info('FCM permission: ${fcmSettings.authorizationStatus}');
 
     final androidImpl = localNotifications
         .resolvePlatformSpecificImplementation<
@@ -88,7 +88,7 @@ class NotificationInitializer {
 
     if (androidImpl != null) {
       final granted = await androidImpl.requestNotificationsPermission();
-      log('Android local notification permission: $granted');
+      getIt<Talker>().info('Android local notification permission: $granted');
     }
   }
 
@@ -104,7 +104,7 @@ class NotificationInitializer {
         badge: true,
         sound: true,
       );
-      log('iOS local notification permission: $iosPermission');
+      getIt<Talker>().info('iOS local notification permission: $iosPermission');
     }
   }
 }

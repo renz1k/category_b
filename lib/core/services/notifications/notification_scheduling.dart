@@ -1,8 +1,8 @@
-import 'dart:developer';
-
 import 'package:category_b/core/constants/app_constants.dart';
+import 'package:category_b/core/di/setup_dependencies.dart';
 import 'package:category_b/core/texts/app_texts.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:talker/talker.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 class NotificationScheduler {
@@ -38,24 +38,24 @@ class NotificationScheduler {
         notificationDetails: details,
       );
 
-      log('Notification shown successfully: id=$id');
+      getIt<Talker>().info('Notification shown successfully: id=$id');
     } on Object catch (e, stackTrace) {
-      log('ERROR showing notification: $e');
-      log('Stack trace: $stackTrace');
+      getIt<Talker>().error('ERROR showing notification: $e');
+      getIt<Talker>().error('Stack trace: $stackTrace');
     }
   }
 
   Future<void> scheduleWeeklyReminder() async {
     try {
       await cancelWeeklyReminder();
-      log(
+      getIt<Talker>().info(
         'Cancelled previous notification with id '
         '${AppConstants.weeklyReminderNotificationId} (reset timer)',
       );
 
       final now = tz.TZDateTime.now(tz.local);
       final scheduledDate = now.add(AppConstants.weeklyReminderInterval);
-      log('Current time: $now, Scheduled time: $scheduledDate');
+      getIt<Talker>().info('Current time: $now, Scheduled time: $scheduledDate');
 
       await localNotifications.zonedSchedule(
         id: AppConstants.weeklyReminderNotificationId,
@@ -79,8 +79,8 @@ class NotificationScheduler {
         androidScheduleMode: AndroidScheduleMode.inexact,
       );
     } on Object catch (e, stackTrace) {
-      log('ERROR scheduling notification: $e');
-      log('Stack trace: $stackTrace');
+      getIt<Talker>().error('ERROR scheduling notification: $e');
+      getIt<Talker>().error('Stack trace: $stackTrace');
     }
   }
 
@@ -88,6 +88,6 @@ class NotificationScheduler {
     await localNotifications.cancel(
       id: AppConstants.weeklyReminderNotificationId,
     );
-    log('Weekly reminder cancelled');
+    getIt<Talker>().info('Weekly reminder cancelled');
   }
 }

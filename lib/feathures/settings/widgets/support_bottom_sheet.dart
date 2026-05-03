@@ -1,11 +1,12 @@
 import 'dart:async';
-import 'dart:developer' as developer;
 
+import 'package:category_b/core/di/setup_dependencies.dart';
 import 'package:category_b/core/texts/app_texts.dart';
 import 'package:category_b/ui/theme/app_theme_tokens.dart';
 import 'package:category_b/ui/theme/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:talker/talker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 const _supportEmail = 'mrdima_aysdehtyarenko@mail.ru';
@@ -106,28 +107,21 @@ class SupportBottomSheet extends StatelessWidget {
       },
     );
 
-    developer.log('Opening email: $uri', name: 'SupportBottomSheet');
+    getIt<Talker>().info('Opening email: $uri');
     try {
       final opened = await launchUrl(uri, mode: LaunchMode.externalApplication);
-      developer.log('Email opened: $opened', name: 'SupportBottomSheet');
+      getIt<Talker>().info('Email opened: $opened');
 
       if (!opened) {
-        developer.log(
-          'Mail app not available, trying Gmail web',
-          name: 'SupportBottomSheet',
-        );
+        getIt<Talker>().info('Mail app not available, trying Gmail web');
         final gmailUri = Uri.https('mail.google.com', '/mail/u/0/', {
           'to': _supportEmail,
           'subject': _supportEmailSubject,
         });
         await launchUrl(gmailUri, mode: LaunchMode.externalApplication);
       }
-    } catch (e) {
-      developer.log(
-        'Error opening email',
-        name: 'SupportBottomSheet',
-        error: e,
-      );
+    } on Exception catch (e) {
+      getIt<Talker>().error('Error opening email: $e');
     }
   }
 

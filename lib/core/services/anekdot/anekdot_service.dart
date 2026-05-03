@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:category_b/core/constants/app_constants.dart';
 import 'package:category_b/core/di/setup_dependencies.dart';
 import 'package:category_b/core/services/anekdot/anekdot_service_interface.dart';
@@ -7,6 +5,7 @@ import 'package:category_b/core/services/anekdot/models/anekdots.dart';
 import 'package:category_b/core/services/dio_service.dart';
 import 'package:dio/dio.dart';
 import 'package:html/parser.dart' as html_parser;
+import 'package:talker/talker.dart';
 
 class AnekdotService implements AnekdotServiceInterface {
   final Dio dio = getIt<DioService>().dio;
@@ -48,7 +47,7 @@ class AnekdotService implements AnekdotServiceInterface {
           isError: true,
         );
       } on Object catch (e) {
-        log('Попытка $attempt/$maxRetries: $e');
+        getIt<Talker>().info('Попытка $attempt/$maxRetries: $e');
 
         if (attempt < maxRetries) {
           await Future<void>.delayed(AppConstants.anekdotRetryDelay);

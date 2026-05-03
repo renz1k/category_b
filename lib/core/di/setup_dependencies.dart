@@ -1,3 +1,6 @@
+// ignore_for_file: cascade_invocations, avoid_redundant_argument_values, document_ignores, prefer_const_constructors
+// These diagnostics are suppressed for DI wiring and build-mode Talker setup.
+
 import 'package:category_b/core/di/app_initializer.dart';
 import 'package:category_b/core/services/anekdot/anekdot_service.dart';
 import 'package:category_b/core/services/anekdot/anekdot_service_interface.dart';
@@ -13,37 +16,47 @@ import 'package:category_b/repositories/settings/settings_repository_interface.d
 import 'package:get_it/get_it.dart';
 import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:talker/talker.dart';
 
 final GetIt getIt = GetIt.instance;
 
 Future<void> setupDependencies({required String baseUrl}) async {
+  // Initialize Talker with production-safe settings
+  final talker = Talker(
+    settings: TalkerSettings(
+      enabled: !bool.fromEnvironment('dart.vm.product'),
+    ),
+    logger: TalkerLogger(
+      settings: TalkerLoggerSettings(enableColors: false),
+    ),
+  );
+  getIt.registerSingleton<Talker>(talker);
+
   getIt.registerLazySingleton<DioService>(DioService.new);
   getIt<DioService>().init(baseUrl: baseUrl);
 
-  getIt
-    ..registerLazySingleton<AnekdotServiceInterface>(AnekdotService.new)
-    ..registerLazySingleton<HiveService>(HiveService.new);
+  getIt.registerLazySingleton<AnekdotServiceInterface>(AnekdotService.new);
+  getIt.registerLazySingleton<HiveService>(HiveService.new);
   await getIt<HiveService>().init();
 
   final sharedPrefs = await SharedPreferences.getInstance();
-  getIt
-    ..registerSingleton<SharedPreferences>(sharedPrefs)
-    ..registerLazySingleton<SettingsRepositoryInterface>(
-      () => SettingsRepository(preferences: getIt<SharedPreferences>()),
-    )
-    ..registerLazySingleton<NotificationServiceInterface>(
-      NotificationService.new,
-    )
-    ..registerLazySingleton<AppInitializer>(
-      () => AppInitializer(
-        notificationService: getIt<NotificationServiceInterface>(),
-        settingsRepository: getIt<SettingsRepositoryInterface>(),
-      ),
-    )
-    ..registerSingleton<Box<FavoriteAnekdots>>(
-      await getIt<HiveService>().getFavoritesBox(),
-    )
-    ..registerLazySingleton<FavoritesRepositoryInterface>(
-      () => FavoritesRepository(favoriteBox: getIt<Box<FavoriteAnekdots>>()),
-    );
+  getIt.registerSingleton<SharedPreferences>(sharedPrefs);
+  getIt.registerLazySingleton<SettingsRepositoryInterface>(
+    () => SettingsRepository(preferences: getIt<SharedPreferences>()),
+  );
+  getIt.registerLazySingleton<NotificationServiceInterface>(
+    NotificationService.new,
+  );
+  getIt.registerLazySingleton<AppInitializer>(
+    () => AppInitializer(
+      notificationService: getIt<NotificationServiceInterface>(),
+      settingsRepository: getIt<SettingsRepositoryInterface>(),
+    ),
+  );
+  getIt.registerSingleton<Box<FavoriteAnekdots>>(
+    await getIt<HiveService>().getFavoritesBox(),
+  );
+  getIt.registerLazySingleton<FavoritesRepositoryInterface>(
+    () => FavoritesRepository(favoriteBox: getIt<Box<FavoriteAnekdots>>()),
+  );
 }

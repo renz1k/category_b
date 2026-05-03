@@ -1,9 +1,9 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
+import 'package:category_b/core/di/setup_dependencies.dart';
 import 'package:category_b/repositories/settings/settings_repository_interface.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/services.dart';
+import 'package:talker/talker.dart';
 
 part 'theme_state.dart';
 
@@ -23,7 +23,7 @@ class ThemeCubit extends Cubit<ThemeState> {
         selected: brightness == Brightness.dark,
       );
     } on Object catch (e) {
-      log(e.toString());
+      getIt<Talker>().error(e.toString());
     }
   }
 
@@ -34,7 +34,7 @@ class ThemeCubit extends Cubit<ThemeState> {
           : Brightness.light;
       emit(ThemeState(brightness));
     } on Object catch (e) {
-      log(e.toString());
+      getIt<Talker>().error(e.toString());
     }
   }
 }
