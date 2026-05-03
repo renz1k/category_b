@@ -1,5 +1,6 @@
 import 'package:category_b/core/services/anekdot/models/anekdots.dart';
 import 'package:category_b/feathures/generate%20anekdot/bloc/generate_anekdot_bloc.dart';
+import 'package:category_b/ui/theme/app_theme_tokens.dart';
 import 'package:category_b/ui/theme/theme.dart';
 import 'package:category_b/ui/widgets/bottom%20sheet/base_bottom_sheet.dart';
 import 'package:category_b/ui/widgets/bottom%20sheet/bottom_sheet_android_buttons.dart';
@@ -36,8 +37,13 @@ class _AnekdotBottomSheetState extends State<AnekdotBottomSheet> {
     return BaseBottomSheet(
       child: Padding(
         padding: theme.isAndroid
-            ? const EdgeInsets.symmetric(horizontal: 12, vertical: 16)
-            : const EdgeInsets.symmetric(horizontal: 12).copyWith(bottom: 16),
+            ? EdgeInsets.symmetric(
+                horizontal: AppThemeTokens.paddingMedium.left,
+                vertical: 16,
+              )
+            : EdgeInsets.symmetric(
+                horizontal: AppThemeTokens.paddingMedium.left,
+              ).copyWith(bottom: 16),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -51,12 +57,16 @@ class _AnekdotBottomSheetState extends State<AnekdotBottomSheet> {
                     )
                   : const CupertinoHandle(),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: AppThemeTokens.marginBottomSmall.bottom),
             Expanded(
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Padding(
-                  padding: const EdgeInsets.only(bottom: 24, right: 8, left: 8),
+                  padding: EdgeInsets.only(
+                    bottom: AppThemeTokens.marginBottomLarge.bottom,
+                    right: AppThemeTokens.paddingSmall.right,
+                    left: AppThemeTokens.paddingSmall.left,
+                  ),
                   child: Text(
                     widget.anekdot.anekdotText,
                     style: theme.textTheme.bodyLarge?.copyWith(

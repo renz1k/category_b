@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:category_b/core/constants/app_constants.dart';
 import 'package:category_b/core/di/setup_dependencies.dart';
 import 'package:category_b/core/services/anekdot/anekdot_service_interface.dart';
 import 'package:category_b/core/services/anekdot/models/anekdots.dart';
@@ -11,7 +12,9 @@ class AnekdotService implements AnekdotServiceInterface {
   final Dio dio = getIt<DioService>().dio;
 
   @override
-  Future<Anekdot> getRandomAnekdot({int maxRetries = 3}) async {
+  Future<Anekdot> getRandomAnekdot({
+    int maxRetries = AppConstants.anekdotMaxRetries,
+  }) async {
     for (var attempt = 1; attempt <= maxRetries; attempt++) {
       try {
         final response = await dio.get<String>(
@@ -19,8 +22,8 @@ class AnekdotService implements AnekdotServiceInterface {
           options: Options(
             responseType: ResponseType.plain,
             followRedirects: true,
-            receiveTimeout: const Duration(seconds: 5),
-            sendTimeout: const Duration(seconds: 3),
+            receiveTimeout: AppConstants.anekdotRequestReceiveTimeout,
+            sendTimeout: AppConstants.anekdotRequestSendTimeout,
           ),
         );
 
@@ -30,13 +33,13 @@ class AnekdotService implements AnekdotServiceInterface {
         if (article != null) {
           final p = article.querySelector('p');
           final text = p?.text.trim().replaceAll(RegExp(r'<br\s*/?>'), '\n');
-          if (text != null && text.length > 10) {
+          if (text != null && text.length > AppConstants.anekdotMinimumLength) {
             return Anekdot(anekdotText: text);
           }
         }
 
         if (attempt < maxRetries) {
-          await Future<void>.delayed(const Duration(milliseconds: 500));
+          await Future<void>.delayed(AppConstants.anekdotRetryDelay);
           continue;
         }
 
@@ -47,7 +50,7 @@ class AnekdotService implements AnekdotServiceInterface {
         log('Попытка $attempt/$maxRetries: $e');
 
         if (attempt < maxRetries) {
-          await Future<void>.delayed(const Duration(milliseconds: 500));
+          await Future<void>.delayed(AppConstants.anekdotRetryDelay);
           continue;
         }
 

@@ -1,3 +1,5 @@
+import 'package:category_b/ui/theme/app_colors.dart';
+import 'package:category_b/ui/theme/app_theme_tokens.dart';
 import 'package:category_b/ui/theme/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -12,12 +14,14 @@ class BaseBottomSheet extends StatelessWidget {
     final isCupertino = !theme.isAndroid;
 
     return Container(
-      padding: const EdgeInsets.all(20).copyWith(top: isCupertino ? 12 : 20),
+      padding: AppThemeTokens.paddingLarge.copyWith(top: isCupertino ? 12 : 20),
       decoration: BoxDecoration(
         color: theme.brightness == Brightness.light
-            ? kSurfaceLight
-            : kSurfaceDark,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+            ? AppColors.surfaceLight
+            : AppColors.surfaceDark,
+        borderRadius: const BorderRadius.vertical(
+          top: Radius.circular(AppThemeTokens.radiusXXLarge),
+        ),
       ),
       child: child,
     );

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:category_b/core/constants/app_constants.dart';
 import 'package:category_b/feathures/favorites/bloc/favorite_anekdots_bloc.dart';
 import 'package:category_b/feathures/favorites/widgets/add%20anekdot%20buttons/add_anekdot_android_button.dart';
 import 'package:category_b/feathures/favorites/widgets/add%20anekdot%20buttons/add_anekdot_cupertino_button.dart';
@@ -42,7 +43,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
 
   void _onSearchChanged(String query) {
     if (_debounce?.isActive ?? false) _debounce!.cancel();
-    _debounce = Timer(const Duration(milliseconds: 150), () {
+    _debounce = Timer(AppConstants.favoriteSearchDebounce, () {
       BlocProvider.of<FavoriteAnekdotsBloc>(
         context,
       ).add(SearchQueryChanged(query));

@@ -4,6 +4,7 @@ import 'package:category_b/core/services/anekdot/anekdot_service_interface.dart'
 import 'package:category_b/core/services/dio_service.dart';
 import 'package:category_b/core/services/hive_service.dart';
 import 'package:category_b/core/services/notifications/notification_service.dart';
+import 'package:category_b/core/services/notifications/notification_service_interface.dart';
 import 'package:category_b/repositories/favorites/favorites_repository.dart';
 import 'package:category_b/repositories/favorites/favorites_repository_interface.dart';
 import 'package:category_b/repositories/favorites/model/favorite_anekdots.dart';
@@ -30,10 +31,12 @@ Future<void> setupDependencies({required String baseUrl}) async {
     ..registerLazySingleton<SettingsRepositoryInterface>(
       () => SettingsRepository(preferences: getIt<SharedPreferences>()),
     )
-    ..registerLazySingleton<NotificationService>(NotificationService.new)
+    ..registerLazySingleton<NotificationServiceInterface>(
+      NotificationService.new,
+    )
     ..registerLazySingleton<AppInitializer>(
       () => AppInitializer(
-        notificationService: getIt<NotificationService>(),
+        notificationService: getIt<NotificationServiceInterface>(),
         settingsRepository: getIt<SettingsRepositoryInterface>(),
       ),
     )

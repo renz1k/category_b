@@ -3,15 +3,18 @@ import 'dart:developer';
 import 'package:category_b/core/services/notifications/firebase_background_handler.dart';
 import 'package:category_b/core/services/notifications/notification_initialization.dart';
 import 'package:category_b/core/services/notifications/notification_scheduling.dart';
+import 'package:category_b/core/services/notifications/notification_service_interface.dart';
+import 'package:category_b/core/texts/app_texts.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class NotificationService {
+class NotificationService implements NotificationServiceInterface {
   final initializer = NotificationInitializer();
   late final NotificationScheduler scheduler;
 
   bool _initialized = false;
 
+  @override
   Future<void> initialize() async {
     if (_initialized) return;
 
@@ -27,8 +30,12 @@ class NotificationService {
         if (message.notification != null) {
           scheduler.showNotification(
             id: message.hashCode,
-            title: message.notification!.title ?? 'Новый анекдот!',
-            body: message.notification!.body ?? 'Зайди почитать.',
+            title:
+                message.notification!.title ??
+                AppTexts.notificationForegroundDefaultTitle,
+            body:
+                message.notification!.body ??
+                AppTexts.notificationForegroundDefaultBody,
           );
         }
       });
@@ -57,16 +64,19 @@ class NotificationService {
     }
   }
 
+  @override
   Future<bool> hasPermission() async {
     final status = await Permission.notification.status;
     return status.isGranted;
   }
 
+  @override
   Future<bool> requestPermission() async {
     final status = await Permission.notification.request();
     return status.isGranted;
   }
 
+  @override
   Future<bool> enableNotifications() async {
     await initialize();
 
@@ -80,11 +90,13 @@ class NotificationService {
     return true;
   }
 
+  @override
   Future<void> disableNotifications() async {
     await initialize();
     await scheduler.cancelWeeklyReminder();
   }
 
+  @override
   Future<void> openSystemSettings() async {
     await openAppSettings();
   }

@@ -1,3 +1,5 @@
+import 'package:category_b/core/texts/app_texts.dart';
+import 'package:category_b/ui/theme/app_theme_tokens.dart';
 import 'package:category_b/ui/theme/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -39,10 +41,17 @@ class _AddOrUpdateAnekdotDialogState extends State<AddOrUpdateAnekdotDialog> {
     if (theme.isAndroid) {
       return AlertDialog(
         backgroundColor: theme.cardColor,
-        actionsPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+        actionsPadding: EdgeInsets.fromLTRB(
+          AppThemeTokens.paddingLarge.left,
+          0,
+          AppThemeTokens.paddingLarge.right,
+          AppThemeTokens.paddingLarge.top,
+        ),
         title: Center(
           child: Text(
-            widget.initialText == null ? 'Добавить анекдот' : 'Редактировать',
+            widget.initialText == null
+                ? AppTexts.dialogAddTitle
+                : AppTexts.dialogEditTitle,
             style: TextStyle(
               color: theme.brightness == Brightness.dark
                   ? Colors.white
@@ -61,7 +70,7 @@ class _AddOrUpdateAnekdotDialogState extends State<AddOrUpdateAnekdotDialog> {
                 : Colors.black,
           ),
           decoration: InputDecoration(
-            hintText: 'Введите текст анекдота...',
+            hintText: AppTexts.dialogPlaceholder,
             hintStyle: TextStyle(
               color: theme.brightness == Brightness.dark
                   ? Colors.white
@@ -73,7 +82,7 @@ class _AddOrUpdateAnekdotDialogState extends State<AddOrUpdateAnekdotDialog> {
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                color: theme.hintColor.withValues(alpha: 0.3),
+                color: theme.hintColor.withValues(alpha: AppThemeTokens.alphaHigh),
                 width: 2,
               ),
             ),
@@ -88,20 +97,22 @@ class _AddOrUpdateAnekdotDialogState extends State<AddOrUpdateAnekdotDialog> {
               TextButton(
                 onPressed: () => _close(context),
                 child: Text(
-                  'Отмена',
+                  AppTexts.buttonCancel,
                   style: TextStyle(
-                    color: theme.primaryColor.withValues(alpha: 0.8),
+                    color: theme.primaryColor.withValues(alpha: AppThemeTokens.alphaNearlySolid),
                   ),
                 ),
               ),
               FilledButton(
                 onPressed: () => widget.onAddOrUpdate(_controller.text),
                 style: FilledButton.styleFrom(
-                  backgroundColor: theme.primaryColor.withValues(alpha: 0.9),
+                  backgroundColor: theme.primaryColor.withValues(alpha: AppThemeTokens.alphaSolid),
                   foregroundColor: Colors.white,
                 ),
                 child: Text(
-                  widget.initialText == null ? 'Добавить' : 'Сохранить',
+                  widget.initialText == null
+                      ? AppTexts.buttonAdd
+                      : AppTexts.buttonSave,
                 ),
               ),
             ],
@@ -111,20 +122,22 @@ class _AddOrUpdateAnekdotDialogState extends State<AddOrUpdateAnekdotDialog> {
     }
     return CupertinoAlertDialog(
       title: Text(
-        widget.initialText == null ? 'Добавить анекдот' : 'Редактировать',
+        widget.initialText == null
+            ? AppTexts.dialogAddTitle
+            : AppTexts.dialogEditTitle,
       ),
       content: Padding(
-        padding: const EdgeInsets.only(top: 12),
+        padding: EdgeInsets.only(top: AppThemeTokens.paddingMedium.top),
         child: CupertinoTextField(
           controller: _controller,
           maxLines: 6,
           minLines: 1,
           autofocus: true,
-          placeholder: 'Введите текст анекдота...',
-          padding: const EdgeInsets.all(12),
+          placeholder: AppTexts.dialogPlaceholder,
+          padding: AppThemeTokens.paddingMedium,
           decoration: BoxDecoration(
             color: theme.cardColor,
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(AppThemeTokens.radiusSmall),
             border: Border.all(color: CupertinoColors.separator),
           ),
           textAlignVertical: TextAlignVertical.top,
@@ -134,13 +147,15 @@ class _AddOrUpdateAnekdotDialogState extends State<AddOrUpdateAnekdotDialog> {
         CupertinoDialogAction(
           isDestructiveAction: true,
           onPressed: () => _close(context),
-          child: const Text('Отмена'),
+          child: const Text(AppTexts.buttonCancel),
         ),
         CupertinoDialogAction(
           onPressed: () => widget.onAddOrUpdate(_controller.text),
           isDefaultAction: true,
           child: Text(
-            widget.initialText == null ? 'Добавить' : 'Сохранить',
+            widget.initialText == null
+                ? AppTexts.buttonAdd
+                : AppTexts.buttonSave,
             style: const TextStyle(color: CupertinoColors.activeBlue),
           ),
         ),

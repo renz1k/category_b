@@ -1,13 +1,13 @@
 import 'dart:developer';
 
+import 'package:category_b/core/constants/app_constants.dart';
+import 'package:category_b/core/texts/app_texts.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 class NotificationScheduler {
   NotificationScheduler(this.localNotifications);
   final FlutterLocalNotificationsPlugin localNotifications;
-
-  static const int weeklyId = 777;
 
   Future<void> showNotification({
     required int id,
@@ -17,7 +17,7 @@ class NotificationScheduler {
     try {
       const androidDetails = AndroidNotificationDetails(
         'high_importance_channel',
-        'Важные уведомления',
+        AppTexts.notificationImportantChannelName,
         importance: Importance.max,
         priority: Priority.high,
       );
@@ -48,22 +48,25 @@ class NotificationScheduler {
   Future<void> scheduleWeeklyReminder() async {
     try {
       await cancelWeeklyReminder();
-      log('Cancelled previous notification with id $weeklyId (reset timer)');
+      log(
+        'Cancelled previous notification with id '
+        '${AppConstants.weeklyReminderNotificationId} (reset timer)',
+      );
 
       final now = tz.TZDateTime.now(tz.local);
-      final scheduledDate = now.add(const Duration(days: 7));
+      final scheduledDate = now.add(AppConstants.weeklyReminderInterval);
       log('Current time: $now, Scheduled time: $scheduledDate');
 
       await localNotifications.zonedSchedule(
-        id: weeklyId,
-        title: 'Скучно без анекдотов? 🥺',
-        body: 'Зайди — у нас свежие анекдоты!',
+        id: AppConstants.weeklyReminderNotificationId,
+        title: AppTexts.notificationWeeklyTitle,
+        body: AppTexts.notificationWeeklyBody,
         scheduledDate: scheduledDate,
         notificationDetails: const NotificationDetails(
           android: AndroidNotificationDetails(
             'weekly_reminder',
-            'Еженедельные напоминания',
-            channelDescription: 'Напоминает зайти в приложение',
+            AppTexts.notificationWeeklyChannelName,
+            channelDescription: AppTexts.notificationWeeklyChannelDescription,
             importance: Importance.high,
             priority: Priority.high,
           ),
@@ -82,7 +85,9 @@ class NotificationScheduler {
   }
 
   Future<void> cancelWeeklyReminder() async {
-    await localNotifications.cancel(id: weeklyId);
+    await localNotifications.cancel(
+      id: AppConstants.weeklyReminderNotificationId,
+    );
     log('Weekly reminder cancelled');
   }
 }

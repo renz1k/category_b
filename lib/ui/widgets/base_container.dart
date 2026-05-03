@@ -1,3 +1,4 @@
+import 'package:category_b/ui/theme/app_theme_tokens.dart';
 import 'package:flutter/material.dart';
 
 class BaseContainer extends StatelessWidget {
@@ -25,7 +26,7 @@ class BaseContainer extends StatelessWidget {
       padding: padding,
       decoration: BoxDecoration(
         color: theme.cardColor,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(AppThemeTokens.radiusMedium),
       ),
       child: child,
     );

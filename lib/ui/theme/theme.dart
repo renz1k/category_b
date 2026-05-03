@@ -1,14 +1,7 @@
+import 'package:category_b/ui/theme/app_colors.dart';
+import 'package:category_b/ui/theme/app_theme_tokens.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
-const Color kPrimaryColor = Color(0xFFF82B10);
-const Color kScaffoldLight = Color(0xFFEFF1F3);
-const Color kScaffoldDark = Color(0xFF0F1117);
-const Color kCardLight = Color(0xFFFFFFFF);
-const Color kCardDark = Color(0xFF1A1D24);
-const Color kSurfaceLight = Color(0xFFF8FAFC);
-const Color kSurfaceDark = Color(0xFF1A1D24);
-const Color kSurfaceVariantDark = Color(0xFF242832);
 
 const TextTheme _kTextTheme = TextTheme(
   titleMedium: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
@@ -19,21 +12,25 @@ const TextTheme _kTextTheme = TextTheme(
 
 ElevatedButtonThemeData _buttonThemeData() => ElevatedButtonThemeData(
   style: ElevatedButton.styleFrom(
-    backgroundColor: kPrimaryColor,
+    backgroundColor: AppColors.primary,
     foregroundColor: Colors.white,
-    elevation: 8,
-    shadowColor: Colors.black.withValues(alpha: 0.3),
-    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+    elevation: AppThemeTokens.elevationXLarge,
+    shadowColor: Colors.black.withValues(alpha: AppThemeTokens.alphaHigh),
+    padding: AppThemeTokens.paddingSymmetricButtonHorizontal,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(AppThemeTokens.radiusXLarge),
+    ),
     textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
   ),
 );
 
 FilledButtonThemeData _filledButtonThemeData() => FilledButtonThemeData(
   style: FilledButton.styleFrom(
-    backgroundColor: kPrimaryColor,
+    backgroundColor: AppColors.primary,
     foregroundColor: Colors.white,
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(AppThemeTokens.radiusLarge),
+    ),
     textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
   ),
 );
@@ -45,29 +42,37 @@ final ThemeData lightTheme = ThemeData(
   switchTheme: SwitchThemeData(
     trackOutlineColor: WidgetStateProperty.all(
       ColorScheme.fromSeed(
-        seedColor: kPrimaryColor,
-      ).onSurfaceVariant.withValues(alpha: 0.5),
+        seedColor: AppColors.primary,
+      ).onSurfaceVariant.withValues(alpha: AppThemeTokens.alphaHigh),
     ),
   ),
 
-  colorScheme: ColorScheme.fromSeed(
-    seedColor: kPrimaryColor,
-    primaryContainer: kPrimaryColor.withValues(alpha: 0.1),
-  ).copyWith(surface: kSurfaceLight, surfaceContainerHighest: kSurfaceLight),
+  colorScheme:
+      ColorScheme.fromSeed(
+        seedColor: AppColors.primary,
+        primaryContainer: AppColors.primary.withValues(
+          alpha: AppThemeTokens.alphaLight,
+        ),
+      ).copyWith(
+        surface: AppColors.surfaceLight,
+        surfaceContainerHighest: AppColors.surfaceLight,
+      ),
 
-  scaffoldBackgroundColor: kScaffoldLight,
-  primaryColor: kPrimaryColor,
-  cardColor: kCardLight,
+  scaffoldBackgroundColor: AppColors.scaffoldLight,
+  primaryColor: AppColors.primary,
+  cardColor: AppColors.cardLight,
   cardTheme: CardThemeData(
-    color: kCardLight,
-    elevation: 2,
-    shadowColor: Colors.black.withValues(alpha: 0.1),
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+    color: AppColors.cardLight,
+    elevation: AppThemeTokens.elevationSmall,
+    shadowColor: Colors.black.withValues(alpha: AppThemeTokens.alphaLight),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(AppThemeTokens.radiusLarge),
+    ),
   ),
 
   textTheme: _kTextTheme,
   dividerTheme: const DividerThemeData(
-    color: Color(0xFFE0E0E0),
+    color: AppColors.dividerLight,
     thickness: 1,
     space: 16,
   ),
@@ -76,27 +81,29 @@ final ThemeData lightTheme = ThemeData(
   filledButtonTheme: _filledButtonThemeData(),
 
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
-    backgroundColor: kSurfaceLight,
-    selectedItemColor: kPrimaryColor,
+    backgroundColor: AppColors.surfaceLight,
+    selectedItemColor: AppColors.primary,
     unselectedItemColor: Colors.grey.shade600,
     type: BottomNavigationBarType.fixed,
-    elevation: 8,
+    elevation: AppThemeTokens.elevationXLarge,
     showSelectedLabels: true,
     showUnselectedLabels: true,
     selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600),
   ),
 
   appBarTheme: const AppBarTheme(
-    backgroundColor: kScaffoldLight,
+    backgroundColor: AppColors.scaffoldLight,
     foregroundColor: Colors.black87,
-    elevation: 0,
+    elevation: AppThemeTokens.elevationNone,
     shadowColor: Colors.transparent,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
+      borderRadius: BorderRadius.vertical(
+        bottom: Radius.circular(AppThemeTokens.radiusXXLarge),
+      ),
     ),
   ),
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
-    backgroundColor: kPrimaryColor,
+    backgroundColor: AppColors.primary,
     foregroundColor: Colors.white,
     elevation: 6,
     shape: CircleBorder(),
@@ -110,35 +117,39 @@ final ThemeData darkTheme = ThemeData(
   switchTheme: SwitchThemeData(
     trackOutlineColor: WidgetStateProperty.all(
       ColorScheme.fromSeed(
-        seedColor: kPrimaryColor,
+        seedColor: AppColors.primary,
         brightness: Brightness.dark,
-      ).onSurfaceVariant.withValues(alpha: 0.5),
+      ).onSurfaceVariant.withValues(alpha: AppThemeTokens.alphaHigh),
     ),
   ),
 
   colorScheme:
       ColorScheme.fromSeed(
-        seedColor: kPrimaryColor,
+        seedColor: AppColors.primary,
         brightness: Brightness.dark,
       ).copyWith(
-        surface: kSurfaceDark,
-        surfaceContainerHighest: kSurfaceVariantDark,
-        primaryContainer: kPrimaryColor.withValues(alpha: 0.2),
+        surface: AppColors.surfaceDark,
+        surfaceContainerHighest: AppColors.surfaceVariantDark,
+        primaryContainer: AppColors.primary.withValues(
+          alpha: AppThemeTokens.alphaMedium,
+        ),
       ),
 
-  scaffoldBackgroundColor: kScaffoldDark,
-  primaryColor: kPrimaryColor,
-  cardColor: kCardDark,
+  scaffoldBackgroundColor: AppColors.scaffoldDark,
+  primaryColor: AppColors.primary,
+  cardColor: AppColors.cardDark,
   cardTheme: CardThemeData(
-    color: kCardDark,
-    elevation: 4,
-    shadowColor: Colors.black.withValues(alpha: 0.5),
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+    color: AppColors.cardDark,
+    elevation: AppThemeTokens.elevationMedium,
+    shadowColor: Colors.black.withValues(alpha: AppThemeTokens.alphaDarker),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(AppThemeTokens.radiusLarge),
+    ),
   ),
 
   textTheme: _kTextTheme,
   dividerTheme: const DividerThemeData(
-    color: Color(0xFF2A2D38),
+    color: AppColors.dividerDark,
     thickness: 1,
     space: 16,
   ),
@@ -147,11 +158,11 @@ final ThemeData darkTheme = ThemeData(
   filledButtonTheme: _filledButtonThemeData(),
 
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
-    backgroundColor: kSurfaceDark,
-    selectedItemColor: kPrimaryColor,
+    backgroundColor: AppColors.surfaceDark,
+    selectedItemColor: AppColors.primary,
     unselectedItemColor: Colors.grey.shade400,
     type: BottomNavigationBarType.fixed,
-    elevation: 8,
+    elevation: AppThemeTokens.elevationXLarge,
     showSelectedLabels: true,
     showUnselectedLabels: true,
     selectedLabelStyle: const TextStyle(
@@ -161,16 +172,18 @@ final ThemeData darkTheme = ThemeData(
   ),
 
   appBarTheme: const AppBarTheme(
-    backgroundColor: kScaffoldDark,
+    backgroundColor: AppColors.scaffoldDark,
     foregroundColor: Colors.white,
-    elevation: 0,
+    elevation: AppThemeTokens.elevationNone,
     shadowColor: Colors.transparent,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
+      borderRadius: BorderRadius.vertical(
+        bottom: Radius.circular(AppThemeTokens.radiusXXLarge),
+      ),
     ),
   ),
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
-    backgroundColor: kPrimaryColor,
+    backgroundColor: AppColors.primary,
     foregroundColor: Colors.white,
     elevation: 6,
     shape: CircleBorder(),

@@ -1,3 +1,4 @@
+import 'package:category_b/ui/theme/app_theme_tokens.dart';
 import 'package:category_b/ui/widgets/bottom%20sheet/anekdot_bottom_shett.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,11 @@ class BottomSheetAndroidButtons extends StatelessWidget {
       children: [
         IconButton(
           onPressed: widget.onTapShare,
-          icon: Icon(Icons.share, size: 32, color: theme.hintColor),
+          icon: Icon(
+            Icons.share,
+            size: AppThemeTokens.iconSizeMedium,
+            color: theme.hintColor,
+          ),
           tooltip: 'Поделиться',
         ),
         if (widget.onTapEdit != null)
@@ -27,8 +32,10 @@ class BottomSheetAndroidButtons extends StatelessWidget {
             onPressed: widget.onTapEdit,
             icon: Icon(
               Icons.edit,
-              size: 32,
-              color: theme.hintColor.withValues(alpha: 0.4),
+              size: AppThemeTokens.iconSizeMedium,
+              color: theme.hintColor.withValues(
+                alpha: AppThemeTokens.alphaVeryHigh,
+              ),
             ),
             tooltip: 'Редактировать',
           ),
@@ -36,10 +43,12 @@ class BottomSheetAndroidButtons extends StatelessWidget {
           onPressed: widget.onTapFavorite,
           icon: Icon(
             Icons.favorite,
-            size: 32,
+            size: AppThemeTokens.iconSizeMedium,
             color: isFavorite
                 ? theme.primaryColor
-                : theme.hintColor.withValues(alpha: 0.4),
+                : theme.hintColor.withValues(
+                    alpha: AppThemeTokens.alphaVeryHigh,
+                  ),
           ),
           tooltip: 'В избранное',
         ),

@@ -1,3 +1,4 @@
+import 'package:category_b/ui/theme/app_theme_tokens.dart';
 import 'package:flutter/material.dart';
 
 class CupertinoHandle extends StatelessWidget {
@@ -7,12 +8,12 @@ class CupertinoHandle extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
-      width: 40,
-      height: 3,
-      margin: const EdgeInsets.only(bottom: 12),
+      width: AppThemeTokens.cupertinoHandleWidth,
+      height: AppThemeTokens.cupertinoHandleHeight,
+      margin: AppThemeTokens.marginBottomMedium,
       decoration: BoxDecoration(
-        color: theme.hintColor.withValues(alpha: 0.3),
-        borderRadius: BorderRadius.circular(2),
+        color: theme.hintColor.withValues(alpha: AppThemeTokens.alphaHigh),
+        borderRadius: BorderRadius.circular(AppThemeTokens.radiusXSmall),
       ),
     );
   }

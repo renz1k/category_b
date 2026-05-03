@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:category_b/core/services/notifications/notification_service.dart';
+import 'package:category_b/core/services/notifications/notification_service_interface.dart';
 import 'package:category_b/repositories/settings/settings_repository_interface.dart';
 import 'package:equatable/equatable.dart';
 
@@ -15,7 +15,7 @@ class NotificationsCubit extends Cubit<NotificationsState> {
          ),
        );
 
-  final NotificationService notificationService;
+  final NotificationServiceInterface notificationService;
   final SettingsRepositoryInterface settingsRepository;
 
   Future<void> toggle({required bool value}) async {

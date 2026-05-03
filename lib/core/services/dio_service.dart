@@ -1,3 +1,4 @@
+import 'package:category_b/core/constants/app_constants.dart';
 import 'package:dio/dio.dart';
 
 class DioService {
@@ -9,9 +10,9 @@ class DioService {
     dio = Dio(
       BaseOptions(
         baseUrl: baseUrl,
-        connectTimeout: const Duration(seconds: 15),
-        receiveTimeout: const Duration(seconds: 15),
-        sendTimeout: const Duration(seconds: 15),
+        connectTimeout: AppConstants.dioConnectTimeout,
+        receiveTimeout: AppConstants.dioReceiveTimeout,
+        sendTimeout: AppConstants.dioSendTimeout,
         followRedirects: true,
         validateStatus: (status) => status != null && status < 500,
         headers: {

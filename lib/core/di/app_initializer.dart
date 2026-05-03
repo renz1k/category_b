@@ -1,4 +1,4 @@
-import 'package:category_b/core/services/notifications/notification_service.dart';
+import 'package:category_b/core/services/notifications/notification_service_interface.dart';
 import 'package:category_b/repositories/settings/settings_repository_interface.dart';
 
 class AppInitializer {
@@ -6,7 +6,7 @@ class AppInitializer {
     required this.notificationService,
     required this.settingsRepository,
   });
-  final NotificationService notificationService;
+  final NotificationServiceInterface notificationService;
   final SettingsRepositoryInterface settingsRepository;
 
   Future<void> init() async {

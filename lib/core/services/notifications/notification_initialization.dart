@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:category_b/core/texts/app_texts.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
@@ -54,15 +55,15 @@ class NotificationInitializer {
   Future<void> _createChannels() async {
     const highImportance = AndroidNotificationChannel(
       'high_importance_channel',
-      'Важные уведомления',
-      description: 'Уведомления о новых анекдотах',
+      AppTexts.notificationImportantChannelName,
+      description: AppTexts.notificationImportantChannelDescription,
       importance: Importance.max,
     );
 
     const weeklyReminder = AndroidNotificationChannel(
       'weekly_reminder',
-      'Еженедельные напоминания',
-      description: 'Напоминает зайти в приложение',
+      AppTexts.notificationWeeklyChannelName,
+      description: AppTexts.notificationWeeklyChannelDescription,
       importance: Importance.high,
     );
 
