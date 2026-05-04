@@ -57,6 +57,6 @@ Future<void> setupDependencies({required String baseUrl}) async {
     await getIt<HiveService>().getFavoritesBox(),
   );
   getIt.registerLazySingleton<FavoritesRepositoryInterface>(
-    () => FavoritesRepository(favoriteBox: getIt<Box<FavoriteAnekdots>>()),
+    () => FavoritesRepository(favoriteBox: getIt<Box<FavoriteAnekdots>>() ),
   );
 }
