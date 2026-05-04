@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:category_b/core/di/setup_dependencies.dart';
 import 'package:category_b/core/texts/app_texts.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -35,7 +37,9 @@ class NotificationInitializer {
       );
 
       if (initialized != true) {
-        getIt<Talker>().error('ERROR: Local notifications failed to initialize!');
+        getIt<Talker>().error(
+          'ERROR: Local notifications failed to initialize!',
+        );
         return;
       }
       getIt<Talker>().info('Local notifications initialized: $initialized');
@@ -78,33 +82,51 @@ class NotificationInitializer {
   }
 
   Future<void> _requestAndroidPermissions() async {
-    final fcmSettings = await fcm.requestPermission();
-    getIt<Talker>().info('FCM permission: ${fcmSettings.authorizationStatus}');
+    if (!Platform.isAndroid) return;
 
-    final androidImpl = localNotifications
-        .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin
-        >();
+    try {
+      final fcmSettings = await fcm.requestPermission();
+      getIt<Talker>().info(
+        'FCM permission: ${fcmSettings.authorizationStatus}',
+      );
 
-    if (androidImpl != null) {
-      final granted = await androidImpl.requestNotificationsPermission();
-      getIt<Talker>().info('Android local notification permission: $granted');
+      final androidImpl = localNotifications
+          .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin
+          >();
+
+      if (androidImpl != null) {
+        final granted = await androidImpl.requestNotificationsPermission();
+        getIt<Talker>().info('Android local notification permission: $granted');
+      }
+    } on Object catch (e, stackTrace) {
+      getIt<Talker>().error('ERROR requesting Android permissions: $e');
+      getIt<Talker>().error('Stack trace: $stackTrace');
     }
   }
 
   Future<void> _requestIosPermissions() async {
-    final iosImplementation = localNotifications
-        .resolvePlatformSpecificImplementation<
-          IOSFlutterLocalNotificationsPlugin
-        >();
+    if (!Platform.isIOS) return;
 
-    if (iosImplementation != null) {
-      final iosPermission = await iosImplementation.requestPermissions(
-        alert: true,
-        badge: true,
-        sound: true,
-      );
-      getIt<Talker>().info('iOS local notification permission: $iosPermission');
+    try {
+      final iosImplementation = localNotifications
+          .resolvePlatformSpecificImplementation<
+            IOSFlutterLocalNotificationsPlugin
+          >();
+
+      if (iosImplementation != null) {
+        final iosPermission = await iosImplementation.requestPermissions(
+          alert: true,
+          badge: true,
+          sound: true,
+        );
+        getIt<Talker>().info(
+          'iOS local notification permission: $iosPermission',
+        );
+      }
+    } on Object catch (e, stackTrace) {
+      getIt<Talker>().error('ERROR requesting iOS permissions: $e');
+      getIt<Talker>().error('Stack trace: $stackTrace');
     }
   }
 }
