@@ -14,6 +14,8 @@ class AppTexts {
   static const settingsThemeToggleTitle = 'Тёмная тема';
   static const settingsNotificationsToggleTitle = 'Уведомления';
   static const settingsSupportTitle = 'Поддержка';
+  static const settingsPrivacyPolicyTitle = 'Privacy Policy';
+  static const settingsPrivacyPolicyUrl = 'https://kolobokpowesilsya.me/';
   static const settingsClearFavoritesTitle = 'Очистить избранное';
   static const settingsClearFavoritesSuccess = 'Избранное успешно очищено!';
   static const settingsClearFavoritesErrorPrefix = 'Ошибка очистки: ';

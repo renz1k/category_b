@@ -1,5 +1,5 @@
 name: anekdots_b
-description: "Project for random anekdots"
+description: "Random jokes app with favorites and notifications"
 publish_to: 'none'
 version: 1.0.0+1
 
@@ -13,6 +13,7 @@ dependencies:
   cloud_firestore: ^6.1.2
   equatable: ^2.0.8
   firebase_core: ^4.4.0
+  firebase_crashlytics: ^5.2.0
   firebase_messaging: ^16.1.1
   flutter:
     sdk: flutter

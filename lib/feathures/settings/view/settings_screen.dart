@@ -6,6 +6,7 @@ import 'package:anekdots_b/core/services/show_message_service.dart';
 import 'package:anekdots_b/core/texts/app_texts.dart';
 import 'package:anekdots_b/feathures/favorites/bloc/favorite_anekdots_bloc.dart';
 import 'package:anekdots_b/feathures/settings/widgets/confirmation_dialog.dart';
+import 'package:anekdots_b/feathures/settings/widgets/legal_action_card.dart';
 import 'package:anekdots_b/feathures/settings/widgets/notification_settings_dialog.dart';
 import 'package:anekdots_b/feathures/settings/widgets/settings_action__card.dart';
 import 'package:anekdots_b/feathures/settings/widgets/settings_toggle_card.dart';
@@ -74,6 +75,12 @@ class SettingsScreen extends StatelessWidget {
               title: AppTexts.settingsSupportTitle,
               iconData: Icons.message_outlined,
               onTap: () => _showSupportSheet(context),
+            ),
+          ),
+          const SliverToBoxAdapter(
+            child: LegalActionCard(
+              title: AppTexts.settingsPrivacyPolicyTitle,
+              url: AppTexts.settingsPrivacyPolicyUrl,
             ),
           ),
         ],
