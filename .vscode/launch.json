@@ -2,24 +2,24 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "category_b",
+            "name": "anekdots_b",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "category_b (profile mode)",
+            "name": "anekdots_b (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "category_b (release mode)",
+            "name": "anekdots_b (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
         },
         {
-            "name": "category_b (Flutter Pixel 9)",
+            "name": "anekdots_b (Flutter Pixel 9)",
             "program": "lib/main.dart",
             "deviceId": "emulator-5554",
             "request": "launch",

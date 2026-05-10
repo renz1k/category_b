@@ -1,11 +1,11 @@
-import 'package:category_b/core/services/anekdot/models/anekdots.dart';
-import 'package:category_b/feathures/generate%20anekdot/bloc/generate_anekdot_bloc.dart';
-import 'package:category_b/ui/theme/app_theme_tokens.dart';
-import 'package:category_b/ui/theme/theme.dart';
-import 'package:category_b/ui/widgets/bottom%20sheet/base_bottom_sheet.dart';
-import 'package:category_b/ui/widgets/bottom%20sheet/bottom_sheet_android_buttons.dart';
-import 'package:category_b/ui/widgets/bottom%20sheet/bottom_sheet_cupertino_buttons.dart';
-import 'package:category_b/ui/widgets/bottom%20sheet/cupertino_handle.dart';
+import 'package:anekdots_b/core/services/anekdot/models/anekdots.dart';
+import 'package:anekdots_b/feathures/generate%20anekdot/bloc/generate_anekdot_bloc.dart';
+import 'package:anekdots_b/ui/theme/app_theme_tokens.dart';
+import 'package:anekdots_b/ui/theme/theme.dart';
+import 'package:anekdots_b/ui/widgets/bottom%20sheet/base_bottom_sheet.dart';
+import 'package:anekdots_b/ui/widgets/bottom%20sheet/bottom_sheet_android_buttons.dart';
+import 'package:anekdots_b/ui/widgets/bottom%20sheet/bottom_sheet_cupertino_buttons.dart';
+import 'package:anekdots_b/ui/widgets/bottom%20sheet/cupertino_handle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -90,18 +90,29 @@ class _AnekdotBottomSheetState extends State<AnekdotBottomSheet> {
                 ),
               ),
             ),
-            if (widget.anekdot.isError) const SizedBox.shrink() else
-            BlocBuilder<GenerateAnekdotBloc, GenerateAnekdotState>(
-              builder: (context, state) {
-                final isFavoriteFromGenerateState =
-                    state is GenerateAnekdotLoaded &&
-                    state.isFavorite(widget.anekdot.anekdotText);
-                final baseIsFavorite =
-                    widget.initialIsFavorite || isFavoriteFromGenerateState;
-                final isFavorite = _favoriteOverride ?? baseIsFavorite;
-                final shouldShowActions = !widget.anekdot.isError;
-                if (theme.isAndroid) {
-                  return BottomSheetAndroidButtons(
+            if (widget.anekdot.isError)
+              const SizedBox.shrink()
+            else
+              BlocBuilder<GenerateAnekdotBloc, GenerateAnekdotState>(
+                builder: (context, state) {
+                  final isFavoriteFromGenerateState =
+                      state is GenerateAnekdotLoaded &&
+                      state.isFavorite(widget.anekdot.anekdotText);
+                  final baseIsFavorite =
+                      widget.initialIsFavorite || isFavoriteFromGenerateState;
+                  final isFavorite = _favoriteOverride ?? baseIsFavorite;
+                  final shouldShowActions = !widget.anekdot.isError;
+                  if (theme.isAndroid) {
+                    return BottomSheetAndroidButtons(
+                      onTapFavorite: shouldShowActions
+                          ? () => _onTapFavorite(isFavorite)
+                          : null,
+                      onTapShare: shouldShowActions ? widget.onTapShare : null,
+                      onTapEdit: widget.onTapEdit,
+                      isFavorite: isFavorite,
+                    );
+                  }
+                  return BottomSheetCupertinoButtons(
                     onTapFavorite: shouldShowActions
                         ? () => _onTapFavorite(isFavorite)
                         : null,
@@ -109,17 +120,8 @@ class _AnekdotBottomSheetState extends State<AnekdotBottomSheet> {
                     onTapEdit: widget.onTapEdit,
                     isFavorite: isFavorite,
                   );
-                }
-                return BottomSheetCupertinoButtons(
-                  onTapFavorite: shouldShowActions
-                      ? () => _onTapFavorite(isFavorite)
-                      : null,
-                  onTapShare: shouldShowActions ? widget.onTapShare : null,
-                  onTapEdit: widget.onTapEdit,
-                  isFavorite: isFavorite,
-                );
-              },
-            ),
+                },
+              ),
           ],
         ),
       ),

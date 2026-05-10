@@ -1,6 +1,6 @@
-import 'package:category_b/core/constants/app_constants.dart';
-import 'package:category_b/core/di/setup_dependencies.dart';
-import 'package:category_b/core/texts/app_texts.dart';
+import 'package:anekdots_b/core/constants/app_constants.dart';
+import 'package:anekdots_b/core/di/setup_dependencies.dart';
+import 'package:anekdots_b/core/texts/app_texts.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:talker/talker.dart';
 import 'package:timezone/timezone.dart' as tz;
@@ -55,7 +55,9 @@ class NotificationScheduler {
 
       final now = tz.TZDateTime.now(tz.local);
       final scheduledDate = now.add(AppConstants.weeklyReminderInterval);
-      getIt<Talker>().info('Current time: $now, Scheduled time: $scheduledDate');
+      getIt<Talker>().info(
+        'Current time: $now, Scheduled time: $scheduledDate',
+      );
 
       await localNotifications.zonedSchedule(
         id: AppConstants.weeklyReminderNotificationId,

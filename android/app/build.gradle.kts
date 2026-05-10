@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.category_b"
+    namespace = "com.pbth34.anekdots_b"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -21,7 +21,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.category_b"
+        applicationId = "com.pbth34.anekdots_b"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode

@@ -1,10 +1,10 @@
+import 'package:anekdots_b/core/services/show_anekdot_bottom_sheet.dart';
+import 'package:anekdots_b/core/texts/app_texts.dart';
+import 'package:anekdots_b/feathures/generate%20anekdot/bloc/generate_anekdot_bloc.dart';
+import 'package:anekdots_b/feathures/generate%20anekdot/widgets/generate_anekdot_button.dart';
+import 'package:anekdots_b/router/router.dart';
+import 'package:anekdots_b/ui/theme/app_theme_tokens.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:category_b/core/services/show_anekdot_bottom_sheet.dart';
-import 'package:category_b/core/texts/app_texts.dart';
-import 'package:category_b/feathures/generate%20anekdot/bloc/generate_anekdot_bloc.dart';
-import 'package:category_b/feathures/generate%20anekdot/widgets/generate_anekdot_button.dart';
-import 'package:category_b/router/router.dart';
-import 'package:category_b/ui/theme/app_theme_tokens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

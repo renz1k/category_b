@@ -1,5 +1,5 @@
-import 'package:category_b/repositories/favorites/favorites_repository_interface.dart';
-import 'package:category_b/repositories/favorites/model/favorite_anekdots.dart';
+import 'package:anekdots_b/repositories/favorites/favorites_repository_interface.dart';
+import 'package:anekdots_b/repositories/favorites/model/favorite_anekdots.dart';
 import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 
 class FavoritesRepository implements FavoritesRepositoryInterface {
@@ -14,7 +14,9 @@ class FavoritesRepository implements FavoritesRepositoryInterface {
   }
 
   @override
-  Future<void> createOrDeleteAnekdots(FavoriteAnekdots anekdot) async {
+  Future<List<FavoriteAnekdots>> createOrDeleteAnekdots(
+    FavoriteAnekdots anekdot,
+  ) async {
     final matches = _favoriteBox.values
         .where((item) => item.anekdotText == anekdot.anekdotText)
         .toList();
@@ -23,10 +25,11 @@ class FavoritesRepository implements FavoritesRepositoryInterface {
       for (final match in matches) {
         await _favoriteBox.delete(match.id);
       }
-      return;
+      return _favoriteBox.values.toList();
     }
 
     await _favoriteBox.put(anekdot.id, anekdot);
+    return _favoriteBox.values.toList();
   }
 
   @override

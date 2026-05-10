@@ -1,15 +1,15 @@
 import 'dart:async';
 
+import 'package:anekdots_b/core/constants/app_constants.dart';
+import 'package:anekdots_b/core/texts/app_texts.dart';
+import 'package:anekdots_b/feathures/favorites/bloc/favorite_anekdots_bloc.dart';
+import 'package:anekdots_b/feathures/favorites/widgets/add%20anekdot%20buttons/add_anekdot_android_button.dart';
+import 'package:anekdots_b/feathures/favorites/widgets/add%20anekdot%20buttons/add_anekdot_cupertino_button.dart';
+import 'package:anekdots_b/feathures/favorites/widgets/custom_search_bar.dart';
+import 'package:anekdots_b/feathures/favorites/widgets/favorite%20screen%20content/empty_favorites_widget.dart';
+import 'package:anekdots_b/feathures/favorites/widgets/favorite%20screen%20content/favorite_content_widget.dart';
+import 'package:anekdots_b/ui/theme/theme.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:category_b/core/constants/app_constants.dart';
-import 'package:category_b/core/texts/app_texts.dart';
-import 'package:category_b/feathures/favorites/bloc/favorite_anekdots_bloc.dart';
-import 'package:category_b/feathures/favorites/widgets/add%20anekdot%20buttons/add_anekdot_android_button.dart';
-import 'package:category_b/feathures/favorites/widgets/add%20anekdot%20buttons/add_anekdot_cupertino_button.dart';
-import 'package:category_b/feathures/favorites/widgets/custom_search_bar.dart';
-import 'package:category_b/feathures/favorites/widgets/favorite%20screen%20content/empty_favorites_widget.dart';
-import 'package:category_b/feathures/favorites/widgets/favorite%20screen%20content/favorite_content_widget.dart';
-import 'package:category_b/ui/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -101,8 +101,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
 
                   if (list.isEmpty) {
                     final message = state.searchQuery.isNotEmpty
-                      ? AppTexts.favoritesEmptySearch
-                      : AppTexts.favoritesEmptyList;
+                        ? AppTexts.favoritesEmptySearch
+                        : AppTexts.favoritesEmptyList;
                     return EmptyFavoritesWidget(message: message);
                   }
 

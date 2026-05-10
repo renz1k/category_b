@@ -1,4 +1,4 @@
-import 'package:category_b/core/texts/app_texts.dart';
+import 'package:anekdots_b/core/texts/app_texts.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ShareService {

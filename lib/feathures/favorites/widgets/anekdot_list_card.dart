@@ -1,5 +1,5 @@
-import 'package:category_b/ui/theme/app_theme_tokens.dart';
-import 'package:category_b/ui/widgets/base_container.dart';
+import 'package:anekdots_b/ui/theme/app_theme_tokens.dart';
+import 'package:anekdots_b/ui/widgets/base_container.dart';
 import 'package:flutter/material.dart';
 
 class AnekdotListCard extends StatelessWidget {
@@ -35,7 +35,9 @@ class AnekdotListCard extends StatelessWidget {
           children: [
             Expanded(
               child: Padding(
-                padding: EdgeInsets.only(right: AppThemeTokens.paddingSmall.right),
+                padding: EdgeInsets.only(
+                  right: AppThemeTokens.paddingSmall.right,
+                ),
                 child: Text(
                   anekdotText,
                   maxLines: 2,

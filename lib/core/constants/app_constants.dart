@@ -15,4 +15,10 @@ class AppConstants {
   static const Duration weeklyReminderInterval = Duration(days: 7);
 
   static const int weeklyReminderNotificationId = 777;
+
+  // Anekdot cache parameters
+  static const int anekdotMaxCached = 600;
+  static const int anekdotFetchSize = 200;
+  static const int anekdotMinBeforeFetch = 100;
+  static const Duration anekdotUpdateInterval = Duration(minutes: 30);
 }

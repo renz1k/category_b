@@ -1,6 +1,6 @@
+import 'package:anekdots_b/core/services/notifications/notification_service_interface.dart';
+import 'package:anekdots_b/repositories/settings/settings_repository_interface.dart';
 import 'package:bloc/bloc.dart';
-import 'package:category_b/core/services/notifications/notification_service_interface.dart';
-import 'package:category_b/repositories/settings/settings_repository_interface.dart';
 import 'package:equatable/equatable.dart';
 
 part 'notifications_state.dart';

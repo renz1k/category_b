@@ -1,6 +1,6 @@
-import 'package:category_b/core/texts/app_texts.dart';
-import 'package:category_b/ui/theme/app_theme_tokens.dart';
-import 'package:category_b/ui/theme/theme.dart';
+import 'package:anekdots_b/core/texts/app_texts.dart';
+import 'package:anekdots_b/ui/theme/app_theme_tokens.dart';
+import 'package:anekdots_b/ui/theme/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -82,7 +82,9 @@ class _AddOrUpdateAnekdotDialogState extends State<AddOrUpdateAnekdotDialog> {
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                color: theme.hintColor.withValues(alpha: AppThemeTokens.alphaHigh),
+                color: theme.hintColor.withValues(
+                  alpha: AppThemeTokens.alphaHigh,
+                ),
                 width: 2,
               ),
             ),
@@ -99,14 +101,18 @@ class _AddOrUpdateAnekdotDialogState extends State<AddOrUpdateAnekdotDialog> {
                 child: Text(
                   AppTexts.buttonCancel,
                   style: TextStyle(
-                    color: theme.primaryColor.withValues(alpha: AppThemeTokens.alphaNearlySolid),
+                    color: theme.primaryColor.withValues(
+                      alpha: AppThemeTokens.alphaNearlySolid,
+                    ),
                   ),
                 ),
               ),
               FilledButton(
                 onPressed: () => widget.onAddOrUpdate(_controller.text),
                 style: FilledButton.styleFrom(
-                  backgroundColor: theme.primaryColor.withValues(alpha: AppThemeTokens.alphaSolid),
+                  backgroundColor: theme.primaryColor.withValues(
+                    alpha: AppThemeTokens.alphaSolid,
+                  ),
                   foregroundColor: Colors.white,
                 ),
                 child: Text(

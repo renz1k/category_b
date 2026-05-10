@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:category_b/core/services/anekdot/models/anekdots.dart';
-import 'package:category_b/feathures/favorites/bloc/favorite_anekdots_bloc.dart';
-import 'package:category_b/feathures/generate%20anekdot/bloc/generate_anekdot_bloc.dart';
+import 'package:anekdots_b/core/services/anekdot/models/anekdots.dart';
+import 'package:anekdots_b/feathures/favorites/bloc/favorite_anekdots_bloc.dart';
+import 'package:anekdots_b/feathures/generate%20anekdot/bloc/generate_anekdot_bloc.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

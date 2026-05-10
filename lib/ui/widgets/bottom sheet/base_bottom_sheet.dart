@@ -1,6 +1,6 @@
-import 'package:category_b/ui/theme/app_colors.dart';
-import 'package:category_b/ui/theme/app_theme_tokens.dart';
-import 'package:category_b/ui/theme/theme.dart';
+import 'package:anekdots_b/ui/theme/app_colors.dart';
+import 'package:anekdots_b/ui/theme/app_theme_tokens.dart';
+import 'package:anekdots_b/ui/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class BaseBottomSheet extends StatelessWidget {

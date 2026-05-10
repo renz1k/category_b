@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:category_b/core/constants/app_constants.dart';
-import 'package:category_b/core/texts/app_texts.dart';
-import 'package:category_b/ui/theme/theme.dart';
+import 'package:anekdots_b/core/constants/app_constants.dart';
+import 'package:anekdots_b/core/texts/app_texts.dart';
+import 'package:anekdots_b/ui/theme/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

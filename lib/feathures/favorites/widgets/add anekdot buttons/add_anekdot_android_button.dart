@@ -1,5 +1,5 @@
-import 'package:category_b/core/texts/app_texts.dart';
-import 'package:category_b/feathures/favorites/widgets/add%20anekdot%20buttons/show_add_anekdot_dialog.dart';
+import 'package:anekdots_b/core/texts/app_texts.dart';
+import 'package:anekdots_b/feathures/favorites/widgets/add%20anekdot%20buttons/show_add_anekdot_dialog.dart';
 import 'package:flutter/material.dart';
 
 class AddAnekdotAndroidButton extends StatelessWidget {

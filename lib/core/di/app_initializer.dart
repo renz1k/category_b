@@ -1,5 +1,5 @@
-import 'package:category_b/core/services/notifications/notification_service_interface.dart';
-import 'package:category_b/repositories/settings/settings_repository_interface.dart';
+import 'package:anekdots_b/core/services/notifications/notification_service_interface.dart';
+import 'package:anekdots_b/repositories/settings/settings_repository_interface.dart';
 
 class AppInitializer {
   AppInitializer({

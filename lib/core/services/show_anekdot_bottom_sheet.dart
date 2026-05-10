@@ -1,9 +1,9 @@
-import 'package:category_b/core/services/anekdot/models/anekdots.dart';
-import 'package:category_b/core/services/share_service.dart';
-import 'package:category_b/core/services/show_add_or_update_dialog.dart';
-import 'package:category_b/core/services/toggle_favorite_func.dart';
-import 'package:category_b/ui/theme/app_theme_tokens.dart';
-import 'package:category_b/ui/widgets/bottom%20sheet/anekdot_bottom_shett.dart';
+import 'package:anekdots_b/core/services/anekdot/models/anekdots.dart';
+import 'package:anekdots_b/core/services/share_service.dart';
+import 'package:anekdots_b/core/services/show_add_or_update_dialog.dart';
+import 'package:anekdots_b/core/services/toggle_favorite_func.dart';
+import 'package:anekdots_b/ui/theme/app_theme_tokens.dart';
+import 'package:anekdots_b/ui/widgets/bottom%20sheet/anekdot_bottom_shett.dart';
 import 'package:flutter/material.dart';
 
 Future<void> showAnekdotBottomSheet({

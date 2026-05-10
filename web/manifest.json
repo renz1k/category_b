@@ -1,6 +1,6 @@
 {
-    "name": "category_b",
-    "short_name": "category_b",
+    "name": "anekdots_b",
+    "short_name": "anekdots_b",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

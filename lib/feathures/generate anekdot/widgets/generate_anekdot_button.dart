@@ -1,4 +1,4 @@
-import 'package:category_b/ui/theme/app_theme_tokens.dart';
+import 'package:anekdots_b/ui/theme/app_theme_tokens.dart';
 import 'package:flutter/material.dart';
 
 class GenerateAnekdotButton extends StatelessWidget {

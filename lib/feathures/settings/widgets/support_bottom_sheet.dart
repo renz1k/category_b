@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:category_b/core/di/setup_dependencies.dart';
-import 'package:category_b/core/texts/app_texts.dart';
-import 'package:category_b/ui/theme/app_theme_tokens.dart';
-import 'package:category_b/ui/theme/theme.dart';
+import 'package:anekdots_b/core/di/setup_dependencies.dart';
+import 'package:anekdots_b/core/texts/app_texts.dart';
+import 'package:anekdots_b/ui/theme/app_theme_tokens.dart';
+import 'package:anekdots_b/ui/theme/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:talker/talker.dart';

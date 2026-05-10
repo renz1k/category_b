@@ -1,6 +1,6 @@
+import 'package:anekdots_b/core/texts/app_texts.dart';
+import 'package:anekdots_b/router/router.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:category_b/core/texts/app_texts.dart';
-import 'package:category_b/router/router.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()

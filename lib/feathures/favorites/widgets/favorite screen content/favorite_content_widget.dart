@@ -1,7 +1,7 @@
-import 'package:category_b/core/services/show_anekdot_bottom_sheet.dart';
-import 'package:category_b/core/services/toggle_favorite_func.dart';
-import 'package:category_b/feathures/favorites/widgets/anekdot_list_card.dart';
-import 'package:category_b/repositories/favorites/model/favorite_anekdots.dart';
+import 'package:anekdots_b/core/services/show_anekdot_bottom_sheet.dart';
+import 'package:anekdots_b/core/services/toggle_favorite_func.dart';
+import 'package:anekdots_b/feathures/favorites/widgets/anekdot_list_card.dart';
+import 'package:anekdots_b/repositories/favorites/model/favorite_anekdots.dart';
 import 'package:flutter/cupertino.dart';
 
 class FavoriteContentWidget extends StatelessWidget {

@@ -1,8 +1,8 @@
+import 'package:anekdots_b/feathures/favorites/view/favorite_screen.dart';
+import 'package:anekdots_b/feathures/generate%20anekdot/view/generate_anekdot_screen.dart';
+import 'package:anekdots_b/feathures/home/view/home_screen.dart';
+import 'package:anekdots_b/feathures/settings/view/settings_screen.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:category_b/feathures/favorites/view/favorite_screen.dart';
-import 'package:category_b/feathures/generate%20anekdot/view/generate_anekdot_screen.dart';
-import 'package:category_b/feathures/home/view/home_screen.dart';
-import 'package:category_b/feathures/settings/view/settings_screen.dart';
 
 part 'router.gr.dart';
 

@@ -1,6 +1,6 @@
+import 'package:anekdots_b/core/di/setup_dependencies.dart';
+import 'package:anekdots_b/repositories/settings/settings_repository_interface.dart';
 import 'package:bloc/bloc.dart';
-import 'package:category_b/core/di/setup_dependencies.dart';
-import 'package:category_b/repositories/settings/settings_repository_interface.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/services.dart';
 import 'package:talker/talker.dart';

@@ -1,12 +1,12 @@
 import 'dart:io';
 
+import 'package:anekdots_b/core/di/setup_dependencies.dart';
+import 'package:anekdots_b/core/services/notifications/firebase_background_handler.dart';
+import 'package:anekdots_b/core/services/notifications/notification_initialization.dart';
+import 'package:anekdots_b/core/services/notifications/notification_scheduling.dart';
+import 'package:anekdots_b/core/services/notifications/notification_service_interface.dart';
+import 'package:anekdots_b/core/texts/app_texts.dart';
 import 'package:app_settings/app_settings.dart';
-import 'package:category_b/core/di/setup_dependencies.dart';
-import 'package:category_b/core/services/notifications/firebase_background_handler.dart';
-import 'package:category_b/core/services/notifications/notification_initialization.dart';
-import 'package:category_b/core/services/notifications/notification_scheduling.dart';
-import 'package:category_b/core/services/notifications/notification_service_interface.dart';
-import 'package:category_b/core/texts/app_texts.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:permission_handler/permission_handler.dart' as ph;

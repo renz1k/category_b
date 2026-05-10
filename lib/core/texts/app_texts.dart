@@ -1,5 +1,5 @@
 class AppTexts {
-  static const shareCopiedFromApp = 'скопировано из приложения category b';
+  static const shareCopiedFromApp = 'скопировано из приложения anekdots b';
 
   static const favoritesTitle = 'Избранное';
   static const favoritesEmptySearch = 'Ничего не найдено';

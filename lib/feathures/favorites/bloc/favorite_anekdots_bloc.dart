@@ -1,8 +1,8 @@
 import 'dart:async';
 
+import 'package:anekdots_b/repositories/favorites/favorites_repository_interface.dart';
+import 'package:anekdots_b/repositories/favorites/model/favorite_anekdots.dart';
 import 'package:bloc/bloc.dart';
-import 'package:category_b/repositories/favorites/favorites_repository_interface.dart';
-import 'package:category_b/repositories/favorites/model/favorite_anekdots.dart';
 import 'package:equatable/equatable.dart';
 import 'package:uuid/uuid.dart';
 

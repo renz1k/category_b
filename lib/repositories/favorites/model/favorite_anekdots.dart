@@ -1,4 +1,4 @@
-import 'package:category_b/core/services/anekdot/models/anekdots.dart';
+import 'package:anekdots_b/core/services/anekdot/models/anekdots.dart';
 
 class FavoriteAnekdots {
   FavoriteAnekdots({

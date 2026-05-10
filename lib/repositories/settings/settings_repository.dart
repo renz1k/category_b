@@ -1,4 +1,4 @@
-import 'package:category_b/repositories/settings/settings_repository_interface.dart';
+import 'package:anekdots_b/repositories/settings/settings_repository_interface.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsRepository implements SettingsRepositoryInterface {

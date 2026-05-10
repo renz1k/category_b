@@ -57,6 +57,3 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-
-# Local jokes asset (do not track)
-assets/anekdots/jokes.json
