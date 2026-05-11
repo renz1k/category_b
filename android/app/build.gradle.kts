@@ -1,5 +1,6 @@
 import java.util.Properties
 import java.io.FileInputStream
+import java.io.File
 
 plugins {
     id("com.android.application")
@@ -27,7 +28,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        jvmTarget = "17"
     }
 
     defaultConfig {
@@ -41,18 +42,21 @@ android {
 
     signingConfigs {
         create("release") {
-            keyAlias = keystoreProperties["keyAlias"] as String
-            keyPassword = keystoreProperties["keyPassword"] as String
-            storeFile = keystoreProperties["storeFile"]?.let { file("android/app/$it") }
-            storePassword = keystoreProperties["storePassword"] as String
+            val keystoreFile = File(projectDir, "anekdots.jks")
+            if (keystoreFile.exists()) {
+                keyAlias = keystoreProperties["keyAlias"]?.toString() ?: "upload"
+                keyPassword = keystoreProperties["keyPassword"]?.toString() ?: "loliPOPchik097"
+                storePassword = keystoreProperties["storePassword"]?.toString() ?: "loliPOPchik097"
+                storeFile = keystoreFile
+            }
         }
     }
 
     buildTypes {
         release {
             signingConfig = signingConfigs.getByName("release")
-            minifyEnabled = false
-            shrinkResources = false
+            isMinifyEnabled = false
+            isShrinkResources = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
