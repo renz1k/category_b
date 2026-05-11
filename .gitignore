@@ -45,6 +45,12 @@ migrate_working_dir/
 /.env
 /lib/firebase_options.dart
 
+# Android Release Keys (NEVER COMMIT THESE!)
+/android/key.properties
+/android/app/release.keystore
+/android/app/*.jks
+
+
 /COPILOT.md
 
 # Symbolication related
