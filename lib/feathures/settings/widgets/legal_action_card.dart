@@ -13,9 +13,23 @@ class LegalActionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return ListTile(
-      title: Text(title),
-      trailing: const Icon(Icons.open_in_new),
+      title: Text(
+        title,
+        style: TextStyle(
+          color: theme.brightness == Brightness.dark
+              ? Colors.white
+              : Colors.black,
+        ),
+      ),
+      trailing: Icon(
+        Icons.open_in_new,
+        color: theme.brightness == Brightness.dark
+            ? Colors.white
+            : Colors.black,
+      ),
       onTap: () async {
         final uri = Uri.parse(url);
         await launchUrl(uri, mode: LaunchMode.externalApplication);
