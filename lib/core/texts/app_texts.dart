@@ -6,8 +6,8 @@ class AppTexts {
   static const favoritesEmptyList = 'Избранных анекдотов нет';
   static const searchHint = 'Поиск...';
 
-  static const homeTabTitle = 'main.html';
-  static const favoritesTabTitle = 'ОЧ нраица';
+  static const homeTabTitle = 'Главная';
+  static const favoritesTabTitle = 'Избранное';
   static const settingsTabTitle = 'Настройки';
 
   static const settingsScreenTitle = 'Настройки';
@@ -32,7 +32,7 @@ class AppTexts {
       'Разрешение на уведомления отключено. Откройте настройки приложения, чтобы включить уведомления.';
   static const settingsNotificationDialogLater = 'В следующий раз';
 
-  static const generateScreenTitle = 'Anekdots B';
+  static const generateScreenTitle = 'Анекдоты Б';
   static const generateButtonText = 'Рандомный анекдот';
 
   static const addAnekdotTooltip = 'Добавить свой анекдот';
