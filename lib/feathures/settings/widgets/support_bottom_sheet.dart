@@ -9,10 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:talker/talker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-const _supportEmail = 'mrdima_aysdehtyarenko@mail.ru';
-const _supportTelegram = 'https://t.me/pbth34';
-const _supportTelegramDeepLink = 'tg://resolve?domain=pbth34';
-const _supportEmailSubject = 'по поводу приложения Anekdots B';
+const _supportEmail = 'klaHip@yandex.ru';
+const _supportTelegram = 'https://t.me/banochkapivchika';
+const _supportTelegramDeepLink = 'tg://resolve?domain=banochkapivchika';
+const _supportEmailSubject = 'по поводу приложения Анекдоты Б';
 
 class SupportBottomSheet extends StatelessWidget {
   const SupportBottomSheet({super.key});
