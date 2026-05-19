@@ -20,5 +20,5 @@ class AppConstants {
   static const int anekdotMaxCached = 600;
   static const int anekdotFetchSize = 200;
   static const int anekdotMinBeforeFetch = 100;
-  static const Duration anekdotUpdateInterval = Duration(minutes: 30);
+  static const Duration anekdotUpdateInterval = Duration(minutes: 90);
 }
